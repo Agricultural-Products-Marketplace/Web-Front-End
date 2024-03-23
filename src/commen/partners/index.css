@@ -1,0 +1,36 @@
+.partners-card{
+    padding: 1vw 5vw;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.partners-title{
+    display: flex;
+}
+.partners-title>p{
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+    align-items: center;
+    color: #00FF66;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.partners-title>p>hr{
+    align-items: start;
+    justify-content: start;
+    width: 0.7vw;
+    height: 2.5vw;
+    border: none;
+    background-color: #00FF66;
+}
+
+.partners-logo{
+    padding: 0 3vw;
+}
+
+.partners-logo>img{
+    height: 3.8vw;
+}

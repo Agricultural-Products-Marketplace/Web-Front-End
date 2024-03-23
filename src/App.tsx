@@ -10,6 +10,7 @@ import ProductSlider from './card/productSlider';
 import CategoryButtonCard from './card/categoryCard';
 import AdCard from './card/adCard';
 import ServicesCard from './commen/services';
+import PartnersCard from './commen/partners';
 
 function App() {
   return (
@@ -118,6 +119,23 @@ function App() {
       ]}
       />
       <ServicesCard />
+
+      <PartnersCard 
+      logo={[
+        {
+          image :'https://asset.brandfetch.io/idLRVBoY1U/id-DxrNKOS.png'
+        },
+        {
+          image :'https://asset.brandfetch.io/idLRVBoY1U/id-DxrNKOS.png'
+        },
+        {
+          image :'https://asset.brandfetch.io/idLRVBoY1U/id-DxrNKOS.png'
+        },
+        {
+          image :'https://asset.brandfetch.io/idLRVBoY1U/id-DxrNKOS.png'
+        }
+      ]}
+      />
 
       <div className="category-card-button-slider">
       </div>
