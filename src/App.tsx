@@ -6,6 +6,8 @@ import Footer  from "./commen/footer";
 import NavBar  from "./commen/navBar";
 import SliderCard from "./card/slider";
 import CategoryCard from "./card/category";
+import ProductSlider from './card/productSlider';
+import CategoryButtonCard from './card/categoryCard';
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <CategoryCard/>
         <SliderCard/>
       </div>
+      <CategoryButtonCard/>
       <Footer/>
     </div>
   );

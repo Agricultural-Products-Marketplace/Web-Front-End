@@ -1,0 +1,21 @@
+.category-button-container{
+    padding: 0.3vw;
+}
+
+.category-button-container-link{
+    width: 9vw;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0.1vw;
+}
+
+.category-button-container-link:hover{
+    outline: solid 1px #00FF66;
+}
+
+.category-button-container-link>img{
+    width: inherit;
+}
