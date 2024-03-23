@@ -85,10 +85,10 @@ a{
 }
 
 .overlay{
-    visibility: hidden;
+    visibility: visible;
     display: flex;
     flex-direction: column;
-    gap: 8vw;
+    gap: 100px;
 }
 
 .slide-img:hover .overlay{
@@ -99,7 +99,7 @@ a{
 .overlay-top-icons{
     display: flex;
     flex-direction: row;
-    gap: 12vw;
+    gap: 150px;
     align-items: center;
 }
 
