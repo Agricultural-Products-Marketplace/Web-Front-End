@@ -32,3 +32,31 @@
     width: 80vw;
     margin-top: 3vw;
 }
+
+.slider-clicks{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 2vw;
+    justify-content: space-between;
+}
+
+.slider-clicks>button{
+    background-color: #00FF66;
+    padding: 10px 13px;
+    border: none;
+    font-size: 1.6vw;
+    align-items: center;
+}
+
+.slider-clicks>button:hover{
+    color: white;
+    cursor: pointer;
+}
+
+/* .slider-click-icon{
+    background-color: #00FF66;
+    padding: 15px 18px;
+    border-radius: 5vw;
+    font-size: 20px;
+} */

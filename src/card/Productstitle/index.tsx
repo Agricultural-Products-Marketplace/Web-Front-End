@@ -15,10 +15,10 @@ function ProductTitleCard({ slog, title }: ProductTitleCardProps) {
             </div>
             <div className="main-title">
                 <p className="title">{title}</p>
-                <div className="title-slider-icons">
+                {/* <div className="title-slider-icons">
                     <a href="#"><i className="fa fa-arrow-left"></i></a>
                     <a href="#"><i className="fa fa-arrow-right"></i></a>
-                </div>
+                </div> */}
             </div>
         </div>
     );

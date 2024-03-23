@@ -15,10 +15,13 @@ function ProductSlider({title,slog,products}:ProductSliderProps){
 
     return(
         <div className="product-slider">
+            
             <ProductTitleCard
             title={title}
             slog={slog}
             />
+            <div className="slider-clicks">
+                <button><i className="fa fa-angle-left slider-click-icon"></i></button>
             {(()=>{
                 if(slog == "category"){
                     return(
@@ -35,6 +38,9 @@ function ProductSlider({title,slog,products}:ProductSliderProps){
                     )
                 }
             })()}
+            <button><i className="fa fa-angle-right slider-click-icon"></i></button>
+            </div>
+            
             <div className="show-all">
                 <button>View All Products</button>
             </div>

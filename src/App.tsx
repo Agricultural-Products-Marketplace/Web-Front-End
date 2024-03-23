@@ -8,6 +8,8 @@ import SliderCard from "./card/slider";
 import CategoryCard from "./card/category";
 import ProductSlider from './card/productSlider';
 import CategoryButtonCard from './card/categoryCard';
+import AdCard from './card/adCard';
+import ServicesCard from './commen/services';
 
 function App() {
   return (
@@ -69,13 +71,54 @@ function App() {
       {
           productName: "Ageda",
           productPrice: 36,
-          rating: 3,
+          rating: 5,
           img: "https://sweetphi.com/wp-content/uploads/2019/03/How-to-make-an-instagram-worthy-fruit-bowl-2-683x1024.jpg",
           discount: 2,
           categoryName:"Fruits"
       },
       ]}
       />
+      <AdCard />
+<ProductSlider 
+      slog='Our Products'
+      title='Explore The Products'
+      products={[
+        {
+          productName: "Ageda",
+          productPrice: 36,
+          rating: 3,
+          img: "https://sweetphi.com/wp-content/uploads/2019/03/How-to-make-an-instagram-worthy-fruit-bowl-2-683x1024.jpg",
+          discount: 2,
+          categoryName:"Foods"
+      },
+      {
+          productName: "Ageda",
+          productPrice: 36,
+          rating: 5,
+          img: "https://sweetphi.com/wp-content/uploads/2019/03/How-to-make-an-instagram-worthy-fruit-bowl-2-683x1024.jpg",
+          discount: 2,
+          categoryName:"Fruits"
+      },
+      {
+          productName: "Ageda",
+          productPrice: 36,
+          rating: 5,
+          img: "https://sweetphi.com/wp-content/uploads/2019/03/How-to-make-an-instagram-worthy-fruit-bowl-2-683x1024.jpg",
+          discount: 2,
+          categoryName:"Fruits"
+      },
+      {
+          productName: "Ageda",
+          productPrice: 36,
+          rating: 5,
+          img: "https://sweetphi.com/wp-content/uploads/2019/03/How-to-make-an-instagram-worthy-fruit-bowl-2-683x1024.jpg",
+          discount: 2,
+          categoryName:"Fruits"
+      }
+      ]}
+      />
+      <ServicesCard />
+
       <div className="category-card-button-slider">
       </div>
       <Footer/>
