@@ -85,7 +85,7 @@ a{
 }
 
 .overlay{
-    visibility: visible;
+    visibility: hidden;
     display: flex;
     flex-direction: column;
     gap: 120px;
