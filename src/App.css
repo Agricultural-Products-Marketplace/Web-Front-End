@@ -50,3 +50,9 @@
   gap: 1vw;
 
 }
+
+.category-card-button-slider{
+  display: flex;
+  padding: 2vw;
+  gap: 2vw;
+}

@@ -3,14 +3,16 @@
 }
 
 .category-button-container-link{
+    outline: solid 1.5px rgba(0,0,0,0.5);
     width: 9vw;
     text-decoration: none;
-    color: black;
+    color: black !important;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 0.1vw;
 }
+
 
 .category-button-container-link:hover{
     outline: solid 1px #00FF66;
@@ -18,4 +20,5 @@
 
 .category-button-container-link>img{
     width: inherit;
+    height: 10vw;
 }
