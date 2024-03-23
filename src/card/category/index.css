@@ -1,0 +1,33 @@
+.category{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    flex: 2;
+}
+
+.Category_title{
+    display: flex;
+    color: #00FF66;
+    align-self: center;
+}
+
+.category_list{
+    display: flex;
+    flex-direction: column;
+}
+
+.category_list>a{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1vw;
+    text-decoration: none;
+    color: black;
+    padding: 0.5vw 3.25vw;
+}
+
+.category_list>a:hover{
+    background-color: #00FF66;
+    transition: all ease-in-out 0.3s;
+    color: white;
+}

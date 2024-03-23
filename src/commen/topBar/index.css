@@ -1,0 +1,48 @@
+.top_bar{
+    display: flex;
+    flex-direction: row;
+    background-color: #00FF66;
+    padding: 0.1vw 2vw;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.top_bar>select{
+    width: 8vw;
+    height: 2vw;
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.top_bar>select>option{
+    display: flex;
+    background-color: #00FF66;
+}
+
+.top_bar>p>a{
+    color: black;
+}
+
+.top_bar>p>a:hover{
+    color: white;
+    transition: all ease-in-out 0.5s;
+}
+
+.icons{
+    display: flex;
+    gap: 2vw;
+}
+
+.icons>a{
+    display: flex;
+    flex-direction: column;
+    color: #8B96A5;
+    text-decoration: none;
+    align-items: center;
+}
+
+.icons>a:hover{
+    color: white;
+    transition: all ease-in-out 0.3s;
+}
