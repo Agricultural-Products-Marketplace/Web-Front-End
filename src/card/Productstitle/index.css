@@ -1,0 +1,51 @@
+.product-title{
+    display: flex;
+    flex-direction: column;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    padding-top: 3vw;
+}
+
+.product-title>.top-slog{
+    display: flex;
+    align-items: start;
+    justify-content: start;
+}
+
+.product-title>.top-slog>p{
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    color: #00FF66;
+    font-weight: 700;
+    
+}
+.product-title>.top-slog>p>hr{
+    width: 0.8vw;
+    height: 2.5vw;
+    background-color: #00FF66;
+    border: none;
+}
+
+.main-title{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.main-title>.title-slider-icons{
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+}
+
+.main-title>.title-slider-icons>a>i{
+    color: black;
+    font-size: 1.8vw;
+}
+
+.main-title>.title{
+    font-weight: 900;
+    font-size: 2vw;
+}
