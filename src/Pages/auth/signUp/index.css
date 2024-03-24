@@ -1,0 +1,145 @@
+.Signup{
+    padding: 4vw 4vw;
+    justify-content: center;
+    display: flex;
+}
+
+.signup-container{
+    border-radius: 8px;
+    background-color: rgba(0,0,0,0);
+    width: 80%;
+    padding: 2vw;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.4)
+}
+
+.Signup-contents{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2vw;
+    justify-content: start;
+    color: black;
+}
+
+.signup-content-image{
+    width: 50%;
+}
+
+.signup-content-image>img{
+    width: 100%;
+}
+
+.signup-content-form{
+    padding: 0.2vw;
+    gap: 1vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-content-form>p{
+    font-size: 2vw;
+}
+.signup-content-form>p>strong{
+    color: #1DAC23;
+    font-size: 2.3vw;
+    font-weight: 900;
+}
+
+.signup-content-form>span{
+    font-size: 1.3vw;
+}
+
+.signup-content-form>small{
+    font-size: 1.1vw;
+}
+
+.signup-content-form-button{
+    padding: 1vw;
+    justify-content: center;
+    display: flex;
+    background-color: transparent;
+    border: solid 1px black;
+    border-radius: 0.6vw;
+    text-decoration: none;
+    font-weight: 900;
+    color: black;
+    font-size: 1.3vw;
+}
+
+.signup-content-form-button:hover{
+    background-color: black;
+    color: white;
+    transform: rotateX(360deg);
+    transition: all ease-in-out 0.5s;
+}
+
+.signup-content-form>span>a{
+    color: #1DAC23;
+    font-weight: 900;
+    font-size: 1.4vw;
+}
+
+.Signup-back-icon{
+    text-decoration: none;
+    color: black;
+    font-size: 2vw;
+    padding-left: 3vw;
+    padding-top: 2vw;
+}
+
+.Signup-back-icon:hover{
+    color: #1DAC23;
+    transition: all ease-in-out 0.3s;
+}
+
+
+@media only screen and (max-width: 600px) {
+    
+    .Signup-back-icon{
+        font-size: 20px;
+    }
+
+    .Signup-back-icon:hover{
+        color: #1DAC23;
+        transition: all ease-in-out 0.3s;
+    }
+
+    .signup-container{
+        width: 80vw;
+        padding: 15px 40px;
+    }
+
+    .signup-content-form{
+        width: 100%;
+        gap: 3vw;
+    }
+
+    .signup-content-form>p{
+        font-size: 25px;
+        margin-bottom: 5px;
+    }
+    .signup-content-form>p>strong{
+        font-size: 25px;
+        margin-bottom: 0px;
+    }
+    .signup-content-form>small{
+        font-size: 15px;
+    }
+    .signup-content-form>span{
+        font-size: 16px;
+    }
+    .signup-content-form>span>a{
+        font-size: 15px;
+    }
+    .signup-content-form-button{
+        align-items: center;
+        font-size: 15px;
+        height: 30px;
+        border-radius: 8px;
+    }
+    .signup-content-image{
+        display: none;
+    }
+  }
