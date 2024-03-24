@@ -27,6 +27,11 @@
     font-size: 30px;
 }
 
+.service-item-icon:hover{
+    transition: all ease 1s;
+    transform: rotateY(360deg);
+}
+
 .service-item>strong{
     font-weight: 800;
     font-size: 1.4vw;

@@ -3,6 +3,7 @@ import './index.css';
 
 interface Logo{
     image:string
+    link : string
 }
 
 interface PartnersCardProps{
@@ -18,7 +19,7 @@ function PartnersCard({logo}:PartnersCardProps) {
             <div className="partners-logo">
             {logo.map((image,index)=>(
                 
-                <img src={image.image} key={index} alt="" />
+                <a href={image.link} target="_blank"><img src={image.image} key={index} alt="" /></a>
             
             ))}
             </div>

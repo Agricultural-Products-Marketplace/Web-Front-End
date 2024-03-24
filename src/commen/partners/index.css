@@ -30,17 +30,17 @@
 .partners-logo{
     display: flex;
     padding: 0 3vw;
-    gap: 1vw;
+    gap: 2vw;
 }
 
-.partners-logo>img{
+.partners-logo>a>img{
     height: 3.8vw;
     filter: grayscale(100%);
+    transition: all ease-in-out 0.3s;
 }
 
-.partners-logo>img:hover{
+.partners-logo>a>img:hover{
     transition: all ease-in-out 0.3s;
     filter: none;
-    scale: 1.1;
-    cursor: pointer;
+    scale: 1.3;
 }

@@ -123,16 +123,20 @@ function App() {
       <PartnersCard 
       logo={[
         {
-          image :'https://asset.brandfetch.io/idLRVBoY1U/id-DxrNKOS.png'
+          image :'https://asset.brandfetch.io/idLRVBoY1U/id-DxrNKOS.png',
+          link : 'https://www.ethiotelecom.et/?lang=am'
         },
         {
-          image :'https://banksethiopia.com/wp-content/uploads/chapa-1-1024x387.png'
+          image :'https://banksethiopia.com/wp-content/uploads/chapa-1-1024x387.png',
+          link: 'https://chapa.co/'
         },
         {
-          image :'https://lh3.googleusercontent.com/proxy/ECwnBLW5b6CaLHwlIieXNmZxl8a7UTnoYagDbnYl7xh6TFl4JPW4WKwvjSLH2XxTVynggqpVHBlyVXoYsHo325UNaoPjwv3B5ZY6Dls'
+          image :'https://lh3.googleusercontent.com/proxy/ECwnBLW5b6CaLHwlIieXNmZxl8a7UTnoYagDbnYl7xh6TFl4JPW4WKwvjSLH2XxTVynggqpVHBlyVXoYsHo325UNaoPjwv3B5ZY6Dls',
+          link : 'https://www.ata.gov.et/'
         },
         {
-          image :'https://www.moderntechethiopia.com/wp-content/uploads/2021/05/TeleBirr-Logo.png'
+          image :'https://www.moderntechethiopia.com/wp-content/uploads/2021/05/TeleBirr-Logo.png',
+          link : 'https://www.ethiotelecom.et/telebirr/'
         }
       ]}
       />
