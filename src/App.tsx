@@ -126,13 +126,13 @@ function App() {
           image :'https://asset.brandfetch.io/idLRVBoY1U/id-DxrNKOS.png'
         },
         {
-          image :'https://asset.brandfetch.io/idLRVBoY1U/id-DxrNKOS.png'
+          image :'https://banksethiopia.com/wp-content/uploads/chapa-1-1024x387.png'
         },
         {
-          image :'https://asset.brandfetch.io/idLRVBoY1U/id-DxrNKOS.png'
+          image :'https://lh3.googleusercontent.com/proxy/ECwnBLW5b6CaLHwlIieXNmZxl8a7UTnoYagDbnYl7xh6TFl4JPW4WKwvjSLH2XxTVynggqpVHBlyVXoYsHo325UNaoPjwv3B5ZY6Dls'
         },
         {
-          image :'https://asset.brandfetch.io/idLRVBoY1U/id-DxrNKOS.png'
+          image :'https://www.moderntechethiopia.com/wp-content/uploads/2021/05/TeleBirr-Logo.png'
         }
       ]}
       />

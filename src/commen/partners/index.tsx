@@ -15,11 +15,13 @@ function PartnersCard({logo}:PartnersCardProps) {
             <div className="partners-title">
                 <p><hr />Partners</p>
             </div>
+            <div className="partners-logo">
             {logo.map((image,index)=>(
-                <div className="partners-logo" key={index}>
-                <img src={image.image} alt="" />
-            </div>
+                
+                <img src={image.image} key={index} alt="" />
+            
             ))}
+            </div>
         </div>
     )
 }
