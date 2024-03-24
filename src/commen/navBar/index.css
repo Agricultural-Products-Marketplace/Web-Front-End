@@ -95,7 +95,7 @@
 }
 
 .account-dropdown-menus{
-    visibility: hidden;
+    visibility: visible;
     border-radius: 3px;
     align-items: center;
     width: 200px;
@@ -103,8 +103,8 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    right: 50px;
-    top: 110px;
+    right: 3rem;
+    top: 7rem;
     padding: 0.5px 20px;
     transition: all ease-in-out 0.3s;
 }
