@@ -94,3 +94,46 @@
     margin-left: -0.4vw;
 }
 
+.account-dropdown-menus{
+    visibility: hidden;
+    border-radius: 3px;
+    align-items: center;
+    width: 200px;
+    background-color: rgba(30, 230, 90, 0.8);
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 50px;
+    top: 110px;
+    padding: 0.5px 20px;
+    transition: all ease-in-out 0.3s;
+}
+
+.account-dropdown-menus>a{
+    display: flex;
+    flex-direction: row;
+    width: inherit;
+    padding: 20px;
+    gap: 15px;
+    justify-content: start;
+    font-size: 15px;
+    color: white;
+}
+
+.account-dropdown-menus>a>i{
+    transform: rotateY(180deg);
+}
+
+.account-dropdown-menus>a:hover{
+    transition: all ease-in-out 0.3s;
+    background-color: rgba(250, 250, 250, 0.8);
+    color: rgba(30, 230, 90, 1);
+}
+
+.icons-user-icon:hover + .account-dropdown-menus{
+        visibility: visible;
+}
+
+.account-dropdown-menus:hover{
+    visibility: visible;
+}

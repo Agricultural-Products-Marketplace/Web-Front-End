@@ -13,7 +13,6 @@ import Footer from "../../commen/footer";
 function Home() {
     return(
         <div className="home">
-            <TopBar />
             <NavBar />
             <div className="slider-category">
                 <CategoryCard />
@@ -131,7 +130,6 @@ function Home() {
                 }
             ]}
             />
-            <Footer />
         </div>
     )
 }

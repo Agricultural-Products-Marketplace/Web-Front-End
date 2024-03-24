@@ -12,9 +12,9 @@ function NavBar() {
             <div className="navigation_bar">
                 <ul>
                     <li><Link to={'/'}>Home</Link></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><Link to={'/auth/signUp/'}>Sign Up</Link></li>
+                    <li><Link to={'/contact'}>Contact</Link></li>
+                    <li><Link to={'/about'}>About</Link></li>
+                    <li><Link to={'/signUp/'}>Sign Up</Link></li>
                 </ul>
             </div>
             
@@ -24,10 +24,35 @@ function NavBar() {
                 </div>
             
             <div className="icons">
-            <a href="#"><i className="fa-regular fa-heart"></i></a>
-            <a href="#"><i className="fa-solid fa-cart-shopping"><sup>2</sup></i></a>
-            <a href="#"><i className="fa-solid fa-user"></i></a>
+            <Link to={'/wishlist'}><i className="fa-regular fa-heart"></i></Link>
+            <Link to={'/cart'}><i className="fa-solid fa-cart-shopping"><sup>2</sup></i></Link>
+            <a href="#" className='icons-user-icon'><i className="fa-solid fa-user"></i>
+            
+            </a>
+            <div className="account-dropdown-menus">
+                <a href="">
+                    <i className="fa fa-user"></i>
+                    Manage My Account
+                </a>
+                <a href="">
+                    <i className="fa-solid fa-cart-shopping"></i>
+                    My Order
+                </a>
+                <a href="">
+                    <i className="fa fa-close"></i>
+                    My Cancelations
+                </a>
+                <a href="">
+                    <i className="fa fa-star"></i>
+                    My Reviews
+                </a>
+                <a href="">
+                <i className="fa-solid fa-right-from-bracket"></i>
+                    LogOut
+                </a>
             </div>
+            </div>
+            
         </section>
     );
 }

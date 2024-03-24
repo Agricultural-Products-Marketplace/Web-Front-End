@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './index.css';
 import TopBar from "../../../commen/topBar";
 import Footer from "../../../commen/footer";
+import { Link } from "react-router-dom";
 
 function signup() {
     const [activecreatepassword, setActivecreatepassword] = useState(false);
@@ -13,12 +14,11 @@ function signup() {
 
     return(
         <div>
-            <TopBar />
             <div className="signin">
             <div className="signin-container">
-            <a href="#" className="signin-back-icon">
+            <Link to={'/'} className="signin-back-icon">
                     <i className="fa fa-arrow-left"></i>
-                    </a>
+                    </Link>
                     <div className="signin-contents">
                         <div className="signin-content-image">
                             <img src="https://img.freepik.com/free-vector/access-control-system-abstract-concept_335657-3180.jpg?size=338&ext=jpg&ga=GA1.1.735520172.1711152000&semt=sph" alt="" />
@@ -41,13 +41,12 @@ function signup() {
                             <i className="fa-brands fa-google"></i>
                                 Continue With Google</a>
                             
-                            <span>Don't Have an account? <a href="#">Sign Up</a></span>
+                            <span>Don't Have an account? <Link to={'/signUp'}>Sign Up</Link></span>
                         </div>
                     </div>
             </div>
                
             </div>
-            <Footer />
         </div>
     )
 }
