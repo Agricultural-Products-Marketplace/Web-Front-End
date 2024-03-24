@@ -1,25 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import TopBar  from "./commen/topBar";
-import Footer  from "./commen/footer";
-import NavBar  from "./commen/navBar";
-import SliderCard from "./card/slider";
-import CategoryCard from "./card/category";
-import ProductSlider from './card/productSlider';
-import CategoryButtonCard from './card/categoryCard';
-import AdCard from './card/adCard';
-import ServicesCard from './commen/services';
-import PartnersCard from './commen/partners';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import TopBar from "./commen/topBar";
+import Footer from "./commen/footer";
+import NavBar from "./commen/navBar";
 import Home from './Pages/home';
 import SignUp from './Pages/auth/signUp';
 import CustomerSignUp from './Pages/auth/signUp/customerSignup';
+import EmailVerification from './Pages/auth/verificationCard';
+import SignIn from './Pages/auth/signIn';
 
-function App() {
+function App(): JSX.Element {
   return (
-    <div>
-      <CustomerSignUp />
-    </div>
+    <Home />
   );
 }
 
