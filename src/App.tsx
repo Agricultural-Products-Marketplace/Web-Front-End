@@ -13,11 +13,12 @@ import ServicesCard from './commen/services';
 import PartnersCard from './commen/partners';
 import Home from './Pages/home';
 import SignUp from './Pages/auth/signUp';
+import CustomerSignUp from './Pages/auth/signUp/customerSignup';
 
 function App() {
   return (
     <div>
-      <SignUp />
+      <CustomerSignUp />
     </div>
   );
 }
