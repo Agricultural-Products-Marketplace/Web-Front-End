@@ -15,7 +15,7 @@ function SignUp() {
                     </Link>
                     <div className="Signup-contents">
                         <div className="signup-content-image">
-                            <img src="https://static.vecteezy.com/system/resources/thumbnails/019/848/977/small/food-delivery-online-shopping-stay-at-home-we-deliver-to-you-order-food-grocery-online-from-app-by-smart-phone-fast-delivery-of-groceries-bucket-smart-phone-vector.jpg" alt="" />
+                            <img src="https://thumbs.dreamstime.com/b/farmers-harvesting-crop-cartoon-vector-illustration-agriculture-farming-concept-cartoon-vector-illustration-farmers-harvesting-105519120.jpg" alt="" />
                         </div>
                         <div className="signup-content-form">
                             <p>Welcome to <br /><strong>Agricultural Market Place</strong></p>
