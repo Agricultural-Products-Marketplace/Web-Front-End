@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import './index.css';
 import TopBar from "../../../../commen/topBar";
 import Footer from "../../../../commen/footer";
 
 function CustomerSignUp() {
+    const [activecreatepassword, setActivecreatepassword] = useState(false);
+    const [activeconfirmpassword, setActiveconfirmpassword] = useState(false);
+
+    const handleClickcreatepassword = () => {
+        setActivecreatepassword(prevActive => !prevActive);
+    };
+
+    const handleClickconfirmpassword = () => {
+        setActiveconfirmpassword(prevActive => !prevActive);
+    };
     return(
         <div>
             <TopBar />
@@ -23,8 +33,18 @@ function CustomerSignUp() {
                             <input type="text" placeholder="Last Name"/>
                             </div>
                             <input type="text" placeholder="Email/Phone"/>
-                            <input type="text" placeholder="Create Password"/>
-                            <input type="text" placeholder="Conform Password"/>
+                            <div className="signup-form-password-input">
+                            <input type={activecreatepassword ? "text" : "password"} placeholder="Create Password"/>
+                            <button onClick={handleClickcreatepassword}>
+            {activecreatepassword ? <i className="fa fa-eye"></i> : <i className="fa fa-eye-slash"></i>}
+        </button>
+                            </div>
+                            <div className="signup-form-password-input">
+                            <input type={activeconfirmpassword ? "text" : "password"} placeholder="Create Password"/>
+                            <button onClick={handleClickconfirmpassword}>
+            {activeconfirmpassword ? <i className="fa fa-eye"></i> : <i className="fa fa-eye-slash"></i>}
+        </button>
+                            </div>
                             <a href="#" className="signup-form-button">Register</a>
                             <span>Already Have an account? <a href="#">Login</a></span>
                         </div>
