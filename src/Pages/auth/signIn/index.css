@@ -76,7 +76,7 @@
 }
 
 .signin-content-form>input{
-    height: 35px;
+    height: 45px;
     border: solid 1px rgba(0,0,0,0.3);
     border-radius: 5px;
     padding-left: 10px;
@@ -95,7 +95,7 @@
 
 .signin-form-input-name>input{
     width: 45%;
-    height: 35px;
+    height: 45px;
     border: solid 1px rgba(0,0,0,0.3);
     border-radius: 5px;
     padding-left: 10px;
@@ -107,9 +107,11 @@
 }
 
 .signin-form-button{
+    border: none;
+    cursor: pointer;
     width: inherit;
     background-color: #1DAC23;
-    height: 35px;
+    height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -119,29 +121,9 @@
     border-radius: 5px;
 }
 
-.signin-form-button-google{
-    width: inherit;
-    background-color: rgba(0, 80, 150, 1);
-    height: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    color: white;
-    font-weight: 900;
-    border-radius: 5px;
-    gap: 10px;
-    border: solid rgba(0, 80, 150, 1) 1px;
-    transition: all ease 0.3s;
-}
 
 
 
-.signin-form-button-google:hover{
-    transition: all ease 0.3s;
-    background-color: transparent;
-    color: rgba(0, 80, 150, 1);
-}
 
 
 
@@ -163,7 +145,7 @@
 
 .signin-form-password-input>input{
     width: 90%;
-    height: 35px;
+    height: 45px;
     border: none;
     
     padding-left: 10px;
