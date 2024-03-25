@@ -31,3 +31,21 @@
     transition: all ease-in-out 0.3s;
     color: white;
 }
+
+.category{
+    animation: categoryIntroAnimation 1s;
+}
+
+@keyframes categoryIntroAnimation {
+    0% {
+        transform: translateY(-300px);
+        opacity: 0;
+    }
+    80%{
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateX(0px);
+        opacity: 1; /* Adjust the translation distance as needed */
+    }
+}

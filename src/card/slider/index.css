@@ -15,3 +15,21 @@
     width: 100%;
     overflow: hidden;
 }
+
+.slider{
+    animation: sliderIntroAnimation 1s;
+}
+
+@keyframes sliderIntroAnimation {
+    0% {
+        transform: translateY(300px);
+        opacity: 0;
+    }
+    80%{
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1; /* Adjust the translation distance as needed */
+    }
+}

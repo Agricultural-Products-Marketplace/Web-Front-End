@@ -11,6 +11,7 @@ interface ProductSliderProps{
     products : Product[]
 }
 
+
 function ProductSlider({title,slog,products}:ProductSliderProps){
 
     return(
@@ -21,7 +22,7 @@ function ProductSlider({title,slog,products}:ProductSliderProps){
             slog={slog}
             />
             <div className="slider-clicks">
-                <button><i className="fa fa-angle-left slider-click-icon"></i></button>
+                <button className="button-left"><i className="fa fa-angle-left slider-click-icon"></i></button>
             {(()=>{
                 if(slog == "category"){
                     return(
@@ -32,13 +33,14 @@ function ProductSlider({title,slog,products}:ProductSliderProps){
                 }
                 else{
                     return(
-                        <Product 
+                        
+                            <Product 
                     products={products}
                     />
                     )
                 }
             })()}
-            <button><i className="fa fa-angle-right slider-click-icon"></i></button>
+            <button className="button-right"><i className="fa fa-angle-right slider-click-icon"></i></button>
             </div>
             
             <div className="show-all">

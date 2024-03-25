@@ -4,11 +4,20 @@ a{
 
 .box{
     width: 250px;
+    min-width: 250px;
     box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     overflow: hidden;  
 }
+.slider-products{
+    overflow-x: scroll;
+    margin: 0 20px;
+    padding-bottom: 25px;
+}
 
+::-webkit-scrollbar{
+    display: none;
+}
 .slide-img{
     height: 250px;
     position: relative;
