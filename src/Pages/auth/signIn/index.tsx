@@ -4,7 +4,7 @@ import TopBar from "../../../commen/topBar";
 import Footer from "../../../commen/footer";
 import { Link } from "react-router-dom";
 
-function signup() {
+function SignIn() {
     const [activecreatepassword, setActivecreatepassword] = useState(false);
 
     const handleClickcreatepassword = () => {
@@ -51,4 +51,4 @@ function signup() {
     )
 }
 
-export default signup;
+export default SignIn;

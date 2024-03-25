@@ -37,6 +37,38 @@ function Home() {
                     discount : 30,
                     img : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Zc6uCIB6x5cmZewJ_g5ebZmbLBpcS2EBLWDuo_PjxQ&s",
                     categoryName : ""
+                },
+                {
+                    productName:"Rice",
+                    productPrice : 165,
+                    rating : 3,
+                    discount : 30,
+                    img : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Zc6uCIB6x5cmZewJ_g5ebZmbLBpcS2EBLWDuo_PjxQ&s",
+                    categoryName : ""
+                },
+                {
+                    productName:"Rice",
+                    productPrice : 165,
+                    rating : 3,
+                    discount : 30,
+                    img : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Zc6uCIB6x5cmZewJ_g5ebZmbLBpcS2EBLWDuo_PjxQ&s",
+                    categoryName : ""
+                },
+                {
+                    productName:"Rice",
+                    productPrice : 165,
+                    rating : 3,
+                    discount : 30,
+                    img : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Zc6uCIB6x5cmZewJ_g5ebZmbLBpcS2EBLWDuo_PjxQ&s",
+                    categoryName : ""
+                },
+                {
+                    productName:"Rice",
+                    productPrice : 165,
+                    rating : 3,
+                    discount : 30,
+                    img : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Zc6uCIB6x5cmZewJ_g5ebZmbLBpcS2EBLWDuo_PjxQ&s",
+                    categoryName : ""
                 }
             ]
             }

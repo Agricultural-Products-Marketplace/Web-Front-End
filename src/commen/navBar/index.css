@@ -137,3 +137,21 @@
 .account-dropdown-menus:hover{
     visibility: visible;
 }
+
+.navbar{
+    animation: NavbarIntroAnimation 1s;
+}
+
+@keyframes NavbarIntroAnimation {
+    0% {
+        transform: translateX(300px);
+        opacity: 0;
+    }
+    80%{
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateX(0px);
+        opacity: 1; /* Adjust the translation distance as needed */
+    }
+}

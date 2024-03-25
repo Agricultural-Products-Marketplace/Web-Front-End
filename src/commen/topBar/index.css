@@ -15,7 +15,7 @@
     background-color: transparent;
 }
 
-.top_bar>select>option{
+.top_bar>seletop_barct>option{
     display: flex;
     background-color: #00FF66;
 }
@@ -45,4 +45,22 @@
 .icons>a:hover{
     color: white;
     transition: all ease-in-out 0.3s;
+}
+
+.top_bar{
+    animation: TopbarIntroAnimation 1s;
+}
+
+@keyframes TopbarIntroAnimation {
+    0% {
+        transform: translateX(-300px);
+        opacity: 0;
+    }
+    80%{
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateX(0px);
+        opacity: 1; /* Adjust the translation distance as needed */
+    }
 }
