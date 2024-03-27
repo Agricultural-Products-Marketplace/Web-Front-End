@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './index.css';
 import NavBar from "../../commen/navBar";
 import CartProductCard from "../../card/cartProductCard";
+import TopPath from "../../commen/topPath";
 
 function Cart() {
     const price = 30;
@@ -27,7 +28,9 @@ function Cart() {
         <>
         <NavBar/>
         <div className="cart-page">
-            <div className="cart-page-top-nav-display"><p>Home/<span>Cart</span></p></div>
+            <TopPath 
+            path="Cart"
+            />
             <div className="cart-product-items">
             <table className="cart-page-product-table">
                 <tr className="cart-page-product-table-head">

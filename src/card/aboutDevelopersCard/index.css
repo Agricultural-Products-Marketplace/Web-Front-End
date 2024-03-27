@@ -1,0 +1,62 @@
+.developers-card{
+
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0,0,0,0.1);
+    padding-bottom: 15px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0px 0px 30px rgba(0,0,0,0.2);
+    transition: all ease-in-out 0.3s;
+}
+
+.developers-card>img{
+    transition: all ease-in-out 0.3s;
+    width: inherit;
+    filter: grayscale(50);
+}
+
+.developers-card>h3{
+    padding: 2px 10px;
+    margin-bottom: 0px;
+}
+
+.developers-card>small{
+    padding: 2px 10px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.developer-social-media-linnk{
+    padding: 0px 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+}
+
+.developer-social-media-linnk>a{
+    color: black;
+    transition: all ease-in-out 0.3s;
+}
+
+.developer-social-media-linnk>a:hover{
+    color: red;
+    transition: all ease-in-out 0.3s;
+}
+
+
+.developers-card:hover{
+    box-shadow: 0px 0px 50px rgba(0,250,120,0.4);
+    scale: 1.03;
+    transition: all ease-in-out 0.3s;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.developers-card:hover.developers-card>img{
+    filter: grayscale(0);
+    transition: all ease-in-out 0.3s;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
