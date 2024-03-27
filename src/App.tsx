@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import TopBar from "./commen/topBar";
 import Footer from "./commen/footer";
 import NavBar from "./commen/navBar";
@@ -13,11 +13,22 @@ import Contact from './Pages/contact';
 import About from './Pages/about';
 import MyAccount from './Pages/Account';
 
+function ScrollToTopOnRouteChange() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return null;
+}
+
 function App(): JSX.Element {
   return (
     <Router>
       <div>
         <TopBar />
+        <ScrollToTopOnRouteChange />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signin" element={<SignIn />} />

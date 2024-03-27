@@ -37,6 +37,7 @@
 .about-page-text-description{
     display: flex;
     flex-direction: column;
+    animation: LeftToRightAnimation 1s;
 }
 
 .about-page-text-description>h1{
@@ -49,8 +50,10 @@
 
 .about-page-description-image{
     display: flex;
+    animation: RightToLeftAnimation 1s;
 }
 
 .about-page-description-image>img{
     width: 45vw;
+    
 }

@@ -3,6 +3,7 @@
     flex-direction: column;
     background-color: #00FF66;
     margin-top: 2vw;
+    animation: BottomToTopAnimation 1s;
 }
 
 .copy_right{

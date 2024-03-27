@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './index.css';
 import TopBar from "../../../commen/topBar";
 import Footer from "../../../commen/footer";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function SignIn() {
+    
     const [activecreatepassword, setActivecreatepassword] = useState(false);
 
     const handleClickcreatepassword = () => {

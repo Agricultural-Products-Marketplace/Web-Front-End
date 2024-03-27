@@ -11,3 +11,87 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@keyframes LeftToRightAnimation {
+  0% {
+      transform: translateX(-300px);
+      opacity: 0;
+  }
+  80%{
+      opacity: 0.5;
+  }
+  100% {
+      transform: translateX(0px);
+      opacity: 1; /* Adjust the translation distance as needed */
+  }
+}
+
+@keyframes RightToLeftAnimation {
+  0% {
+      transform: translateX(300px);
+      opacity: 0;
+  }
+  80%{
+      opacity: 0.5;
+  }
+  100% {
+      transform: translateX(0px);
+      opacity: 1; /* Adjust the translation distance as needed */
+  }
+}
+
+@keyframes TopToBottomAnimation {
+  0% {
+      transform: translateY(-300px);
+      opacity: 0;
+  }
+  80%{
+      opacity: 0.5;
+  }
+  100% {
+      transform: translateY(0px);
+      opacity: 1; /* Adjust the translation distance as needed */
+  }
+}
+
+@keyframes BottomToTopAnimation {
+  0% {
+      transform: translateY(300px);
+      opacity: 0;
+  }
+  80%{
+      opacity: 0.5;
+  }
+  100% {
+      transform: translateY(0px);
+      opacity: 1; /* Adjust the translation distance as needed */
+  }
+}
+
+@keyframes ScaleUpAnimation {
+  0% {
+      transform: scale(0);
+      opacity: 0;
+  }
+  80%{
+      opacity: 0.5;
+  }
+  100% {
+      transform: scale(1);
+      opacity: 1; /* Adjust the translation distance as needed */
+  }
+}
+
+@keyframes ScaleDownAnimation {
+  0% {
+      transform: scale(2);
+      opacity: 0;
+  }
+  80%{
+      opacity: 0.5;
+  }
+  100% {
+      transform: scale(1);
+      opacity: 1; /* Adjust the translation distance as needed */
+  }
+}

@@ -12,6 +12,10 @@
     flex: 3;
 }
 
+.contact-page-info-left{
+    animation:  LeftToRightAnimation 1s;
+}
+
 .contact-page-item>div{
     display: flex;
     flex-direction: row;
@@ -38,6 +42,7 @@
 
 .contact-page-right{
     flex: 4;
+    animation: BottomToTopAnimation 1s;
 }
 
 .contact-page-right>form{
@@ -74,6 +79,12 @@
     padding: 1vw 2vw;
 }
 
+.contact-page-form-button{
+    animation:  LeftToRightAnimation 1s;
+    display: flex;
+    justify-content: end;
+}
+
 .contact-page-form-button>button{
     display: flex;
     height: 43px;
@@ -94,3 +105,4 @@
     outline: 1px solid green;
     color: green;
 }
+
