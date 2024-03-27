@@ -1,0 +1,136 @@
+.my-account{
+    display: flex;
+    flex-direction: column;
+    padding: 2vw 7vw;
+}
+
+.my-account-top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.my-account-top-p1{
+    font-size: 17px;
+    color: rgba(0,0,0,0.4);
+}
+
+.my-account-top-p2>span{
+    color: red;
+}
+
+.my-account-top-p1>span{
+    color: black;
+}
+
+.my-account-bottom{
+    display: flex;
+    gap: 2vw;
+    padding: 5vw 3vw;
+}
+
+.my-account-bottom-left{
+    display: flex;
+    flex-direction: column;
+}
+
+.my-account-bottom-left>a{
+    margin-top: 15px;
+    margin-left: 35px;
+    color: rgba(0,0,0,0.6);
+}
+
+.my-account-bottom-left>a:hover{
+    color: red;
+}
+
+.active{
+    color: red !important;
+}
+
+.my-account-bottom-right{
+    display: flex;
+    flex-direction: column;
+    padding: 2vw 4vw;
+    box-shadow: 0px 0px 18px rgba(0,0,0,0.1);
+}
+
+.my-account-bottom-right-name{
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+}
+
+.my-account-bottom-right-name-item{
+    display: flex;
+    flex-direction: column;
+}
+
+.my-account-bottom-right-name-item>input{
+    height: 40px;
+    width: 18vw;
+    border: none;
+    background-color: rgba(0,0,0,0.09);
+    border-radius: 6px;
+    padding: 0px 15px;
+}
+
+.my-account-bottom-right-name-item>input:focus{
+    outline: solid 1px red;
+}
+
+.my-account-bottom-right>h2{
+    color: red;
+}
+
+.my-account-bottom-right-password{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+.my-account-bottom-right-password>input{
+    height: 40px;
+    width: 100%;
+    border: none;
+    background-color: rgba(0,0,0,0.09);
+    border-radius: 6px;
+    padding: 0px 15px;
+}
+
+.my-account-bottom-right-password>input:focus{
+    outline: 1px solid red;
+}
+
+.my-account-bottom-right-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 2vw;
+    margin-top: 2vw;
+}
+
+.my-account-bottom-right-button-cancel{
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+}
+
+.my-account-bottom-right-button-save{
+    background-color: green;
+    color: white;
+    font-weight: 900;
+    font-size: 16px;
+    border: none;
+    padding: 13px 45px;
+    border-radius: 5px;
+    transition: all ease-in-out 0.3s;
+}
+
+.my-account-bottom-right-button-save:hover{
+    background-color: transparent;
+    outline: green 1px solid;
+    color: green;
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+}

@@ -11,6 +11,7 @@ import Cart from './Pages/cart';
 import WishList from './Pages/wishlist';
 import Contact from './Pages/contact';
 import About from './Pages/about';
+import MyAccount from './Pages/Account';
 
 function App(): JSX.Element {
   return (
@@ -26,6 +27,7 @@ function App(): JSX.Element {
           <Route path='/wishlist' element={<WishList />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/about' element={<About />} />
+          <Route path='/account' element={<MyAccount />} />
         </Routes>
         <Footer />
       </div>

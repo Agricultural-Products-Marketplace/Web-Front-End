@@ -1,0 +1,7 @@
+.cart-product-card{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 10vw;
+    align-items: center;
+}
