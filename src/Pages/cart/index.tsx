@@ -1,104 +1,150 @@
 import React, { useState } from "react";
 import './index.css';
 import NavBar from "../../commen/navBar";
-import CartProductCard from "../../card/cartProductCard";
 import TopPath from "../../commen/topPath";
 
 function Cart() {
+
+    const [showPopup, setShowPopup] = useState(false); // State to control the pop-up visibility
+
+    const openPopup = () => setShowPopup(true); // Function to open the pop-up
+    const closePopup = () => setShowPopup(false); 
+
+    const products =[
+        {
+            Image: 'https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?s=612x612&w=0&k=20&c=NvO-bLsG0DJ_7Ii8SSVoKLurzjmV0Qi4eGfn6nW3l5w=',
+            Title: 'Red Apple',
+            Price: 25
+        },
+        {
+            Image: 'https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?s=612x612&w=0&k=20&c=NvO-bLsG0DJ_7Ii8SSVoKLurzjmV0Qi4eGfn6nW3l5w=',
+            Title: 'Blue Apple',
+            Price: 50
+        },
+        {
+            Image: 'https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?s=612x612&w=0&k=20&c=NvO-bLsG0DJ_7Ii8SSVoKLurzjmV0Qi4eGfn6nW3l5w=',
+            Title: 'Red Apple',
+            Price: 25
+        },
+        {
+            Image: 'https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?s=612x612&w=0&k=20&c=NvO-bLsG0DJ_7Ii8SSVoKLurzjmV0Qi4eGfn6nW3l5w=',
+            Title: 'Blue Apple',
+            Price: 50
+        },
+    ];
     const price = 30;
-    var productquantity = 2;
 
-    var [quantity, setQuantity] = useState(1);
+    // State for quantities, initialized to an array of length equal to the products array
+    const [quantities, setQuantities] = useState(Array(products.length).fill(1));
 
-    var increment = () => {
-        setQuantity( quantity++);
+    // Function to increment quantity of a specific product
+    const increment = (index: number) => {
+        const newQuantities = [...quantities];
+        newQuantities[index] += 1;
+        setQuantities(newQuantities);
     };
 
-    var decrement = () =>{
-        if(quantity == 1){
-            return setQuantity(1)
+    // Function to decrement quantity of a specific product, but not below 1
+    const decrement = (index: number) => {
+        const newQuantities = [...quantities];
+        if (newQuantities[index] > 1) {
+            newQuantities[index] -= 1;
+            setQuantities(newQuantities);
         }
-        else{
-            return setQuantity(quantity--);
-        }
-    }
+    };
 
+    
 
     return(
         <>
-        <NavBar/>
-        <div className="cart-page">
-            <TopPath 
-            path="Cart"
-            />
-            <div className="cart-product-items">
-            <table className="cart-page-product-table">
-                <tr className="cart-page-product-table-head">
-                    <td>Product</td>
-                    <td>Price</td>
-                    <td>Quantity</td>
-                    <td>Subtotal</td>
-                </tr>
-                <tr className="cart-page-product-table-row">
-                    <td>
-                        <button><sup>X</sup></button>
-                        <img src="https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?s=612x612&w=0&k=20&c=NvO-bLsG0DJ_7Ii8SSVoKLurzjmV0Qi4eGfn6nW3l5w=" alt="" />
-                        <p>Red-Apple</p>
-                    </td>
-                    <td>${price}</td>
-                    <td className="cart-product-quantity">
-                        <div className="cart-quantitiy-container">
-                        <p>{quantity}</p>
-                        <div className="quantity-button">
-                            <button onClick={increment}><i className="fa fa-angle-up"></i></button>
-                            <button onClick={decrement}><i className="fa fa-angle-down"></i></button>
-                        </div>
-                        </div>
-                    </td>
-                    <td>${quantity * price}</td>
-                </tr>
-                
-            </table>
-            </div>
-            <div className="cart-page-bottom-button">
-                <a href="#">Return To Shop</a>
-                <a href="#">Update Cart</a>
-            </div>
-            <div className="cart-page-bottom-checkout">
-                <div className="cart-page-bottom-checkout-left">
-                    <input type="text" placeholder="Coupon Code"/>
-                    <button>Apply Coupon</button>
+            <NavBar/>
+            <div className="cart-page">
+                <TopPath path="Cart" />
+                <div className="cart-product-items">
+                    <table className="cart-page-product-table">
+
+                            <tr className="cart-page-product-table-head">
+                                <td>Product</td>
+                                <td>Price</td>
+                                <td>Quantity</td>
+                                <td>Subtotal</td>
+                            </tr>
+                        <tbody>
+                            {products.map((product, index) => (
+                                <tr key={index} className="cart-page-product-table-row">
+                                    <td>
+                                        <button onClick={openPopup}><sup>X</sup></button>
+                                        <img src={product.Image} alt={product.Title} />
+                                        <p>{product.Title}</p>
+                                    </td>
+                                    <td>${product.Price}</td>
+                                    <td className="cart-product-quantity">
+                                        <div className="cart-quantitiy-container">
+                                            <p>{quantities[index]}</p>
+                                            <div className="quantity-button">
+                                                <button onClick={() => increment(index)}><i className="fa fa-angle-up"></i></button>
+                                                <button onClick={() => decrement(index)}><i className="fa fa-angle-down"></i></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>${quantities[index] * product.Price}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
-                <div className="cart-page-bottom-checkout-right">
-                    <h3>Cart Total</h3>
-                    <div className="cart-page-bottom-checkout-right-price">
-                        <div className="cart-page-bottom-checkout-right-price-item">
-                        <p>Subtotal :</p>
-                        <p>$460</p>
-                        </div>
-                        <hr />
+                <div className="cart-page-bottom-button">
+                    <a href="#">Return To Shop</a>
+                    <a href="#">Update Cart</a>
+                </div>
+                <div className="cart-page-bottom-checkout">
+                    <div className="cart-page-bottom-checkout-left">
+                        <input type="text" placeholder="Coupon Code"/>
+                        <button>Apply Coupon</button>
                     </div>
-                    <div className="cart-page-bottom-checkout-right-price">
-                        <div className="cart-page-bottom-checkout-right-price-item">
-                        <p>Shipping :</p>
-                        <p>Free</p>
+                    <div className="cart-page-bottom-checkout-right">
+                        <h3>Cart Total</h3>
+                        <div className="cart-page-bottom-checkout-right-price">
+                            <div className="cart-page-bottom-checkout-right-price-item">
+                                <p>Subtotal :</p>
+                                <p>${quantities.reduce((acc, curr, index) => acc + (curr * products[index].Price), 0)}</p>
+                            </div>
+                            <hr />
                         </div>
-                        <hr />
-                    </div>
-                    <div className="cart-page-bottom-checkout-right-price">
-                        <div className="cart-page-bottom-checkout-right-price-item">
-                        <p>Total :</p>
-                        <p>$460</p>
+                        <div className="cart-page-bottom-checkout-right-price">
+                            <div className="cart-page-bottom-checkout-right-price-item">
+                                <p>Shipping :</p>
+                                <p>Free</p>
+                            </div>
+                            <hr />
                         </div>
-                        <hr />
+                        <div className="cart-page-bottom-checkout-right-price">
+                            <div className="cart-page-bottom-checkout-right-price-item">
+                                <p>Total :</p>
+                                <p>${quantities.reduce((acc, curr, index) => acc + (curr * products[index].Price), 0)}</p>
+                            </div>
+                            <hr />
+                        </div>
+                        <button>Process to Checkout</button>
                     </div>
-                    <button>Process to Checkout</button>
                 </div>
             </div>
-        </div>
+            {showPopup && (
+                <div className="popup">
+                    <div className="popup-container">
+                    <div className="popup-content">
+                        <span className="close-popup" onClick={closePopup}>&times;</span>
+                        <p>Are you sure you want to remove this item from the cart?</p>
+                        <div className="popup-buttons">
+                            <button onClick={closePopup}>No</button>
+                            <button className="popup-buttons-Delet">Delete</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            )}
         </>
     ) 
 }
-
 
 export default Cart;
