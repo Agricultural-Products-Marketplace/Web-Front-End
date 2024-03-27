@@ -1,0 +1,142 @@
+.product-detail-top-path{
+    animation: TopToBottomAnimation 1s;
+    display: flex;
+    padding: 1vw 4vw;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.product-detail-top-path>p{
+    width: 40%;
+    padding: 1vw 4vw;
+    border-radius: 15px;
+    color: rgba(0,0,0,0.5);
+}
+
+.product-detail-top-path>p>span{
+    color: black;
+}
+
+.product-detail-item{
+    display: flex;
+    padding: 1vw 4vw;
+    gap: 2vw;
+}
+
+
+.product-detail-item-left{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.product-detail-item-left-images-choose{
+    display: flex;
+    flex-direction: column;
+    gap: 3vw;
+    height: 35vw;
+    overflow-y: scroll;
+}
+
+.product-detail-item-left-images-choose>img{
+    width: 7vw;
+}
+
+.product-detail-item-image-main{
+    display: flex;
+}
+
+.product-detail-item-image-main>img{
+    width: 50vw;
+}
+
+.product-detail-item-right>h1{
+    display: flex;
+    margin: 0px;
+}
+
+.product-detail-rating{
+    margin-top: -22px;
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+
+.product-detail-rating-icons{
+    display: flex;
+    gap: 0.1vw;
+}
+.product-detail-rating-icons>i{
+    color: gold;
+    font-size: 12px;
+}
+
+.product-detail-rating>p{
+    font-size: 13px;
+    margin: 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1vw;
+    color: rgba(0,0,0,0.5);
+}
+
+.product-detail-rating>p>hr{
+    height: 15px;
+}
+
+.product-detail-rating>span{
+    font-size: 13px;
+    color: green;
+}
+
+.product-detail-colors{
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+    align-items: center;
+}
+
+.product-detail-colors>div{
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+}
+
+.product-detail-colors>div:hover{
+    outline: solid 2px black;
+}
+
+.color-a{
+    background-color: green;
+}
+
+.color-b{
+    background-color: yellow;
+}
+
+.color-c{
+    background-color: red;
+}
+
+.product-detail-buttons{
+    display: flex;
+    flex-direction: row;
+    padding: 1vw 3vw;
+    justify-content: space-around;
+}
+
+.product-detail-button-quantity{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.product-detail-button-quantity>i{
+    border: solid 2px black;
+    padding: 3px 4px;
+    justify-content: center;
+    align-items: center;
+}

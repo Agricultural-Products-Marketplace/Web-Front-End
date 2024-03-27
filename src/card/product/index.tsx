@@ -1,5 +1,6 @@
 import React from "react";
 import './index.css'
+import { Link } from "react-router-dom";
 
 interface Product {
     discount: number;
@@ -36,7 +37,7 @@ function Product({ products }: ProductProps) {
                     </div>
                     <div className="detail-box">
                         <div className="type">
-                            <a href="#">{product.productName}</a>
+                            <Link to={'/product-detail'}>{product.productName}</Link>
                             <span>New Arrival</span>
                             <div className="rating">
                                 {[...Array(product.rating)].map((_, i) => (
