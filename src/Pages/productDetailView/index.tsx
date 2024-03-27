@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import './index.css';
 import NavBar from "../../commen/navBar";
 import TopPath from "../../commen/topPath";
+import Product from "../../card/product";
+import ProductSlider from "../../card/productSlider";
 
 function ProductDetail() {
+    const [quantity, setQuantity] = useState(1);
+
+    const incrementQuantity = () => {
+        setQuantity(prevQuantity => prevQuantity + 1);
+    };
+
+    const decrementQuantity = () => {
+        if (quantity > 1) {
+            setQuantity(prevQuantity => prevQuantity - 1);
+        }
+    };
+    const [mainImage, setMainImage] = useState("https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg");
     return(
         <>
         <NavBar />
@@ -14,17 +28,12 @@ function ProductDetail() {
             <div className="product-detail-item">
                 <div className="product-detail-item-left">
                     <div className="product-detail-item-left-images-choose">
-                        <img src="https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg" alt="" />
-                        <img src="https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg" alt="" />
-                        <img src="https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg" alt="" />
-                        <img src="https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg" alt="" />
-                        <img src="https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg" alt="" />
-                        <img src="https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg" alt="" />
-                        <img src="https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg" alt="" />
-                        <img src="https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg" alt="" />
+                    <img src="https://www.tastingtable.com/img/gallery/are-oranges-named-after-the-color/l-intro-1666984048.jpg" alt="" onClick={() => setMainImage("https://www.tastingtable.com/img/gallery/are-oranges-named-after-the-color/l-intro-1666984048.jpg")} />
+                        <img src="https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg" alt="" onClick={() => setMainImage("https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg")} />
+                        <img src="https://images.unsplash.com/photo-1509391618207-32f1fa13c1d2?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b3JhbmdlJTIwZnJ1aXR8ZW58MHx8MHx8fDA%3D" alt="" onClick={() => setMainImage("https://images.unsplash.com/photo-1509391618207-32f1fa13c1d2?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b3JhbmdlJTIwZnJ1aXR8ZW58MHx8MHx8fDA%3D")}/>
                     </div>
                     <div className="product-detail-item-image-main">
-                        <img src="https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg" alt="" />
+                    <img src={mainImage} alt="" />
                     </div>
                 </div>
                 <div className="product-detail-item-right">
@@ -52,17 +61,53 @@ function ProductDetail() {
                     </div>
                     <div className="product-detail-buttons">
                         <div className="product-detail-button-quantity">
-                            <i className="fa fa-minus"></i>
-                            <p>2</p>
-                            <i className="fa fa-plus"></i>
+                            <button onClick={decrementQuantity}><i className="fa fa-minus"></i></button>
+                            <p>{quantity}</p>
+                            <button onClick={incrementQuantity}><i className="fa fa-plus"></i></button>
                         </div>
-                        <button>Buy Now</button>
+                        <button className="buy-now-btn">Buy Now</button>
                         <button><i className="fa-regular fa-heart"></i></button>
                     </div>
-                    <div className="product-detail-services"></div>
+                    <div className="product-detail-services">
+                        <div className="product-detail-service-item">
+                            <i className="fa fa-truck"></i>
+                            <div>
+                                <span>Free Delivery</span>
+                                <small>Enter Your Postal Code for Delivery Avialable</small>
+                            </div>
+                        </div>
+                        <div className="product-detail-service-item">
+                            <i className="fa fa-truck"></i>
+                            <div>
+                                <span>Free Delivery</span>
+                                <small>Enter Your Postal Code for Delivery Avialable</small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div className="product-detail-related"></div>
+            <ProductSlider 
+                    products={[
+                        {
+                            productName:'apple',
+                            productPrice : 16,
+                            categoryName : '',
+                            rating:3,
+                            discount: 40,
+                            img:'https://weresmartworld.com/sites/default/files/styles/full_screen/public/2021-04/watermeloen_2.jpg?itok=hsBPt3DQ'
+                        },
+                        {
+                            productName:'apple',
+                            productPrice : 16,
+                            categoryName : '',
+                            rating:3,
+                            discount: 40,
+                            img:'https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg'
+                        }
+                    ]}
+                    title=""
+                    slog="Related Items"
+                    />
         </div>
         </>
     )
