@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './index.css';
 import Footer from "../../../commen/footer";
 import TopBar from "../../../commen/topBar";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import signup from "../signIn";
 
 function SignUp() {

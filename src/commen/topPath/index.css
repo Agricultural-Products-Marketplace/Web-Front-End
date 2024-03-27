@@ -1,4 +1,5 @@
 .about-page-top-path{
+    animation: TopToBottomAnimation 1s;
     display: flex;
     padding: 1vw 4vw;
     font-size: 18px;

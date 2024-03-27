@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './index.css';
 import NavBar from "../../commen/navBar";
 import ServicesCard from "../../commen/services";
 import DevelopersCard from "../../card/aboutDevelopersCard";
 import AboutStatusCard from "../../card/aboutStatus";
 import TopPath from "../../commen/topPath";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function About() {
 

@@ -5,6 +5,7 @@
 }
 
 .signin-container{
+    animation: ScaleDownAnimation 1s;
     border-radius: 8px;
     background-color: rgba(0,0,0,0);
     width: 80%;
@@ -32,6 +33,7 @@
 }
 
 .signin-content-form{
+    animation: LeftToRightAnimation 1s;
     padding: 0.2vw;
     gap: 1vw;
     display: flex;
@@ -63,6 +65,7 @@
 }
 
 .signin-back-icon{
+    animation: ScaleUpAnimation 1s !important;
     text-decoration: none;
     color: black;
     font-size: 2vw;

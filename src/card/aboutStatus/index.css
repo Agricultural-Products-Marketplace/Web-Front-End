@@ -5,6 +5,7 @@
     gap: 5vw;
     justify-content: center;
     margin-bottom: 3vw;
+    animation: LeftToRightAnimation 1s;
     
 }
 
