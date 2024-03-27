@@ -30,10 +30,10 @@ function NavBar() {
             
             </a>
             <div className="account-dropdown-menus">
-                <a href="">
+                <Link to={'/account'}>
                     <i className="fa fa-user"></i>
                     Manage My Account
-                </a>
+                </Link>
                 <a href="">
                     <i className="fa-solid fa-cart-shopping"></i>
                     My Order
