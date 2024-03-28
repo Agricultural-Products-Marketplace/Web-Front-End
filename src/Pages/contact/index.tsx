@@ -8,8 +8,9 @@ function Contact() {
         <>
         <NavBar />
         <div className="contact-page">
-            <TopPath 
-            path="Contact"
+            <TopPath
+            prepath="Home / "
+            mainpath="Contact"
             />
 
             <div className="contact-page-info">

@@ -50,7 +50,8 @@ function About() {
         <NavBar />
         <div className="about-page">
             <TopPath 
-            path="About"
+            prepath="Home / "
+            mainpath="About"
             />
             <div className="about-page-description">
                 <div className="about-page-text-description">

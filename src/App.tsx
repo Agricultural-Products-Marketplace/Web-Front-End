@@ -13,6 +13,7 @@ import Contact from './Pages/contact';
 import About from './Pages/about';
 import MyAccount from './Pages/Account';
 import ProductDetail from './Pages/productDetailView';
+import BillingDetail from './Pages/billingDetail';
 
 function ScrollToTopOnRouteChange() {
   const location = useLocation();
@@ -41,6 +42,7 @@ function App(): JSX.Element {
           <Route path='/about' element={<About />} />
           <Route path='/account' element={<MyAccount />} />
           <Route path='/product-detail' element={<ProductDetail />} />
+          <Route path='/cart/checkout' element={<BillingDetail />} />
         </Routes>
         <Footer />
       </div>

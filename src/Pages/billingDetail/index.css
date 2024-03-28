@@ -1,0 +1,195 @@
+.billing-detail-main{
+    display: flex;
+    align-items: start;
+    justify-content: space-around;
+}
+
+.billing-detail-main-left{
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+}
+
+.billing-detail-form{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vw;
+}
+
+.billing-detail-form>label{
+    display: flex;
+    gap: 0.2vw;
+    color: rgba(0,0,0,0.6);
+}
+
+.billing-detail-form>label>sup{
+    color: red;
+}
+
+.billing-detail-form>input{
+    height: 40px;
+    border: none;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 5px;
+    padding-left: 15px;
+}
+
+.billing-address-save{
+    display: flex;
+    gap: 0.5vw;
+    align-items: center;
+}
+
+.billing-address-save>p{
+    font-size: 15px;
+}
+
+
+/* Billing Detail Right */
+
+.billing-detail-main-right{
+    display: flex;
+    flex-direction: column;
+}
+
+.billing-detail-main-right-products{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1vw;
+}
+
+.checkout-product-detail{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.checkout-product-detail>img{
+    width: 40px;
+}
+
+.checkout-product-total-price{
+    display: flex;
+    flex-direction: column;
+}
+
+.checkout-product-total-price>hr{
+    color: black;
+    width: 100%;
+}
+
+.checkout-product-total-price p{
+    margin: 0px;
+}
+
+.checkout-subtotal{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1vw;
+}
+
+.checkout-payment-bank{
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-radio, .payment-radio>div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1vw;
+}
+
+.payment-radio-first{
+    margin-top: 2vw;
+    display: flex;
+justify-content: space-between;
+}
+
+.checkout-payment-bank-options{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.checkout-payment-bank-options>img{
+    width: 30px;
+    height: 30px;
+}
+
+.checkout-coupon{
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+    margin-bottom: 2vw;
+    margin-top: 1vw;
+}
+
+.checkout-coupon>input{
+    height: 35px;
+    border: 0.2vw solid black;
+    border-radius: 3px;
+}
+
+.checkout-coupon>button,.subimt-order-btn{
+    display: flex;
+    height: 40px;
+    background-color: green;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 2vw;
+    color: white;
+    font-size: 15px;
+    font-weight: 900;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.checkout-coupon>button:hover,.subimt-order-btn:hover{
+    background-color: transparent;
+    outline: green solid 1px;
+    color: green;
+}
+
+
+/* Check Box css*/
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 2px solid #ccc;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; /* Make it circular */
+    outline: none;
+    cursor: pointer;
+    position: relative; /* Position the checkmark relative to the checkbox */
+  }
+  
+  /* Style for the checkmark */
+  input[type="checkbox"]:before {
+    content: "\2713"; /* Unicode character for tick */
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 18px; /* Adjust as needed */
+    color: transparent; /* Hide the checkmark by default */
+    position: absolute; /* Position the checkmark absolutely */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the checkmark */
+  }
+  
+  /* Style for checked state */
+  input[type="checkbox"]:checked:before {
+    background-color: green;
+    color: white;
+    border-radius: 50px;
+    font-size: 22px; /* Change the color of the checkmark when checked */
+  }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import './index.css';
 import NavBar from "../../commen/navBar";
 import TopPath from "../../commen/topPath";
+import { Link } from "react-router-dom";
 
 function Cart() {
 
@@ -59,7 +60,9 @@ function Cart() {
         <>
             <NavBar/>
             <div className="cart-page">
-                <TopPath path="Cart" />
+                <TopPath
+                prepath="Home / " 
+                mainpath="Cart" />
                 <div className="cart-product-items">
                     <table className="cart-page-product-table">
 
@@ -125,7 +128,7 @@ function Cart() {
                             </div>
                             <hr />
                         </div>
-                        <button>Process to Checkout</button>
+                        <Link to={'/cart/checkout'}>Process to Checkout</Link>
                     </div>
                 </div>
             </div>
