@@ -2,13 +2,14 @@ import React from "react";
 import './index.css';
 
 interface TopPathProps{
-    path : string
+    mainpath : string
+    prepath : string
 }
 
-function TopPath({path}:TopPathProps) {
+function TopPath({mainpath,prepath}:TopPathProps) {
     return(
         <div className="about-page-top-path">
-                <p>Home / <span>{path}</span></p>
+                <p>{prepath}<span>{mainpath}</span></p>
             </div>
     )
 }
