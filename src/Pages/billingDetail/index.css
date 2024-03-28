@@ -4,7 +4,13 @@
     justify-content: space-around;
 }
 
+.Billing-detail>h1{
+    padding: 1vw 6vw;
+    animation: RightToLeftAnimation 1s;
+}
+
 .billing-detail-main-left{
+    animation: BottomToTopAnimation 1s;
     display: flex;
     flex-direction: column;
     gap: 2vw;
@@ -48,6 +54,7 @@
 /* Billing Detail Right */
 
 .billing-detail-main-right{
+    animation: LeftToRightAnimation 1s;
     display: flex;
     flex-direction: column;
 }

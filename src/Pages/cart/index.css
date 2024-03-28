@@ -36,6 +36,7 @@
     justify-content: space-between;
     box-shadow: 0px 0px 20px rgba(0,0,0,0.1);
     padding: 1vw 2vw;
+    animation: TopToBottomAnimation 1s;
 }
 
 .cart-page-product-table-head>td{
@@ -44,6 +45,7 @@
 }
 
 .cart-page-product-table-row{
+    animation: BottomToTopAnimation 1s;
     margin-top: 2vw;
     width: 100%;
     display: flex;

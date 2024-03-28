@@ -5,6 +5,10 @@
     flex-direction: row;
 }
 
+.product-slider{
+    animation: RightToLeftAnimation 1s;
+}
+
 .show-all{
     margin-top: 3vw;
     display: flex;

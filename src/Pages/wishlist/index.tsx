@@ -3,6 +3,7 @@ import './index.css';
 import WishlistCard from "../../card/wishlistCard";
 import Product from "../../card/product";
 import NavBar from "../../commen/navBar";
+import TopPath from "../../commen/topPath";
 
 
 
