@@ -13,6 +13,7 @@ a{
     overflow-x: scroll;
     margin: 0 20px;
     padding-bottom: 25px;
+    animation: RightToLeftAnimation 1s;
 }
 
 ::-webkit-scrollbar{
