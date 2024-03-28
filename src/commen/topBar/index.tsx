@@ -1,11 +1,11 @@
+import React, { useEffect } from 'react';
+import './index.css';
+
 declare global {
     interface Window {
         gtranslateSettings: any;
     }
 }
-
-import React, { useEffect } from 'react';
-import './index.css';
 
 const TopBar = () => {
     useEffect(() => {
