@@ -39,7 +39,7 @@ function App(): JSX.Element {
           <Route path='/cart' element={<Cart />} />
           <Route path='/wishlist' element={<WishList />} />
           <Route path='/contact' element={<Contact />} />
-{/*           <Route path='/about' element={<About />} /> */}
+          <Route path='/about' element={<About />} />
           <Route path='/account' element={<MyAccount />} />
           <Route path='/product-detail' element={<ProductDetail />} />
           <Route path='/cart/checkout' element={<BillingDetail />} />
