@@ -66,7 +66,7 @@ function About() {
                 </div>
             </div>
             <AboutStatusCard />
-            <div className="about-page-developers">
+{/*             <div className="about-page-developers">
             {Developers.map((developer, index) => (
                         <DevelopersCard
                             key={index}
@@ -79,7 +79,7 @@ function About() {
                             Github={developer.Github}
                         />
                     ))}
-            </div>
+            </div> */}
             <ServicesCard />
         </div>
         </>
