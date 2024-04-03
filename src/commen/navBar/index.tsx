@@ -27,8 +27,6 @@ function NavBar() {
             <Link to={'/wishlist'}><i className="fa-regular fa-heart"></i></Link>
             <Link to={'/cart'}><i className="fa-solid fa-cart-shopping"><sup>2</sup></i></Link>
             <a href="#" className='icons-user-icon'><i className="fa-solid fa-user"></i>
-            
-            </a>
             <div className="account-dropdown-menus">
                 <Link to={'/account'}>
                     <i className="fa fa-user"></i>
@@ -51,6 +49,7 @@ function NavBar() {
                     LogOut
                 </a>
             </div>
+            </a>
             </div>
             
         </section>
