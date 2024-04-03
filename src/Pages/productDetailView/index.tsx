@@ -22,12 +22,13 @@ function ProductDetail() {
         <>
         <NavBar />
         <div className="product-detail-page">
-            <div className="product-detail-top-path">
-                <p>Account / Fruit / <span>Grape</span></p>
-            </div>
+            <TopPath
+            prepath="Account / Fruit/ " 
+            mainpath="Grape"
+            />
             <div className="product-detail-item">
-                <div className="product-detail-item-left">
-                    <div className="product-detail-item-left-images-choose">
+                <div className="product-detail-item-left row">
+                    <div className="product-detail-item-left-images-choose col">
                     <img src="https://www.tastingtable.com/img/gallery/are-oranges-named-after-the-color/l-intro-1666984048.jpg" alt="" onClick={() => setMainImage("https://www.tastingtable.com/img/gallery/are-oranges-named-after-the-color/l-intro-1666984048.jpg")} />
                         <img src="https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg" alt="" onClick={() => setMainImage("https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg")} />
                         <img src="https://images.unsplash.com/photo-1509391618207-32f1fa13c1d2?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b3JhbmdlJTIwZnJ1aXR8ZW58MHx8MHx8fDA%3D" alt="" onClick={() => setMainImage("https://images.unsplash.com/photo-1509391618207-32f1fa13c1d2?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b3JhbmdlJTIwZnJ1aXR8ZW58MHx8MHx8fDA%3D")}/>
@@ -53,14 +54,14 @@ function ProductDetail() {
                     <p className="product-detail-price">$192.00</p>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint suscipit labore illum odit facilis, minus omnis ad aspernatur tempora voluptas saepe, at fugit debitis assumenda illo, corporis consequatur incidunt? Adipisci?</p>
                     <hr />
-                    <div className="product-detail-colors">
+                    <div className="product-detail-colors row">
                         <p>Colors : </p>
                         <div className="color-a"></div>
                         <div className="color-b"></div>
                         <div className="color-c"></div>
                     </div>
-                    <div className="product-detail-buttons">
-                        <div className="product-detail-button-quantity">
+                    <div className="product-detail-buttons row">
+                        <div className="product-detail-button-quantity row">
                             <button onClick={decrementQuantity}><i className="fa fa-minus"></i></button>
                             <p>{quantity}</p>
                             <button onClick={incrementQuantity}><i className="fa fa-plus"></i></button>
@@ -68,17 +69,17 @@ function ProductDetail() {
                         <button className="buy-now-btn">Buy Now</button>
                         <button><i className="fa-regular fa-heart"></i></button>
                     </div>
-                    <div className="product-detail-services">
+                    <div className="product-detail-services col">
                         <div className="product-detail-service-item">
                             <i className="fa fa-truck"></i>
-                            <div>
+                            <div className="col">
                                 <span>Free Delivery</span>
                                 <small>Enter Your Postal Code for Delivery Avialable</small>
                             </div>
                         </div>
                         <div className="product-detail-service-item">
                             <i className="fa fa-truck"></i>
-                            <div>
+                            <div className="col">
                                 <span>Free Delivery</span>
                                 <small>Enter Your Postal Code for Delivery Avialable</small>
                             </div>

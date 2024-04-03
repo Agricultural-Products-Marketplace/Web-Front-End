@@ -64,9 +64,9 @@ function Cart() {
                 prepath="Home / " 
                 mainpath="Cart" />
                 <div className="cart-product-items">
-                    <table className="cart-page-product-table">
+                    <table className="cart-page-product-table col">
 
-                            <tr className="cart-page-product-table-head">
+                            <tr className="cart-page-product-table-head row">
                                 <td>Product</td>
                                 <td>Price</td>
                                 <td>Quantity</td>
@@ -74,17 +74,17 @@ function Cart() {
                             </tr>
                         <tbody>
                             {products.map((product, index) => (
-                                <tr key={index} className="cart-page-product-table-row">
+                                <tr key={index} className="cart-page-product-table-row row">
                                     <td>
                                         <button onClick={openPopup}><sup>X</sup></button>
                                         <img src={product.Image} alt={product.Title} />
                                         <p>{product.Title}</p>
                                     </td>
                                     <td>${product.Price}</td>
-                                    <td className="cart-product-quantity">
-                                        <div className="cart-quantitiy-container">
+                                    <td className="cart-product-quantity row">
+                                        <div className="cart-quantitiy-container row">
                                             <p>{quantities[index]}</p>
-                                            <div className="quantity-button">
+                                            <div className="quantity-button col">
                                                 <button onClick={() => increment(index)}><i className="fa fa-angle-up"></i></button>
                                                 <button onClick={() => decrement(index)}><i className="fa fa-angle-down"></i></button>
                                             </div>
@@ -96,33 +96,33 @@ function Cart() {
                         </tbody>
                     </table>
                 </div>
-                <div className="cart-page-bottom-button">
+                <div className="cart-page-bottom-button row">
                     <a href="#">Return To Shop</a>
                     <a href="#">Update Cart</a>
                 </div>
-                <div className="cart-page-bottom-checkout">
-                    <div className="cart-page-bottom-checkout-left">
+                <div className="cart-page-bottom-checkout row">
+                    <div className="cart-page-bottom-checkout-left row">
                         <input type="text" placeholder="Coupon Code"/>
                         <button>Apply Coupon</button>
                     </div>
-                    <div className="cart-page-bottom-checkout-right">
+                    <div className="cart-page-bottom-checkout-right col">
                         <h3>Cart Total</h3>
-                        <div className="cart-page-bottom-checkout-right-price">
-                            <div className="cart-page-bottom-checkout-right-price-item">
+                        <div className="cart-page-bottom-checkout-right-price col">
+                            <div className="cart-page-bottom-checkout-right-price-item row">
                                 <p>Subtotal :</p>
                                 <p>${quantities.reduce((acc, curr, index) => acc + (curr * products[index].Price), 0)}</p>
                             </div>
                             <hr />
                         </div>
-                        <div className="cart-page-bottom-checkout-right-price">
-                            <div className="cart-page-bottom-checkout-right-price-item">
+                        <div className="cart-page-bottom-checkout-right-price col">
+                            <div className="cart-page-bottom-checkout-right-price-item row">
                                 <p>Shipping :</p>
                                 <p>Free</p>
                             </div>
                             <hr />
                         </div>
-                        <div className="cart-page-bottom-checkout-right-price">
-                            <div className="cart-page-bottom-checkout-right-price-item">
+                        <div className="cart-page-bottom-checkout-right-price col">
+                            <div className="cart-page-bottom-checkout-right-price-item row">
                                 <p>Total :</p>
                                 <p>${quantities.reduce((acc, curr, index) => acc + (curr * products[index].Price), 0)}</p>
                             </div>

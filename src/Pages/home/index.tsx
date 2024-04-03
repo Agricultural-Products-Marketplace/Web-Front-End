@@ -14,7 +14,7 @@ function Home() {
     return(
         <div className="home">
             <NavBar />
-            <div className="slider-category">
+            <div className="slider-category row">
                 <CategoryCard />
                 <SliderCard />
             </div>
