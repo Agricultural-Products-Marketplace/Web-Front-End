@@ -13,10 +13,10 @@ function Contact() {
             mainpath="Contact"
             />
 
-            <div className="contact-page-info">
+            <div className="contact-page-info row">
                 <div className="contact-page-info-left">
-                    <div className="contact-page-item">
-                        <div>
+                    <div className="contact-page-item col">
+                        <div className="row">
                             <i className="fa fa-phone contact-icon"></i>
                             <h4>Call To Us</h4>
                         </div>
@@ -24,8 +24,8 @@ function Contact() {
                         <p>Phone : +251 91 297 8713</p>
                     </div>
                     <hr />
-                    <div className="contact-page-item">
-                        <div>
+                    <div className="contact-page-item col">
+                        <div className="row">
                             <i className="fa-regular fa-envelope contact-icon"></i>
                             <h4>Write To us</h4>
                         </div>
@@ -35,8 +35,8 @@ function Contact() {
                     </div>
                 </div>
                 <div className="contact-page-right">
-                    <form action="">
-                        <div className="contact-page-form-user-info">
+                    <form action="" className="col">
+                        <div className="contact-page-form-user-info row">
                             <input type="text" placeholder="Your Name"/>
                             <input type="text" placeholder="Your Email"/>
                             <input type="text" placeholder="Your Phone"/>

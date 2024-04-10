@@ -12,7 +12,7 @@ function WishList() {
     return(
         <>
         <NavBar />
-        <div className="wishlist">
+        <div className="wishlist col">
             <div className="wishlist-title">
                 <h3>WishList ({40})</h3>
                 <a href="#">Move all to bag</a>    
@@ -29,9 +29,9 @@ function WishList() {
                ]}
                />
                
-               <div className="wishlist-for-you">
-               <div className="wishlist-for-you-title">
-                <p><hr />Just For You</p>
+               <div className="wishlist-for-you col">
+               <div className="wishlist-for-you-title row">
+                <p className="row"><hr />Just For You</p>
                 <a href="#">See All</a>
                </div>
                <div className="wishlist-for-you-products">

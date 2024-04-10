@@ -84,6 +84,7 @@
 
 .icons>a>i{
     font-size: 20px;
+    
 }
 
 .icons>a>i>sup{
@@ -92,6 +93,10 @@
     padding: 0.3vw;
     border-radius: 100px;
     margin-left: -0.4vw;
+}
+
+.icons-user-icon{
+    position: relative;
 }
 
 .account-dropdown-menus{
@@ -103,8 +108,8 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    right: 3.4rem;
-    top: 6.5rem;
+    right: 0;
+    top: 100%;
     padding: 0.5px 20px;
     transition: all ease-in-out 0.3s;
 }
@@ -130,8 +135,9 @@
     color: rgba(30, 230, 90, 1);
 }
 
-.icons-user-icon:hover + .account-dropdown-menus{
+.icons-user-icon:hover .account-dropdown-menus{
         visibility: visible;
+        animation: RightToLeftAnimation 0.2s;
 }
 
 .account-dropdown-menus:hover{

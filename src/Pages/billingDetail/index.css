@@ -11,14 +11,10 @@
 
 .billing-detail-main-left{
     animation: BottomToTopAnimation 1s;
-    display: flex;
-    flex-direction: column;
     gap: 2vw;
 }
 
 .billing-detail-form{
-    display: flex;
-    flex-direction: column;
     gap: 0.5vw;
 }
 
@@ -55,32 +51,21 @@
 
 .billing-detail-main-right{
     animation: LeftToRightAnimation 1s;
-    display: flex;
-    flex-direction: column;
 }
 
 .billing-detail-main-right-products{
-    display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1vw;
 }
 
 .checkout-product-detail{
-    display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 0.5vw;
 }
 
 .checkout-product-detail>img{
     width: 40px;
-}
-
-.checkout-product-total-price{
-    display: flex;
-    flex-direction: column;
 }
 
 .checkout-product-total-price>hr{
@@ -98,11 +83,6 @@
     margin-top: 1vw;
 }
 
-.checkout-payment-bank{
-    display: flex;
-    flex-direction: column;
-}
-
 .payment-radio, .payment-radio>div{
     display: flex;
     flex-direction: row;
@@ -117,8 +97,6 @@ justify-content: space-between;
 }
 
 .checkout-payment-bank-options{
-    display: flex;
-    flex-direction: row;
     align-items: center;
 }
 
@@ -128,8 +106,6 @@ justify-content: space-between;
 }
 
 .checkout-coupon{
-    display: flex;
-    flex-direction: row;
     gap: 2vw;
     margin-bottom: 2vw;
     margin-top: 1vw;

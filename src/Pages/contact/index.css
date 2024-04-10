@@ -1,14 +1,10 @@
 .contact-page-info{
-    display: flex;
-    flex-direction: row;
     padding: 2vw 5vw;
     flex: 7;
     gap: 3vw;
 }
 
 .contact-page-item{
-    display: flex;
-    flex-direction: column;
     flex: 3;
 }
 
@@ -17,8 +13,6 @@
 }
 
 .contact-page-item>div{
-    display: flex;
-    flex-direction: row;
     align-items: center;
     gap: 2vw;
 }
@@ -46,8 +40,6 @@
 }
 
 .contact-page-right>form{
-    display: flex;
-    flex-direction: column;
     gap: 2vw;
 }
 
@@ -62,8 +54,6 @@
 }
 
 .contact-page-form-user-info{
-    display: flex;
-    flex-direction: row;
     gap: 1vw;
 }
 
