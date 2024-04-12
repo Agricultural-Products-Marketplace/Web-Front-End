@@ -80,7 +80,7 @@ function CustomerSignUp() {
                                 <input type="text" name="username" placeholder="First Name" value={formData.username} onChange={handleChange} required />
                                 {/* <input type="text" name="lastName" placeholder="Last Name" onChange={handleChange} required /> */}
                             </div>
-                            <input type="text" name="phone" placeholder="Your Phone" value={formData.phone} onChange={handleChange} required />
+                            <input type="text" name="phone" placeholder="Your Phone" value={formData.phone_number} onChange={handleChange} required />
                             <input type="text" name="email" placeholder="Your Email" value={formData.email} onChange={handleChange} />
                             <div className="signup-form-password-input">
                                 <input type="password" name="password" placeholder="Create Password" value={formData.password} onChange={handleChange} required />
