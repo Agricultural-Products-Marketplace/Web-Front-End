@@ -21,7 +21,7 @@ function CustomerSignUp() {
         email: "",
         username: "",
         password: "",
-        phone:""
+        phone_number:""
     });
 
     const [registrationStatus, setRegistrationStatus] = useState("");
