@@ -11,9 +11,10 @@ import Cart from './Pages/cart';
 import WishList from './Pages/wishlist';
 import Contact from './Pages/contact';
 import About from './Pages/about';
-import MyAccount from './Pages/Account';
+import MyAccount from './Pages/account';
 import ProductDetail from './Pages/productDetailView';
 import BillingDetail from './Pages/billingDetail';
+import Admin from './Pages/admin';
 
 function ScrollToTopOnRouteChange() {
   const location = useLocation();
@@ -29,7 +30,6 @@ function App(): JSX.Element {
   return (
     <Router>
       <div>
-        <TopBar />
         <ScrollToTopOnRouteChange />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -43,8 +43,8 @@ function App(): JSX.Element {
           <Route path='/account' element={<MyAccount />} />
           <Route path='/product-detail' element={<ProductDetail />} />
           <Route path='/cart/checkout' element={<BillingDetail />} />
+          <Route path='/admin' element={<Admin />} />
         </Routes>
-        <Footer />
       </div>
     </Router>
   );
