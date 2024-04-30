@@ -13,8 +13,8 @@ interface CircularProgressBarProps {
 const CircularProgressBar: React.FC<CircularProgressBarProps> = ({ color, progressValue }) => {
   return (
     <div style={{ position: 'relative', display: 'inline-block' }}>
-      <CircularProgress variant="determinate" value={200-progressValue} color={color}  size={90} thickness={2} />
-      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: '20px' }}>
+      <CircularProgress variant="determinate" value={200-progressValue} color={color}  size={'7vw'} thickness={2} />
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: '1.7vw' }}>
         {progressValue}%
       </div>
     </div>

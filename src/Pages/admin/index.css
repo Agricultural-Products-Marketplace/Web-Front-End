@@ -3,7 +3,15 @@
     flex-direction: row;
 }
 
-.admin-page-nav{
+.admin-content {
+    padding-left: 16vw; /* Adjust this value according to the height of the AdminNavBar */
+}
+
+.admin-page-nav {
+    position: fixed;
+    top: 0; 
+    left: 0;
+    z-index: 1000; 
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -34,22 +42,30 @@
     padding: 0;
 }
 
-.admin-page-nav-bar-list-item>a{
+.admin-page-nav-bar-list-item>button{
+    background-color: transparent;
+    border: none;
+    display: flex;
+}
+
+.admin-page-nav-bar-list-item>button{
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 1vw;
     text-decoration: none;
     color: rgba(150, 150, 150, 0.8);
     width: 16vw;
-    justify-content: center;
+    gap: 1vw;
+    padding-left: 3vw;
+    justify-content: left;
 }
 
 .admin-page-nav-bar-list-item>.active-item{
     color: #00FF66;
 }
 
-.admin-page-nav-bar-list-item>a:hover{
+.admin-page-nav-bar-list-item>button:hover{
+    cursor: pointer;
     background-color: #00FF66;
     color: white;
 }
@@ -57,7 +73,7 @@
 .admin-page-main{
     display: flex;
     flex-direction: column;
-    width: 84vw;
+    width: 80vw;
     background-color: rgba(200, 200, 200, 0.3);
 }
 
@@ -137,7 +153,10 @@
     gap: 3vw;
 }
 .admin-page-main-right{
+    display: flex;
+    flex-direction: column;
     width: 20vw;
+    gap: 3vw;
 }
 
 .admin-page-main-left-top{
@@ -306,4 +325,37 @@
     margin: 0;
     margin-top: 0.8vw;
     font-size: 12px;
+}
+
+.admin-page-main-right-bottom{
+    background-color: white;
+    padding: 2vw;
+    border-radius: 20px;
+    box-shadow: 1px 7px 8px -3px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 1px 7px 8px -3px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 7px 8px -3px rgba(0,0,0,0.75);
+}
+
+.admin-page-main-right-bottom-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: fit-content;
+    margin-bottom: 2vw;
+
+}
+
+.admin-page-main-right-bottom-title>select{
+    height: 2vw;
+}
+
+.admin-page-main-right-bottom-title-text>h5{
+    margin: 0px;
+    padding: 0px;
+    color: rgba(150, 150, 150, 0.7);
+}
+
+.admin-page-main-right-bottom-title-text>h3{
+    margin: 0px;
+    padding: 0px;
 }
