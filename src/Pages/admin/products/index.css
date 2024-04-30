@@ -1,0 +1,35 @@
+.admin-page-main-products{
+    width: 74vw;
+    background-color: white;
+    border-radius: 15px;
+    padding: 1.5vw 3vw;
+}
+
+.admin-page-main-products-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.admin-page-main-products-title-actions{
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+    align-items: center;
+}
+
+.admin-page-main-products-title-actions-search{
+    background-color: #E4E2E2;
+    width: 20vw;
+    height: 3vw;
+    display: flex;
+    border-radius: 1vw;
+    padding-left: 1vw;
+}
+
+.admin-page-main-products-title-actions-search>input{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    
+}
