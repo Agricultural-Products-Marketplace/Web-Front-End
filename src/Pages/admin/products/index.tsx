@@ -6,7 +6,7 @@ function Products() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState("All Category");
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 10;
+    const productsPerPage = 15;
 
     const originalProductData = [
         { id: 1, image:'https://domf5oio6qrcr.cloudfront.net/medialibrary/11525/0a5ae820-7051-4495-bcca-61bf02897472.jpg',name: 'Apple', category:'Fruit',qty: 'X2', date: 'Feb 5, 2020', price: '253.82', discount: '60.76', status: 'out of Stock' },
@@ -103,7 +103,7 @@ function Products() {
                                 <td className='flex-1'>{product.date}</td>
                                 <td className='flex-1'>{product.price}</td>
                                 <td className='flex-1'>{product.discount}</td>
-                                <td className='flex-1' style={{ color: product.status === 'waiting' ? 'yellow' : (product.status === 'in Stock' ? '#00FF66' : (product.status === 'out of Stock' ? 'Red' : 'Black')) }}>{product.status}</td>
+                                <td className='flex-1' style={{ color: product.status === 'waiting' ? 'yellow' : (product.status === 'in Stock' ? 'green' : (product.status === 'out of Stock' ? 'Red' : 'Black')) }}>{product.status}</td>
                                 <td className='flex-1'>
                                     <div className='row'>
                                         <button><i className='fa-solid fa-pen'></i></button>

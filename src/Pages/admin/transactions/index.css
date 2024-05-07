@@ -1,0 +1,37 @@
+.admin-page-main-transaction-title{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 3vw;
+    margin-top: 2vw;
+}
+
+.transaction-table{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 2vw;
+}
+
+.transaction-table-head>tr{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 3vw;
+    color: #8E95A9;
+}
+
+.transaction-table-body{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+.transaction-table-body>tr{
+    background-color: white;
+    border: none !important;
+    display: flex;
+    padding: 1.3vw 3vw;
+    border-radius: 1vw;
+    justify-content: space-between;
+    color: #555F7E;
+}
