@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import AdminTopCard from "../../../card/admin/adminTopCard";
+import './index.css';
 
 function Orders() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState("Figma");
+    const [selectedOption, setSelectedOption] = useState("All Category");
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
@@ -14,6 +15,12 @@ function Orders() {
         setIsDropdownOpen(false); // Close dropdown after selecting an option
     };
 
+    const ordersData = [
+        { id: 1, image:'https://thumbs.dreamstime.com/b/coffee-cup-beans-26448276.jpg',name: 'Banana', qty: 'X2', date: 'Feb 5, 2020', revenue: '253.82', profit: '60.76', status: 'Pending' },
+        { id: 2, image:'https://thumbs.dreamstime.com/b/coffee-cup-beans-26448276.jpg',name: 'Apple', qty: 'X3', date: 'Feb 6, 2020', revenue: '350.25', profit: '80.30', status: 'Ended' },
+        // Add more data as needed
+    ];
+
     return (
         <div className="admin-page-main">
             <AdminTopCard title="Orders"/>
@@ -22,17 +29,19 @@ function Orders() {
                     <h3>Latest Orders</h3>
                     <div className="admin-page-main-products-title-actions">
                         <div className={`dropdown ${isDropdownOpen ? "menu-open" : ""}`}>
-                            <div className="select" onClick={toggleDropdown}>
+                            <div className="select" onClick={() => toggleDropdown()}>
                                 <span className="selected">{selectedOption}</span>
-                                <div className={`caret ${isDropdownOpen ? "caret-rotate" : ""}`}></div>
+                                <i className={`fa-solid ${isDropdownOpen ? "fa-caret-up" : "fa-caret-down"}`}></i>
                             </div>
-                            <ul className="menu">
-                                <li onClick={() => handleOptionClick("Framer")}>Framer</li>
-                                <li onClick={() => handleOptionClick("Sketch")}>Sketch</li>
-                                <li onClick={() => handleOptionClick("Invision")}>Invision</li>
-                                <li className={selectedOption === "Figma" ? "active" : ""} onClick={() => handleOptionClick("Figma")}>Figma</li>
-                                <li onClick={() => handleOptionClick("Adobe Xd")}>Adobe Xd</li>
-                            </ul>
+                            {isDropdownOpen && (
+                                <ul className="menu">
+                                    <li  className={selectedOption === "All Category" ? "active" : ""}onClick={() => handleOptionClick("All Category")}>All Category</li>
+                                    <li  className={selectedOption === "Framer" ? "active" : ""}onClick={() => handleOptionClick("Framer")}>Framer</li>
+                                    <li className={selectedOption === "Sketch" ? "active" : ""} onClick={() => handleOptionClick("Sketch")}>Sketch</li>
+                                    <li className={selectedOption === "Invision" ? "active" : ""} onClick={() => handleOptionClick("Invision")}>Invision</li>
+                                    <li className={selectedOption === "Figma" ? "active" : ""} onClick={() => handleOptionClick("Figma")}>Figma</li>
+                                </ul>
+                            )}
                         </div>
                         <a href="#More">More <i className="fa-solid fa-arrow-right"></i></a>
                         
@@ -51,18 +60,19 @@ function Orders() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        {ordersData.map((order)=>(
+                            <tr key={order.id}>
                             <td className='flex-3'>
                                 <div className='row'>
-                                    <img src="https://thumbs.dreamstime.com/b/coffee-cup-beans-26448276.jpg" alt="" />
-                                    <p>Banana</p>
+                                    <img src={order.image} alt="" />
+                                    <p>{order.name}</p>
                                 </div>
                             </td>
-                            <td className='flex-1'>X2</td>
-                            <td className='flex-1'>Feb 5, 2020</td>
-                            <td className='flex-1'>253.82</td>
-                            <td className='flex-1'>60.76</td>
-                            <td className='flex-1'>Pending</td>
+                            <td className='flex-1'>{order.qty}</td>
+                            <td className='flex-1'>{order.date}</td>
+                            <td className='flex-1'>{order.revenue}</td>
+                            <td className='flex-1'>{order.profit}</td>
+                            <td className='flex-1' style={{ color: order.status === 'Pending' ? 'yellow' : (order.status === 'Ended' ? 'green' : 'red') }}>{order.status}</td>
                             <td className='flex-2'>
                                 <div className='row'>
                                     <button><i className='fa-solid fa-pen'></i></button>
@@ -71,86 +81,7 @@ function Orders() {
                                 </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td className='flex-3'>
-                                <div className='row'>
-                                    <img src="https://thumbs.dreamstime.com/b/coffee-cup-beans-26448276.jpg" alt="" />
-                                    <p>Banana</p>
-                                </div>
-                            </td>
-                            <td className='flex-1'>X2</td>
-                            <td className='flex-1'>Feb 5, 2020</td>
-                            <td className='flex-1'>253.82</td>
-                            <td className='flex-1'>60.76</td>
-                            <td className='flex-1'>Ended</td>
-                            <td className='flex-2'>
-                                <div className='row'>
-                                    <button><i className='fa-solid fa-pen'></i></button>
-                                    <button><i className='fa-solid fa-trash'></i></button>
-                                    <button><i className='fa-solid fa-ellipsis'></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className='flex-3'>
-                                <div className='row'>
-                                    <img src="https://thumbs.dreamstime.com/b/coffee-cup-beans-26448276.jpg" alt="" />
-                                    <p>Banana</p>
-                                </div>
-                            </td>
-                            <td className='flex-1'>X2</td>
-                            <td className='flex-1'>Feb 5, 2020</td>
-                            <td className='flex-1'>253.82</td>
-                            <td className='flex-1'>60.76</td>
-                            <td className='flex-1'>Ended</td>
-                            <td className='flex-2'>
-                                <div className='row'>
-                                    <button><i className='fa-solid fa-pen'></i></button>
-                                    <button><i className='fa-solid fa-trash'></i></button>
-                                    <button><i className='fa-solid fa-ellipsis'></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className='flex-3'>
-                                <div className='row'>
-                                    <img src="https://thumbs.dreamstime.com/b/coffee-cup-beans-26448276.jpg" alt="" />
-                                    <p>Banana</p>
-                                </div>
-                            </td>
-                            <td className='flex-1'>X2</td>
-                            <td className='flex-1'>Feb 5, 2020</td>
-                            <td className='flex-1'>253.82</td>
-                            <td className='flex-1'>60.76</td>
-                            <td className='flex-1'>Ended</td>
-                            <td className='flex-2'>
-                                <div className='row'>
-                                    <button><i className='fa-solid fa-pen'></i></button>
-                                    <button><i className='fa-solid fa-trash'></i></button>
-                                    <button><i className='fa-solid fa-ellipsis'></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td className='flex-3'>
-                                <div className='row'>
-                                    <img src="https://thumbs.dreamstime.com/b/coffee-cup-beans-26448276.jpg" alt="" />
-                                    <p>Banana</p>
-                                </div>
-                            </td>
-                            <td className='flex-1'>X2</td>
-                            <td className='flex-1'>Feb 5, 2020</td>
-                            <td className='flex-1'>253.82</td>
-                            <td className='flex-1'>60.76</td>
-                            <td className='flex-1'>Ended</td>
-                            <td className='flex-2'>
-                                <div className='row'>
-                                    <button><i className='fa-solid fa-pen'></i></button>
-                                    <button><i className='fa-solid fa-trash'></i></button>
-                                    <button><i className='fa-solid fa-ellipsis'></i></button>
-                                </div>
-                            </td>
-                        </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>
