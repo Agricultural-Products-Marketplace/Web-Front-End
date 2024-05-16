@@ -64,3 +64,22 @@
         opacity: 1; /* Adjust the translation distance as needed */
     }
 }
+
+
+@media only screen and (max-width: 767px){
+    .top_bar>p{
+        font-size: 13px;
+    }
+
+    .icons>a{
+        gap: 0.2vw !important;
+    }
+
+    .icons>a>i{
+        font-size: 15px !important;
+    }
+
+    .icons>a>small{
+       display: none;
+    }
+}

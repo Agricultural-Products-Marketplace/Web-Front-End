@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './index.css';
+import { useLocation } from 'react-router-dom';
 
 declare global {
     interface Window {
@@ -8,6 +9,8 @@ declare global {
 }
 
 const TopBar = () => {
+    const location = useLocation();
+    const { pathname } = location;
     useEffect(() => {
         const script = document.createElement('script');
         script.src = 'https://cdn.gtranslate.net/widgets/latest/float.js';
@@ -28,14 +31,14 @@ const TopBar = () => {
     }, []);
 
     return (
-        <div className="top_bar" id='TopBar'>
-            <p>Summer Sale For All Agricultural product And Free Express Delivery - OFF 50%! <a href=""><strong> Shop Now</strong></a></p>
-            <div className="gtranslate_wrapper"></div>
-            <div className="icons">
-                <a href="#"><i className="fa-solid fa-user"></i><small>Profile</small></a>
-                <a href="#"><i className="fa-solid fa-message"></i> <small>Message</small></a>
-            </div>
+        pathname === '/admin'?null:<div className="top_bar" id='TopBar'>
+        <p>Summer Sale For All Agricultural product And Free Express Delivery - OFF 50%! <a href=""><strong> Shop Now</strong></a></p>
+        <div className="gtranslate_wrapper"></div>
+        <div className="icons">
+            <a href="#"><i className="fa-solid fa-phone"></i><small>+251 91 297 8713</small></a>
+            <a href="#"><i className="fa-solid fa-message"></i> <small>agmp.ino@gmail.com</small></a>
         </div>
+    </div>
     );
 }
 

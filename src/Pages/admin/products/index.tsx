@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import AdminTopCard from "../../../card/admin/adminTopCard";
 import './index.css';
+import AddProduct from '../addproduct';
 
 function Products() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState("All Category");
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 15;
+    const [showPopup, setShowPopup] = useState(false);
 
     const originalProductData = [
         { id: 1, image:'https://domf5oio6qrcr.cloudfront.net/medialibrary/11525/0a5ae820-7051-4495-bcca-61bf02897472.jpg',name: 'Apple', category:'Fruit',qty: 'X2', date: 'Feb 5, 2020', price: '253.82', discount: '60.76', status: 'out of Stock' },
@@ -47,10 +49,23 @@ function Products() {
         }
     };
 
+    const openPopup = () => {
+        setShowPopup(true);
+    };
+
+    const closePopup = () => {
+        handleOptionClick("All Category");
+        setShowPopup(false);
+    };
+
     return (
         <div className="admin-page-main">
             <AdminTopCard title="Products"/>
             <div className="admin-page-main-products">
+                {/* Add Product popup */}
+                {showPopup && (
+                    <AddProduct />
+                )}
                 <div className="admin-page-main-products-title">
                     <h3>Product List</h3>
                     <div className="admin-page-main-products-title-actions">
@@ -72,7 +87,7 @@ function Products() {
                             )}
                         </div>
                         
-                        <button>Add Product</button>
+                        <button onClick={openPopup}>Add Product</button>
                         <a href="#More">More <i className="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
@@ -93,7 +108,7 @@ function Products() {
                         {currentProducts.map(product => (
                             <tr key={product.id}>
                                 <td className='flex-3'>
-                                    <div className='row'>
+                                    <div className='row' onClick={openPopup}>
                                         <img src={product.image} alt="" />
                                         <p>{product.name}</p>
                                     </div>
@@ -123,5 +138,6 @@ function Products() {
         </div>
     );
 }
+
 
 export default Products;

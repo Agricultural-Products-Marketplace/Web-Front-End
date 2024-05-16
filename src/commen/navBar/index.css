@@ -147,3 +147,54 @@
 .navbar{
     animation: RightToLeftAnimation 1s;
 }
+
+.navbar-dropdown-menus{
+    visibility: hidden;
+}
+
+.navbar-dropdown-menus>div{
+    visibility: hidden;
+    position: absolute;
+    list-style: none;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    background-color: rgba(30, 230, 90, 1);
+}
+
+.navbar-dropdown-menus>div>a{
+    width: 100vw;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3vw 0;
+}
+
+.navbar-dropdown-menus>div>a:hover{
+    background-color: white;
+    color: rgba(30, 230, 90, 1);
+}
+
+
+
+
+
+@media only screen and (max-width: 767px){
+    .navbar-dropdown-menus{
+        visibility: visible;
+    }
+    .navigation_bar{
+        display: none;
+    }
+    .search_bar{
+        display: none;
+    }
+
+    .navbar>.icons{
+        display: none;
+    }
+}

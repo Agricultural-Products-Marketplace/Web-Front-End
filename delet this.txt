@@ -1,0 +1,9 @@
+sceen size Guide
+
+Phone =  < 767px
+Tablet = 768 px -991 px
+Laptop = 992 px - 1199 px
+Desktop = > 1200px
+
+
+@media only screen and (max-width: 767px)

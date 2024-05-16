@@ -79,7 +79,7 @@ function CustomerSignUp() {
                             <p>Welcome <br /><strong>Sign Up For Customer Account</strong></p>
                             <div className="signup-form-input-name">
                                 <input type="text" name="username" placeholder="First Name" value={formData.username} onChange={handleChange} required />
-                                {/* <input type="text" name="lastName" placeholder="Last Name" onChange={handleChange} required /> */}
+                                <input type="text" name="lastName" placeholder="Last Name" onChange={handleChange} required />
                             </div>
 
                             <input type="text" name="phone_number" placeholder="Your Phone" value={formData.phone_number} onChange={handleChange} required />
@@ -89,8 +89,9 @@ function CustomerSignUp() {
                                 <input type="password" name="password" placeholder="Create Password" value={formData.password} onChange={handleChange} required />
                             </div>
                             <div className="signup-form-password-input">
-                                {/* <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange} required /> */}
+                                <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange} required />
                             </div>
+                            <p className="error-message">Erorr Message</p>
                             <button className="signup-form-button" type="submit" disabled={isLoading}>
                                 {isLoading ? "Loading..." : "Register"}
                             </button>

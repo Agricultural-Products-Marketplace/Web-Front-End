@@ -15,17 +15,17 @@
 }
 
 .service-item-icon{
-    width: 70px;
-    height: 70px;
+    width: 5.3vw;
+    height: 5.3vw;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: black;
-    outline:solid 10px rgba(0, 0, 0, 0.4);
+    outline:solid 0.8vw rgba(0, 0, 0, 0.4);
     border-radius: 100%;
     margin-bottom: 1vw;
     color: white;
-    font-size: 30px;
+    font-size: 2vw;
 }
 
 .service-item-icon:hover{
@@ -42,4 +42,5 @@
 .service-item>p{
     margin: 0px;
     font-weight: lighter;
+    font-size: 1.15vw;
 }
