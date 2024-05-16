@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import TopBar from "./commen/topBar";
 import Footer from "./commen/footer";
 import NavBar from "./commen/navBar";
@@ -15,6 +15,8 @@ import MyAccount from './Pages/account';
 import ProductDetail from './Pages/productDetailView';
 import BillingDetail from './Pages/billingDetail';
 import Admin from './Pages/admin';
+import PageNotFound from './commen/404';
+import Message from './Pages/message';
 
 function ScrollToTopOnRouteChange() {
   const location = useLocation();
@@ -26,10 +28,13 @@ function ScrollToTopOnRouteChange() {
   return null;
 }
 
-function App(): JSX.Element {
+function App(): JSX.Element { // Get the location directly
+
   return (
     <Router>
       <div>
+        <TopBar />
+        <NavBar />
         <ScrollToTopOnRouteChange />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -41,10 +46,13 @@ function App(): JSX.Element {
           <Route path='/contact' element={<Contact />} />
           <Route path='/about' element={<About />} />
           <Route path='/account' element={<MyAccount />} />
+          <Route path='/message' element={<Message />}/>
           <Route path='/product-detail' element={<ProductDetail />} />
           <Route path='/cart/checkout' element={<BillingDetail />} />
           <Route path='/admin' element={<Admin />} />
+          <Route path='*' element={<PageNotFound />} />
         </Routes>
+        <Footer/>
       </div>
     </Router>
   );

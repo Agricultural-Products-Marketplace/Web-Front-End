@@ -6,7 +6,6 @@ import TopPath from "../../commen/topPath";
 function Contact() {
     return(
         <>
-        <NavBar />
         <div className="contact-page">
             <TopPath
             prepath="Home / "

@@ -5,7 +5,6 @@ import NavBar from "../../commen/navBar";
 function MyAccount() {
     return(
     <>
-        <NavBar />
         <div className="my-account">
             <div className="my-account-top">
                 <p className="my-account-top-p1">Home / <span>My Account</span></p>
@@ -20,7 +19,6 @@ function MyAccount() {
                     <h4>My Orders</h4>
                     <a href="#">My Returns</a>
                     <a href="#">My Cancellation</a>
-                    <h4>My WishList</h4>
                 </div>
                 <div className="my-account-bottom-right">
                     <h2>Edit Your Profile</h2>

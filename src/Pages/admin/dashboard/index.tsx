@@ -5,9 +5,22 @@ import TopProducts from "../../../card/admin/topProducts";
 import AdminChart from "../../../card/chart";
 import LinearProgressBar from "../../../card/linearprogress";
 import AdminTopCard from "../../../card/admin/adminTopCard";
+import { useState } from "react";
 
 function Dashboard() {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState("This Year");
+    const [currentPage, setCurrentPage] = useState(1);
 
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleOptionClick = (option:string) => {
+        setSelectedOption(option);
+        setCurrentPage(1); // Reset to first page when changing category
+        setIsDropdownOpen(false); // Close dropdown after selecting an option
+    };
     const products = [
         { image: 'https://thumbs.dreamstime.com/b/coffee-cup-beans-26448276.jpg', title: 'Coffee', description: 'Our Coffee', price: 150, inventory: 700, sales: 1000.60, today: 17000.92 },
         { image: 'https://snaped.fns.usda.gov/sites/default/files/seasonal-produce/2018-05/avocado.jpg', title: 'Avocado', description: 'Fresh Avocado', price: 100, inventory: 1000, sales: 10000.56, today: 5000.882 },
@@ -24,10 +37,18 @@ function Dashboard() {
                             <h5>Total Revenue</h5>
                             <h3>$980,273.00</h3>
                         </div>
-                        <select name="year" id="">
-                            <option value="ThisYear">This Year</option>
-                            <option value="LastYear">Last year</option>
-                        </select>
+                        <div className={`dropdown ${isDropdownOpen ? "menu-open" : ""}`}>
+                            <div className="select" onClick={toggleDropdown}>
+                                <span className="selected">{selectedOption}</span>
+                                <i className={`fa-solid ${isDropdownOpen ? "fa-caret-up" : "fa-caret-down"}`}></i>
+                            </div>
+                            {isDropdownOpen && (
+                                <ul className="menu">
+                                    <li className={selectedOption === "This Year" ? "active" : ""} onClick={() => handleOptionClick("This year")}>This Year</li>
+                                    <li className={selectedOption === "Last Year" ? "active" : ""} onClick={() => handleOptionClick("Last Year")}>Last Year</li>
+                                </ul>
+                            )}
+                        </div>
                     </div>
                     <AdminChart />
                 </div>

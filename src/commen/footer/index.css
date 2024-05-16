@@ -112,3 +112,19 @@
 .footer_e_social_links>a:hover{
     color: white;
 }
+
+@media only screen and (max-width: 767px){
+    .footer{
+        display: flex;
+        flex: 2;
+        flex-direction: column;
+    }
+
+    .footer_a{
+        flex: 1;
+    }
+
+    .footer_b{
+        flex: 1;
+    }
+}

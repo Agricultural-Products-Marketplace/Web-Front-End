@@ -11,7 +11,6 @@ import TopPath from "../../commen/topPath";
 function WishList() {
     return(
         <>
-        <NavBar />
         <div className="wishlist col">
             <div className="wishlist-title">
                 <h3>WishList ({40})</h3>

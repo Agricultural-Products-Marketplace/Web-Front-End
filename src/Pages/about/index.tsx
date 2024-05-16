@@ -47,7 +47,6 @@ function About() {
 ]
     return(
         <>
-        <NavBar />
         <div className="about-page">
             <TopPath 
             prepath="Home / "

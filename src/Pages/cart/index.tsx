@@ -58,7 +58,6 @@ function Cart() {
 
     return(
         <>
-            <NavBar/>
             <div className="cart-page">
                 <TopPath
                 prepath="Home / " 
