@@ -96,7 +96,7 @@ function Cart() {
                     </table>
                 </div>
                 <div className="cart-page-bottom-button row">
-                    <a href="#">Return To Shop</a>
+                    <Link to={'/'}>Return To Shop</Link>
                     <a href="#">Update Cart</a>
                 </div>
                 <div className="cart-page-bottom-checkout row">
