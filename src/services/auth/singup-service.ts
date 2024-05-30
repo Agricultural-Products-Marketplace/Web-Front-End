@@ -28,7 +28,6 @@ export const signup = async (formData: SignupData): Promise<SignupResponse> => {
             },
             body: JSON.stringify(formData)
         });
-console.log(response);
         const data = await response.json();
 
         if (!response.ok) {
