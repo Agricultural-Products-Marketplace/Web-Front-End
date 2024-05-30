@@ -20,7 +20,6 @@ function ProductDetail() {
     const [mainImage, setMainImage] = useState("https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg");
     return(
         <>
-        <NavBar />
         <div className="product-detail-page">
             <TopPath
             prepath="Account / Fruit/ " 

@@ -19,7 +19,10 @@ function AddProduct() {
     return (
         <div className="popup">
             <div className="popup-content-product">
+                <div className='heading-popup'>
                 <h2>Basic Info</h2>
+                <i className='fa-solid fa-close'></i>
+                </div>
                 <div className="add-product-content">
                     <div className="product-contents">
                         <p>Product Name <sup>*</sup></p>

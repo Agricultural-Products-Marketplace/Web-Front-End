@@ -53,10 +53,7 @@ function Products() {
         setShowPopup(true);
     };
 
-    const closePopup = () => {
-        handleOptionClick("All Category");
-        setShowPopup(false);
-    };
+    
 
     return (
         <div className="admin-page-main">

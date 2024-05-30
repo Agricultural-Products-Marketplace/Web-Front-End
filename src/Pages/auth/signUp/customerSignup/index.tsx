@@ -1,32 +1,31 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import './index.css';
-import TopBar from "../../../../commen/topBar";
-import Footer from "../../../../commen/footer";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { signup } from "../../../../services/auth/singup-service"; 
 
 function CustomerSignUp() {
-    
-    const [activecreatepassword, setActivecreatepassword] = useState(false);
-    const [activeconfirmpassword, setActiveconfirmpassword] = useState(false);
+    const [activeCreatePassword, setActiveCreatePassword] = useState(false);
+    const [activeConfirmPassword, setActiveConfirmPassword] = useState(false);
 
-    const handleClickcreatepassword = () => {
-        setActivecreatepassword(prevActive => !prevActive);
+    const handleClickCreatePassword = () => {
+        setActiveCreatePassword(prevActive => !prevActive);
     };
 
-    const handleClickconfirmpassword = () => {
-        setActiveconfirmpassword(prevActive => !prevActive);
+    const handleClickConfirmPassword = () => {
+        setActiveConfirmPassword(prevActive => !prevActive);
     };
 
     const [formData, setFormData] = useState({
         email: "",
         username: "",
+        phone_number: "",
+        user_type: "customer",
         password: "",
-        phone_number:"",
-
     });
 
+    const [confirmPassword, setConfirmPassword] = useState("");
     const [registrationStatus, setRegistrationStatus] = useState("");
-    const [isLoading, setIsLoading] = useState(false); // Track loading state
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({
@@ -35,36 +34,35 @@ function CustomerSignUp() {
         });
     };
 
+    const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setConfirmPassword(e.target.value);
+    };
+
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
-        setIsLoading(true); // Set loading state to true
-        
+        setIsLoading(true);
+
+        if (formData.password !== confirmPassword) {
+            setRegistrationStatus("Passwords do not match.");
+            setIsLoading(false);
+            return;
+        }
+
         try {
-            const response = await fetch("http://127.0.0.1:8000/api/auth/register/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            });
-            
-            if (response.ok) {
-                // User registered successfully
-                setRegistrationStatus("Registration successful!");
+            const data = await signup(formData);
+            setRegistrationStatus("Registration successful!");
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setRegistrationStatus(error.message);
             } else {
-                // Error registering user
                 setRegistrationStatus("Registration failed. Please try again.");
             }
-        } catch (error) {
-            console.error("Error registering user:", error);
-            setRegistrationStatus("Registration failed. Please try again. another time");
         } finally {
-            setIsLoading(false); // Set loading state back to false
+            setIsLoading(false);
         }
     };
-    
-    return(
+
+    return (
         <div>
             <div className="Signup">
                 <div className="signup-container">
@@ -77,32 +75,36 @@ function CustomerSignUp() {
                         </div>
                         <form className="signup-content-form" onSubmit={handleSubmit}>
                             <p>Welcome <br /><strong>Sign Up For Customer Account</strong></p>
-                            <div className="signup-form-input-name">
-                                <input type="text" name="username" placeholder="First Name" value={formData.username} onChange={handleChange} required />
-                                <input type="text" name="lastName" placeholder="Last Name" onChange={handleChange} required />
-                            </div>
+                            <input type="text" name="username" placeholder="Full Name" value={formData.username} onChange={handleChange} required />
 
                             <input type="text" name="phone_number" placeholder="Your Phone" value={formData.phone_number} onChange={handleChange} required />
-
                             <input type="text" name="email" placeholder="Your Email" value={formData.email} onChange={handleChange} />
+
                             <div className="signup-form-password-input">
-                                <input type="password" name="password" placeholder="Create Password" value={formData.password} onChange={handleChange} required />
+                                <input type={activeCreatePassword ? "text" : "password"} name="password" placeholder="Create Password" value={formData.password} onChange={handleChange} required />
+                                <button type="button" onClick={handleClickCreatePassword}>
+                                    {activeCreatePassword ? <i className="fa fa-eye"></i> : <i className="fa fa-eye-slash"></i>}
+                                </button>
                             </div>
+
                             <div className="signup-form-password-input">
-                                <input type="password" name="confirmPassword" placeholder="Confirm Password" onChange={handleChange} required />
+                                <input type={activeConfirmPassword ? "text" : "password"} name="confirmPassword" placeholder="Confirm Password" value={confirmPassword} onChange={handleConfirmPasswordChange} required />
+                                <button type="button" onClick={handleClickConfirmPassword}>
+                                    {activeConfirmPassword ? <i className="fa fa-eye"></i> : <i className="fa fa-eye-slash"></i>}
+                                </button>
                             </div>
-                            <p className="error-message">Erorr Message</p>
+
+                            {registrationStatus && <p className="error-message">{registrationStatus}</p>}
                             <button className="signup-form-button" type="submit" disabled={isLoading}>
                                 {isLoading ? "Loading..." : "Register"}
                             </button>
                             <span>Already Have an account? <Link to={'/signIn'}>Login</Link></span>
-                            {registrationStatus && <div>{registrationStatus}</div>}
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default CustomerSignUp;
