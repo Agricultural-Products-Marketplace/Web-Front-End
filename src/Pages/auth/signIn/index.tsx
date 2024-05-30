@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import './index.css';
 import { Link } from "react-router-dom";
+import { login } from "../../../services/auth/signin-service";
 
 function SignIn() {
-    const [emailPhone, setEmailPhone] = useState("");
-    const [password, setPassword] = useState("");
-    const [activeCreatePassword, setActiveCreatePassword] = useState(false);
-    const [error, setError] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
+    const [emailPhone, setEmailPhone] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [activeCreatePassword, setActiveCreatePassword] = useState<boolean>(false);
+    const [error, setError] = useState<string>("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const handleChangeEmailPhone = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    const handleChangeEmailPhone = (e: ChangeEvent<HTMLInputElement>) => {
         setEmailPhone(e.target.value);
     };
 
-    const handleChangePassword = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+    const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
     };
 
@@ -21,41 +22,27 @@ function SignIn() {
         setActiveCreatePassword(prevActive => !prevActive);
     };
 
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
-        
+
         try {
-            const response = await fetch("http://127.0.0.1:8000/auth/login/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    emailPhone,
-                    password
-                })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Login successful
-                console.log("Login successful:", data);
-                // Redirect or perform any other action
+            const data = await login(emailPhone, password);
+            // Login successful
+            console.log("Login successful:", data);
+            // Redirect or perform any other action
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setError(error.message);
             } else {
-                // Login failed
-                setError(data.message || "Login failed. Please try again.");
+                setError("Login failed. Please try again.");
             }
-        } catch (error) {
-            console.error("Error logging in:", error);
-            setError("Login failed. Please try again. Another time");
         } finally {
             setIsLoading(false);
         }
     };
 
-    return(
+    return (
         <div>
             <div className="signin">
                 <div className="signin-container col">
@@ -72,7 +59,7 @@ function SignIn() {
                             <input type="text" placeholder="Email/Phone" value={emailPhone} onChange={handleChangeEmailPhone} required />
                             <div className="signin-form-password-input">
                                 <input type={activeCreatePassword ? "text" : "password"} placeholder="Your Password" value={password} onChange={handleChangePassword} required />
-                                <button onClick={handleClickCreatePassword}>
+                                <button type="button" onClick={handleClickCreatePassword}>
                                     {activeCreatePassword ? <i className="fa fa-eye"></i> : <i className="fa fa-eye-slash"></i>}
                                 </button>
                             </div>
@@ -86,7 +73,7 @@ function SignIn() {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default SignIn;
