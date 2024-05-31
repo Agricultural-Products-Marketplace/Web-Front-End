@@ -17,6 +17,8 @@ import BillingDetail from './Pages/billingDetail';
 import Admin from './Pages/admin';
 import PageNotFound from './commen/404';
 import Message from './Pages/message';
+import AddProduct from './Pages/addProduct';
+import VerificationSuccess from './commen/verification-success';
 
 function ScrollToTopOnRouteChange() {
   const location = useLocation();
@@ -50,7 +52,9 @@ function App(): JSX.Element { // Get the location directly
           <Route path='/product-detail' element={<ProductDetail />} />
           <Route path='/cart/checkout' element={<BillingDetail />} />
           <Route path='/admin' element={<Admin />} />
+          <Route path='/add-product' element={<AddProduct />} />
           <Route path='*' element={<PageNotFound />} />
+          <Route path='/success' element={<VerificationSuccess />} />
         </Routes>
         <Footer/>
       </div>

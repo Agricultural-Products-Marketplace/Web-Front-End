@@ -6,20 +6,15 @@ interface SignupData {
     password: string;
 }
 
-
 interface SignupResponse {
     message: string;
-    user?: {
-        id: number;
-        username: string;
-        email: string;
-    };
+    status: number;
 }
-
 
 
 export const signup = async (formData: SignupData): Promise<SignupResponse> => {
     console.log(formData);
+
     try {
         const response = await fetch("http://127.0.0.1:8000/api/auth/register/", {
             method: "POST",
@@ -28,13 +23,38 @@ export const signup = async (formData: SignupData): Promise<SignupResponse> => {
             },
             body: JSON.stringify(formData)
         });
+
         const data = await response.json();
 
-        if (!response.ok) {
-            throw new Error(data.message || "Registration failed. Please try again.");
+        if (response.status === 201) {
+            return {
+                message: data.message,
+                status: response.status
+            };
+        } else if (response.status === 400) {
+            // Extract the first error message
+            const firstErrorMessage = Object.values(data)
+                .flat()
+                .map(value => {
+                    if (Array.isArray(value)) {
+                        return value.join(" ");
+                    } else if (typeof value === 'string') {
+                        return value;
+                    }
+                    return '';
+                })
+                .find(message => message.trim() !== '');
+
+            return {
+                message: firstErrorMessage || "Registration failed. Please try again.",
+                status: response.status
+            };
         }
 
-        return data;
+        return {
+            message: data.message,
+            status: response.status
+        };
     } catch (error) {
         console.error("Error registering user:", error);
         throw error;

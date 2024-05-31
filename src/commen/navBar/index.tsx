@@ -7,7 +7,7 @@ function NavBar() {
     
     const location = useLocation();
     const { pathname } = location;
-    return(pathname === '/admin' || pathname === '/signup/customer' || pathname === '/signIn' || pathname === '/signUp/' || pathname === '/signUp'? null : <section className="navbar">
+    return(pathname === '/admin' || pathname === '/signup/customer' || pathname === '/signIn' || pathname === '/signUp/' || pathname === '/signUp' || pathname === '/success'? null : <section className="navbar">
     <a href="#123" className="navbar_logo">
         <img src="./assets/img/logo.png" alt="" />
         <hr/>
@@ -18,7 +18,8 @@ function NavBar() {
             <li><Link to={'/'}>Home</Link></li>
             <li><Link to={'/contact'}>Contact</Link></li>
             <li><Link to={'/about'}>About</Link></li>
-            <li><Link to={'/signUp/'}>Sign Up</Link></li>
+            <li><Link to={'/signUp/'}>Register</Link></li>
+            <li><Link to={'/signUp/'}>Log In</Link></li>
         </ul>
     </div>
     
@@ -28,6 +29,7 @@ function NavBar() {
         </div>
     
     <div className="icons">
+    <Link to={'/add-product'}><i className="fa-solid fa-add"></i><small>Product</small></Link>
     <Link to={'/wishlist'}><i className="fa-solid fa-heart"></i></Link>
     <Link to={'/message'} ><i className='fa-solid fa-message'><sup>8</sup></i></Link>
     <Link to={'/cart'}><i className="fa-solid fa-cart-shopping"><sup>2</sup></i></Link>

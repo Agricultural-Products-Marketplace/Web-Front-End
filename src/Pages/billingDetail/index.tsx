@@ -18,10 +18,9 @@ function BillingDetail() {
   };
     return(
         <>
-        <NavBar />
         <div className="Billing-detail">
             <TopPath 
-            prepath="Account / My Account / Product / View Cart / "
+            prepath="Account / My Account / Product / "
             mainpath="Chech Out"
             />
             <h1>Billing Details</h1>

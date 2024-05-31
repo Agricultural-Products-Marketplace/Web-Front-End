@@ -50,7 +50,20 @@ function CustomerSignUp() {
 
         try {
             const data = await signup(formData);
-            setRegistrationStatus("Registration successful!");
+            if(data.status == 201){
+                setFormData({
+                    email: "",
+                    username: "",
+                    phone_number: "",
+                    user_type: "customer",
+                    password: "",
+                
+                })
+                setRegistrationStatus(data.message);
+            }
+            else if(data.status == 400){
+                setRegistrationStatus(data.message);
+            }
         } catch (error: unknown) {
             if (error instanceof Error) {
                 setRegistrationStatus(error.message);
@@ -75,7 +88,10 @@ function CustomerSignUp() {
                         </div>
                         <form className="signup-content-form" onSubmit={handleSubmit}>
                             <p>Welcome <br /><strong>Sign Up For Customer Account</strong></p>
-                            <input type="text" name="username" placeholder="Full Name" value={formData.username} onChange={handleChange} required />
+                            <div className="signup-form-input-name">
+                            <input type="text" name="firstName" placeholder="First Name" value={formData.username} onChange={handleChange} required />
+                            <input type="text" name="lserName" placeholder="Last Name" value={formData.username} onChange={handleChange} required />
+                            </div>
 
                             <input type="text" name="phone_number" placeholder="Your Phone" value={formData.phone_number} onChange={handleChange} required />
                             <input type="text" name="email" placeholder="Your Email" value={formData.email} onChange={handleChange} />
