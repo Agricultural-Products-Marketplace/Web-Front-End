@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './index.css';
-import NavBar from "../../commen/navBar";
-import TopPath from "../../commen/topPath";
+import NavBar from "../shared/commen/navBar";
+import TopPath from "../shared/commen/topPath";
 
 function BillingDetail() {
     const [isBankChecked, setIsBankChecked] = useState(false);
@@ -18,10 +18,9 @@ function BillingDetail() {
   };
     return(
         <>
-        <NavBar />
         <div className="Billing-detail">
             <TopPath 
-            prepath="Account / My Account / Product / View Cart / "
+            prepath="Account / My Account / Product / "
             mainpath="Chech Out"
             />
             <h1>Billing Details</h1>

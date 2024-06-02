@@ -1,7 +1,7 @@
 import React from "react";
 import './index.css';
-import NavBar from "../../commen/navBar";
-import TopPath from "../../commen/topPath";
+import NavBar from "../shared/commen/navBar";
+import TopPath from "../shared/commen/topPath";
 
 function Contact() {
     return(
@@ -12,12 +12,12 @@ function Contact() {
             mainpath="Contact"
             />
 
-            <div className="contact-page-info row">
+            <div className="contact-page-info">
                 <div className="contact-page-info-left">
                     <div className="contact-page-item col">
                         <div className="row">
                             <i className="fa fa-phone contact-icon"></i>
-                            <h4>Call To Us</h4>
+                            <h4>Call Now</h4>
                         </div>
                         <p>We Are Avilable 24/7, 7 Days a Week</p>
                         <p>Phone : +251 91 297 8713</p>
@@ -26,7 +26,7 @@ function Contact() {
                     <div className="contact-page-item col">
                         <div className="row">
                             <i className="fa-regular fa-envelope contact-icon"></i>
-                            <h4>Write To us</h4>
+                            <h4>Message</h4>
                         </div>
                         <p>Fill Out Our Form and We Will contact You within 24 hours</p>
                         <p>Email : Customer@griproducts.com</p>

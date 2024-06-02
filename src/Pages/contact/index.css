@@ -1,4 +1,6 @@
 .contact-page-info{
+    display: flex;
+    flex-direction: ro;
     padding: 2vw 5vw;
     flex: 7;
     gap: 3vw;
@@ -96,3 +98,15 @@
     color: green;
 }
 
+@media only screen and (max-width: 767px){
+    .contact-page-info{
+        flex-direction: column;
+    }
+    .contact-page-form-button{
+        justify-content: center;
+    }
+
+    .contact-page-form-button>button{
+        width: 50vw;
+    }
+}

@@ -1,0 +1,78 @@
+.services-card{
+    animation: BottomToTopAnimation 1s;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.service-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5vw;
+}
+
+.service-item-icon{
+    width: 5.3vw;
+    height: 5.3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    outline:solid 0.8vw rgba(0, 0, 0, 0.4);
+    border-radius: 100%;
+    margin-bottom: 1vw;
+    color: white;
+    font-size: 2vw;
+}
+
+.service-item-icon:hover{
+    transition: all ease 1s;
+    transform: rotateY(360deg);
+}
+
+.service-item>strong{
+    font-weight: 800;
+    font-size: 1.4vw;
+    margin: 0px;
+}
+
+.service-item>p{
+    margin: 0px;
+    font-weight: lighter;
+    font-size: 1.15vw;
+}
+
+@media only screen and (max-width: 767px){
+    .service-item-icon{
+        width: 70px;
+        height: 70px;
+        font-size: 20px;
+    }
+
+    .service-item>strong{
+        font-size: 15px;
+    }
+
+    .service-item>p{
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 650px){
+    .services-card{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4vw;
+    }
+}
+
+@media only screen and (max-width: 450px){
+    .services-card{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 4vw;
+    }
+}

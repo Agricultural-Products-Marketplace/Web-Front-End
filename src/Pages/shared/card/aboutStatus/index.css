@@ -1,0 +1,95 @@
+.about-page-company-status{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    flex-direction: row;
+    padding: 1vw 5vw;
+    gap: 5vw;
+    justify-content: center;
+    margin-bottom: 3vw;
+    animation: LeftToRightAnimation 1s;
+    
+}
+
+.about-status-card{
+    width: 140px !important;
+    display: flex;
+    flex-direction: column;
+    padding: 1vw 1vw;
+    align-items: center;
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 5px;
+    justify-content: center;
+    transition: all ease-in-out 0.3s;
+}
+
+.about-status-card-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.3);
+    padding: 0.5vw;
+    border-radius: 100px;
+    transition: all ease-in-out 0.3s;
+}
+
+.about-status-card-icon>i{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    width: 60px;
+    height: 60px;
+    color: white;
+    background-color: black;
+    font-size: 25px;
+    transition: all ease-in-out 0.3s;
+}
+
+.about-status-card-number>p{
+    margin-bottom: 0px;
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: 900;
+    
+}
+
+
+.about-status-card:hover{
+    background-color: #DB4444;
+    color: white;
+    border: #DB4444 solid 1px;
+    transition: all ease-in-out 0.3s;
+    cursor: pointer;
+}
+
+.about-status-card:hover .about-status-card-icon{
+    transition: all ease-in-out 0.3s;
+    background-color: rgba(250,250,250,0.5);
+
+}
+
+.about-status-card:hover .about-status-card-icon>i{
+    background-color: white;
+    color: black;
+    transition: all ease-in-out 0.3s;
+}
+
+@media only screen and (max-width: 767px){
+    .about-page-company-status{
+        grid-template-columns: repeat(3,1fr);
+    }
+}
+
+
+@media only screen and (max-width: 550px){
+    .about-page-company-status{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media only screen and (max-width: 340px){
+    .about-page-company-status{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
+

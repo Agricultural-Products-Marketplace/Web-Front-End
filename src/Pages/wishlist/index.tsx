@@ -1,9 +1,9 @@
 import React from "react";
 import './index.css';
-import WishlistCard from "../../card/wishlistCard";
-import Product from "../../card/product";
-import NavBar from "../../commen/navBar";
-import TopPath from "../../commen/topPath";
+import WishlistCard from "../shared/card/wishlistCard";
+import Product from "../shared/card/product";
+import NavBar from "../shared/commen/navBar";
+import TopPath from "../shared/commen/topPath";
 
 
 
@@ -19,6 +19,7 @@ function WishList() {
                <WishlistCard 
                products={[
                 {
+                    
                     productName:"Rice",
                     productPrice : 165,
                     rating : 3,
@@ -36,6 +37,7 @@ function WishList() {
                <div className="wishlist-for-you-products">
                 <Product 
                 products={[{
+                    id:1,
                     productName:"Rice",
                     productPrice : 165,
                     rating : 3,
