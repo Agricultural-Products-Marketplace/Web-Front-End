@@ -3,11 +3,12 @@ import './index.css';
 import ProductTitleCard from "../Productstitle";
 import Product from "../product";
 import CategoryButtonCard from "../categoryCard";
+import ProductModel from "../../../../model/product";
 
 interface ProductSliderProps{
     title : string
     slog : string
-    products : Product[]
+    products : ProductModel[]
 }
 
 

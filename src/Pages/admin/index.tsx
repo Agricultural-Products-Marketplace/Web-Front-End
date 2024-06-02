@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './index.css';
-import AdminNavBar from "../../card/admin/navbar";
+import AdminNavBar from "../shared/card/admin/navbar";
 import Dashboard from "./dashboard";
 import Orders from './orders';
 import Products from './products';

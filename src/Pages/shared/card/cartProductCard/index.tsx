@@ -12,7 +12,7 @@ function CartProductCard() {
                 $100
             </div>
             <div className="cart-product-quantity">
-                <p>02</p>
+                <p>05</p>
             </div>
             <div className="cart-product-subtotal">
                 <p>$200s</p>

@@ -44,3 +44,35 @@
     font-weight: lighter;
     font-size: 1.15vw;
 }
+
+@media only screen and (max-width: 767px){
+    .service-item-icon{
+        width: 70px;
+        height: 70px;
+        font-size: 20px;
+    }
+
+    .service-item>strong{
+        font-size: 15px;
+    }
+
+    .service-item>p{
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 650px){
+    .services-card{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4vw;
+    }
+}
+
+@media only screen and (max-width: 450px){
+    .services-card{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 4vw;
+    }
+}

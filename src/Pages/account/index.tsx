@@ -1,6 +1,6 @@
 import React from "react";
 import './index.css'
-import NavBar from "../../commen/navBar";
+import NavBar from "../shared/commen/navBar";
 
 function MyAccount() {
     return(

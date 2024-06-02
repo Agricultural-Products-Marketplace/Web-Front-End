@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import './index.css';
-import NavBar from "../../commen/navBar";
-import TopPath from "../../commen/topPath";
-import Product from "../../card/product";
-import ProductSlider from "../../card/productSlider";
+import NavBar from "../shared/commen/navBar";
+import TopPath from "../shared/commen/topPath";
+import Product from "../shared/card/product";
+import ProductSlider from "../shared/card/productSlider";
 
 function ProductDetail() {
     const [quantity, setQuantity] = useState(1);
@@ -89,6 +89,7 @@ function ProductDetail() {
             <ProductSlider 
                     products={[
                         {
+                            id:1,
                             productName:'apple',
                             productPrice : 16,
                             categoryName : '',
@@ -97,6 +98,7 @@ function ProductDetail() {
                             img:'https://weresmartworld.com/sites/default/files/styles/full_screen/public/2021-04/watermeloen_2.jpg?itok=hsBPt3DQ'
                         },
                         {
+                            id:2,
                             productName:'apple',
                             productPrice : 16,
                             categoryName : '',

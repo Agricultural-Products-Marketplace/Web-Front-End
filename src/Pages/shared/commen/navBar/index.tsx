@@ -1,10 +1,13 @@
 import React from 'react';
 import './index.css'
 import { Link, useLocation } from 'react-router-dom';
-function NavBar() {
+import { useSelector } from 'react-redux';
+import { getCartItemCount } from '../../../../redux/selecters/cartSelecter';
 
-    const navbar = () =>{}
-    
+
+const NavBar: React.FC = () => {
+
+    const cartItemCount = useSelector(getCartItemCount);
     const location = useLocation();
     const { pathname } = location;
     return(pathname === '/admin' || pathname === '/signup/customer' || pathname === '/signIn' || pathname === '/signUp/' || pathname === '/signUp' || pathname === '/success'? null : <section className="navbar">
@@ -16,6 +19,7 @@ function NavBar() {
     <div className="navigation_bar">
         <ul>
             <li><Link to={'/'}>Home</Link></li>
+            <li><Link to={'/category'}>Category</Link></li>
             <li><Link to={'/contact'}>Contact</Link></li>
             <li><Link to={'/about'}>About</Link></li>
             <li><Link to={'/signUp/'}>Register</Link></li>
@@ -32,7 +36,7 @@ function NavBar() {
     <Link to={'/add-product'}><i className="fa-solid fa-add"></i><small>Product</small></Link>
     <Link to={'/wishlist'}><i className="fa-solid fa-heart"></i></Link>
     <Link to={'/message'} ><i className='fa-solid fa-message'><sup>8</sup></i></Link>
-    <Link to={'/cart'}><i className="fa-solid fa-cart-shopping"><sup>2</sup></i></Link>
+    <Link to={'/cart'}><i className="fa-solid fa-cart-shopping"><sup>{cartItemCount}</sup></i></Link>
     <a href="#" className='icons-user-icon'><i className="fa-solid fa-user"></i>
     <div className="account-dropdown-menus">
         <Link to={'/account'}>

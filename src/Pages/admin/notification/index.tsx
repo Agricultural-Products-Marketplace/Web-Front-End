@@ -1,4 +1,4 @@
-import AdminTopCard from "../../../card/admin/adminTopCard";
+import AdminTopCard from "../../shared/card/admin/adminTopCard";
 
 function AdminNotification() {
     return(

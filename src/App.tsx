@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import TopBar from "./commen/topBar";
-import Footer from "./commen/footer";
-import NavBar from "./commen/navBar";
+import TopBar from "./Pages/shared/commen/topBar";
+import Footer from "./Pages/shared/commen/footer";
+import NavBar from "./Pages/shared/commen/navBar";
 import Home from './Pages/home';
 import SignUp from './Pages/auth/signUp';
 import CustomerSignUp from './Pages/auth/signUp/customerSignup';
@@ -15,10 +15,14 @@ import MyAccount from './Pages/account';
 import ProductDetail from './Pages/productDetailView';
 import BillingDetail from './Pages/billingDetail';
 import Admin from './Pages/admin';
-import PageNotFound from './commen/404';
+import PageNotFound from './Pages/shared/commen/404';
 import Message from './Pages/message';
 import AddProduct from './Pages/addProduct';
-import VerificationSuccess from './commen/verification-success';
+import VerificationSuccess from './Pages/shared/commen/verification-success';
+import Category from './Pages/category';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
 
 function ScrollToTopOnRouteChange() {
   const location = useLocation();
@@ -33,6 +37,7 @@ function ScrollToTopOnRouteChange() {
 function App(): JSX.Element { // Get the location directly
 
   return (
+    <Provider store={store}> 
     <Router>
       <div>
         <TopBar />
@@ -43,6 +48,7 @@ function App(): JSX.Element { // Get the location directly
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signup/customer" element={<CustomerSignUp />} />
+          <Route path='/category' element={<Category />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/wishlist' element={<WishList />} />
           <Route path='/contact' element={<Contact />} />
@@ -59,6 +65,7 @@ function App(): JSX.Element { // Get the location directly
         <Footer/>
       </div>
     </Router>
+    </Provider>
   );
 }
 

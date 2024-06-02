@@ -1,20 +1,19 @@
 import React from "react";
 import './index.css';
-import TopBar from "../../commen/topBar";
-import NavBar from "../../commen/navBar";
-import SliderCard from "../../card/slider";
-import CategoryCard from "../../card/category";
-import ProductSlider from "../../card/productSlider";
-import AdCard from "../../card/adCard";
-import ServicesCard from "../../commen/services";
-import PartnersCard from "../../commen/partners";
-import Footer from "../../commen/footer";
+import TopBar from "../shared/commen/topBar";
+import NavBar from "../shared/commen/navBar";
+import SliderCard from "../shared/card/slider";
+import CategoryCard from "../shared/card/category";
+import ProductSlider from "../shared/card/productSlider";
+import AdCard from "../shared/card/adCard";
+import ServicesCard from "../shared/commen/services";
+import PartnersCard from "../shared/commen/partners";
+import Footer from "../shared/commen/footer";
 
 function Home() {
     return(
         <div className="home">
             <div className="slider-category row">
-                <CategoryCard />
                 <SliderCard />
             </div>
             <ProductSlider 
@@ -22,6 +21,7 @@ function Home() {
             slog="today's"
             products={
                 [{
+                    id:1,
                     productName:"Mango",
                     productPrice : 120,
                     rating : 4,
@@ -30,6 +30,7 @@ function Home() {
                     categoryName : ""
                 },
                 {
+                    id:2,
                     productName:"Apple",
                     productPrice : 200,
                     rating : 5,
@@ -38,6 +39,7 @@ function Home() {
                     categoryName : ""
                 },
                 {
+                    id:3,
                     productName:"PineApple",
                     productPrice : 250,
                     rating : 4,
@@ -46,6 +48,7 @@ function Home() {
                     categoryName : ""
                 },
                 {
+                    id:4,
                     productName:"Watermelon",
                     productPrice : 165,
                     rating : 3,
@@ -54,6 +57,7 @@ function Home() {
                     categoryName : ""
                 },
                 {
+                    id:5,
                     productName:"Banana",
                     productPrice : 100,
                     rating : 5,
@@ -62,6 +66,7 @@ function Home() {
                     categoryName : ""
                 },
                 {
+                    id:6,
                     productName:"Orange",
                     productPrice : 135,
                     rating : 2,
@@ -78,6 +83,7 @@ function Home() {
             products={
                 [
                     {
+                        id:1,
                         categoryName : "Fruit",
                         rating : 0,
                         productName : '',
@@ -93,6 +99,7 @@ function Home() {
             slog="This Month"
             products={
                 [{
+                    id:1,
                     productName:"Apple",
                     productPrice : 200,
                     rating : 5,
@@ -101,6 +108,7 @@ function Home() {
                     categoryName : ""
                 },
                 {
+                    id:2,
                     productName:"PineApple",
                     productPrice : 250,
                     rating : 4,
@@ -117,6 +125,7 @@ function Home() {
             slog="Our Products"
             products={
                 [{
+                    id:1,
                     productName:"Rice",
                     productPrice : 165,
                     rating : 3,
@@ -125,6 +134,7 @@ function Home() {
                     categoryName : ""
                 },
                 {
+                    id:2,
                     productName:"Rice",
                     productPrice : 165,
                     rating : 3,

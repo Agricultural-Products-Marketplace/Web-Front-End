@@ -143,6 +143,11 @@ a{
     color: gold;
 }
 
+.overlay>button{
+    border: none;
+}
+
+
 @keyframes fade{
     0%{
         opacity: 0;

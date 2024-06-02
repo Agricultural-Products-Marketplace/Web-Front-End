@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import './index.css';
-import NavBar from "../../commen/navBar";
-import TopPath from "../../commen/topPath";
+import NavBar from "../shared/commen/navBar";
+import TopPath from "../shared/commen/topPath";
 
 function BillingDetail() {
     const [isBankChecked, setIsBankChecked] = useState(false);

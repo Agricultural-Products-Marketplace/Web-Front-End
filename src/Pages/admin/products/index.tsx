@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AdminTopCard from "../../../card/admin/adminTopCard";
+import AdminTopCard from "../../shared/card/admin/adminTopCard";
 import './index.css';
 import AddProduct from '../addproduct';
 

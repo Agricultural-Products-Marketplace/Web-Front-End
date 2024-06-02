@@ -134,15 +134,14 @@
     background-color: rgba(250, 250, 250, 0.8);
     color: rgba(30, 230, 90, 1);
 }
-
-.icons-user-icon:hover .account-dropdown-menus{
-        visibility: visible;
-        animation: RightToLeftAnimation 0.2s;
-}
-
 .account-dropdown-menus:hover{
     visibility: visible;
 }
+
+.icons-user-icon:hover .account-dropdown-menus{
+        visibility: visible;
+}
+
 
 .navbar{
     animation: RightToLeftAnimation 1s;

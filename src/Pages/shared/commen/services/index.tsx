@@ -5,9 +5,9 @@ function ServicesCard() {
     return(
         <div className="services-card">
             <div className="service-item">
-            <div className="service-item-icon">
-            <i className="fa-solid fa-truck-fast"></i>
-            </div>
+                <div className="service-item-icon">
+                    <i className="fa-solid fa-truck-fast"></i>
+                </div>
                 <strong>FREE AND FAST DELIVERY</strong>
                 <p>Free Delivery for all orders over $140</p>
             </div>

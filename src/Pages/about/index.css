@@ -58,3 +58,12 @@
     
 }
 
+@media only screen and (max-width: 767px){
+    .about-page-description-image{
+        display: none;
+    }
+
+    .about-page-text-description>p{
+        font-size: 15px;
+    }
+}

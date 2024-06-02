@@ -1,7 +1,7 @@
 import React from "react";
 import './index.css';
-import TopBar from "../../../commen/topBar";
-import Footer from "../../../commen/footer";
+import TopBar from "../../shared/commen/topBar";
+import Footer from "../../shared/commen/footer";
 import { link } from "fs";
 
 interface VerificationCardProps{

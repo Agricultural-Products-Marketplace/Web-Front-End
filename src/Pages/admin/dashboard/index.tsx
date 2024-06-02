@@ -1,10 +1,10 @@
 import exp from "constants";
-import CircularProgressBar from "../../../card/CirclularProgress";
-import IconButtonList from "../../../card/admin/iconbutton";
-import TopProducts from "../../../card/admin/topProducts";
-import AdminChart from "../../../card/chart";
-import LinearProgressBar from "../../../card/linearprogress";
-import AdminTopCard from "../../../card/admin/adminTopCard";
+import CircularProgressBar from "../../shared/card/CirclularProgress";
+import IconButtonList from "../../shared/card/admin/iconbutton";
+import TopProducts from "../../shared/card/admin/topProducts";
+import AdminChart from "../../shared/card/chart";
+import LinearProgressBar from "../../shared/card/linearprogress";
+import AdminTopCard from "../../shared/card/admin/adminTopCard";
 import { useState } from "react";
 
 function Dashboard() {

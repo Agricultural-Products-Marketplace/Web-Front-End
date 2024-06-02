@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import './index.css';
-import Footer from "../../../commen/footer";
-import TopBar from "../../../commen/topBar";
+import Footer from "../../shared/commen/footer";
+import TopBar from "../../shared/commen/topBar";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import signup from "../signIn";
 

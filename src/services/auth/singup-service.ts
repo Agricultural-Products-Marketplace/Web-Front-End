@@ -1,3 +1,5 @@
+import { url } from "../../api/apiUrl";
+
 interface SignupData {
     email: string;
     username: string;
@@ -16,7 +18,8 @@ export const signup = async (formData: SignupData): Promise<SignupResponse> => {
     console.log(formData);
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/api/auth/register/", {
+        const baseurl = url; 
+        const response = await fetch(baseurl+"auth/register/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

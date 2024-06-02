@@ -1,39 +1,28 @@
 import React, { useState } from "react";
 import './index.css';
-import NavBar from "../../commen/navBar";
-import TopPath from "../../commen/topPath";
+import TopPath from "../shared/commen/topPath";
 import { Link } from "react-router-dom";
+import ProductModel from "../../model/product";
+import { addToCart, removeFromCart } from '../../redux/actions/cartAction';
+import Products from '../admin/products/index';
+import { AppState } from "../../redux/types";
+import { connect } from "react-redux";
 
-function Cart() {
+interface Props{
+    cart:ProductModel[];
+    addToCart:(product:ProductModel) => void;
+    removeFromCart: (productId: number) => void;
+}
 
-    const [showPopup, setShowPopup] = useState(false); // State to control the pop-up visibility
-
-    const openPopup = () => setShowPopup(true); // Function to open the pop-up
-    const closePopup = () => setShowPopup(false); 
+const Cart: React.FC<Props> = ({cart,addToCart,removeFromCart}) => {
 
     const products =[
         {
             Image: 'https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?s=612x612&w=0&k=20&c=NvO-bLsG0DJ_7Ii8SSVoKLurzjmV0Qi4eGfn6nW3l5w=',
             Title: 'Red Apple',
-            Price: 25
-        },
-        {
-            Image: 'https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?s=612x612&w=0&k=20&c=NvO-bLsG0DJ_7Ii8SSVoKLurzjmV0Qi4eGfn6nW3l5w=',
-            Title: 'Blue Apple',
-            Price: 50
-        },
-        {
-            Image: 'https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?s=612x612&w=0&k=20&c=NvO-bLsG0DJ_7Ii8SSVoKLurzjmV0Qi4eGfn6nW3l5w=',
-            Title: 'Red Apple',
-            Price: 25
-        },
-        {
-            Image: 'https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?s=612x612&w=0&k=20&c=NvO-bLsG0DJ_7Ii8SSVoKLurzjmV0Qi4eGfn6nW3l5w=',
-            Title: 'Blue Apple',
-            Price: 50
+            Price: 60
         },
     ];
-    const price = 30;
 
     // State for quantities, initialized to an array of length equal to the products array
     const [quantities, setQuantities] = useState(Array(products.length).fill(1));
@@ -72,14 +61,16 @@ function Cart() {
                                 <td>Subtotal</td>
                             </tr>
                         <tbody>
-                            {products.map((product, index) => (
+                            {cart.map((product, index) => (
                                 <tr key={index} className="cart-page-product-table-row row">
                                     <td>
-                                        <button onClick={openPopup}><sup>X</sup></button>
-                                        <img src={product.Image} alt={product.Title} />
-                                        <p>{product.Title}</p>
+                                        <button onClick={()=>{
+                                            removeFromCart(product.id);
+                                        }}><sup>X</sup></button>
+                                        <img src={product.img} alt={product.productName} />
+                                        <p>{product.productName}</p>
                                     </td>
-                                    <td>${product.Price}</td>
+                                    <td>${product.productPrice}</td>
                                     <td className="cart-product-quantity row">
                                         <div className="cart-quantitiy-container row">
                                             <p>{quantities[index]}</p>
@@ -89,7 +80,7 @@ function Cart() {
                                             </div>
                                         </div>
                                     </td>
-                                    <td>${quantities[index] * product.Price}</td>
+                                    <td>${quantities[index] * product.productPrice}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -131,22 +122,12 @@ function Cart() {
                     </div>
                 </div>
             </div>
-            {showPopup && (
-                <div className="popup">
-                    <div className="popup-container">
-                    <div className="popup-content">
-                        <span className="close-popup" onClick={closePopup}>&times;</span>
-                        <p>Are you sure you want to remove this item from the cart?</p>
-                        <div className="popup-buttons">
-                            <button onClick={closePopup}>No</button>
-                            <button className="popup-buttons-Delet">Delete</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            )}
         </>
     ) 
-}
+};
 
-export default Cart;
+const mapStateToProps = (state: AppState) =>({
+    cart: state.cart.cart
+})
+
+export default connect(mapStateToProps,{addToCart,removeFromCart})(Cart);
