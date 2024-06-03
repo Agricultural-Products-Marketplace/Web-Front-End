@@ -6,24 +6,37 @@ import { ProductData, getAllProducts } from '../../services/product/getProducts'
 function Category() {
 
     const [products, setProducts] = useState<ProductData[]>([]);
+    const [filteredProducts, setFilteredProducts] = useState<ProductData[]>([]);
+    const [activeCategory, setActiveCategory] = useState<string | null>('All');
+
 
     useEffect(() => {
         const fetchData = async () => {
             const productsData = await getAllProducts();
             setProducts(productsData);
+            setFilteredProducts(productsData); // Initialize with all products
         };
         fetchData();
     }, []);
-    
+
+    const handleCategoryClick = (categoryTitle: string) => {
+        setActiveCategory(categoryTitle);
+        if (categoryTitle === 'All') {
+            setFilteredProducts(products); // Show all products if 'All' is selected
+        } else {
+            setFilteredProducts(products.filter(product => product.category.title === categoryTitle));
+        }
+    };
 
     // Local list variable
 
 
     return(
         <div className="category-page">
-            <CategoryCard />
+            <CategoryCard activeCategory={activeCategory} onCategoryClick={handleCategoryClick} />
+            
             <div className="category-page-items">
-                {products.map((product, index) => (
+                {filteredProducts.map((product, index) => (
                     <a key={index} href={`/product-detail?id=${product.id}`} className="category-page-item">
                         <div className='category-page-item-overlay'>
                             <div className="overlay-top">
