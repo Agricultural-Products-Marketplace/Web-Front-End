@@ -4,6 +4,7 @@ import ProductTitleCard from "../Productstitle";
 import Product from "../product";
 import CategoryButtonCard from "../categoryCard";
 import ProductModel from "../../../../model/product";
+import { Link } from "react-router-dom";
 
 interface ProductSliderProps{
     title : string
@@ -47,7 +48,7 @@ function ProductSlider({title,slog,products}:ProductSliderProps){
             </div>
             
             <div className="show-all">
-                <button>View All Products</button>
+                <Link to={'/category'}>View All Products</Link>
             </div>
             <hr />
         </div>

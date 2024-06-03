@@ -1,3 +1,5 @@
+//types.ts
+
 import ProductModel from "../model/product";
 import { ADD_TO_CART, REMOVE_FROM_CART } from "./actions/cartActionTypes";
 

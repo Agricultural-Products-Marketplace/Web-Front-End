@@ -1,3 +1,5 @@
+//cartReducer.ts
+
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/cartActionTypes";
 import { cartState, cartAction } from '../types';
 

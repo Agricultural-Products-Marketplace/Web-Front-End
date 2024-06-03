@@ -10,7 +10,7 @@ const NavBar: React.FC = () => {
     const cartItemCount = useSelector(getCartItemCount);
     const location = useLocation();
     const { pathname } = location;
-    return(pathname === '/admin' || pathname === '/signup/customer' || pathname === '/signIn' || pathname === '/signUp/' || pathname === '/signUp' || pathname === '/success'? null : <section className="navbar">
+    return(pathname === '/signup/customer' || pathname === '/signIn' || pathname === '/signUp/' || pathname === '/signUp' || pathname === '/success'? null : <section className="navbar">
     <a href="#123" className="navbar_logo">
         <img src="./assets/img/logo.png" alt="" />
         <hr/>
@@ -33,7 +33,6 @@ const NavBar: React.FC = () => {
         </div>
     
     <div className="icons">
-    <Link to={'/add-product'}><i className="fa-solid fa-add"></i><small>Product</small></Link>
     <Link to={'/wishlist'}><i className="fa-solid fa-heart"></i></Link>
     <Link to={'/message'} ><i className='fa-solid fa-message'><sup>8</sup></i></Link>
     <Link to={'/cart'}><i className="fa-solid fa-cart-shopping"><sup>{cartItemCount}</sup></i></Link>
@@ -43,14 +42,10 @@ const NavBar: React.FC = () => {
             <i className="fa fa-user"></i>
             Manage My Account
         </Link>
-        <a href="">
-            <i className="fa-solid fa-cart-shopping"></i>
-            My Order
-        </a>
-        <a href="">
-            <i className="fa fa-close"></i>
-            My Cancelations
-        </a>
+        <Link to={'/admin'} >
+            <i className="fa fa-shop"></i>
+            My Shop
+        </Link>
         <a href="">
             <i className="fa fa-star"></i>
             My Reviews

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './index.css';
 import TopBar from "../shared/commen/topBar";
 import NavBar from "../shared/commen/navBar";
@@ -9,8 +9,19 @@ import AdCard from "../shared/card/adCard";
 import ServicesCard from "../shared/commen/services";
 import PartnersCard from "../shared/commen/partners";
 import Footer from "../shared/commen/footer";
+import { Category, getAllCategories } from "../../services/category/getCategory";
 
 function Home() {
+    const [categories, setCategories] = useState<Category[]>([]);
+
+    useEffect(()=>{
+        const fetchData = async () => {
+            const categoriesData = await getAllCategories();
+            setCategories(categoriesData);
+        };
+        fetchData();
+    },
+[]);
     return(
         <div className="home">
             <div className="slider-category row">
@@ -81,17 +92,18 @@ function Home() {
             slog="category"
             title="Brows By Category"
             products={
-                [
+                categories.map(category=>(
                     {
-                        id:1,
-                        categoryName : "Fruit",
-                        rating : 0,
-                        productName : '',
-                        productPrice : 0,
-                        discount : 0,
-                        img : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Zc6uCIB6x5cmZewJ_g5ebZmbLBpcS2EBLWDuo_PjxQ&s',
+                        id:category.id,
+                    productName:"",
+                    productPrice : 0,
+                    rating : 0,
+                    discount : 0,
+                    img : category.image,
+                    categoryName : category.title
+
                     }
-                ]
+                ))
             }
             />
             <ProductSlider 
