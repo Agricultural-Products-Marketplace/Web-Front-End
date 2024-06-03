@@ -85,53 +85,13 @@
     justify-content: space-between;
 }
 
-.admin-page-main-top-search{
-    background-color: white;
-    width: 25vw;
-    height: 3vw;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 0.5vw;
-    padding: 0 0.5vw 0 1vw;
-    
+.admin-page-main-top h3{
+    color: #00FF66;
 }
 
-.admin-page-main-top-search>input{
-    width: 22vw;
-    height: 2.2vw;
-    border: none;
-    outline: none;
-    font-size: 1.2vw;
-}
-
-.admin-page-main-top-search>i{
-    color: rgba(150, 150, 150, 0.8);
-}
-
-.admin-page-main-top-nav-icon{
-    display: flex;
-    gap: 2vw;
-    font-size: 1.5vw;
-    align-items: center;
-
-}
-
-.admin-page-main-top-nav-icon>a{
-    color: rgba(150, 150, 150, 0.8);
-}
-
-.admin-page-main-top-nav-icon>a:hover{
-    color: rgba(0, 0, 0, 1);
-}
-
-.admin-page-main-top-nav-icon-notification>sup{
-    background-color: black;
-    font-size: 0.8vw;
-    color: white;
-    padding: 0.1vw;
-    border-radius: 150px;
-    margin-left: -0.5vw;
+.admin-page-main-top span{
+    color: black;
+    font-size: 21px;
 }
 
 

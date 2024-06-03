@@ -14,26 +14,7 @@
 }
 
 .admin-page-main-products-title-actions{
-    display: flex;
-    flex-direction: row;
-    gap: 2vw;
-    align-items: center;
-}
-
-.admin-page-main-products-title-actions>button{
-    width: 8vw;
-    height: 3vw;
-    background-color: #00FF66;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.1vw;
-    color: white;
-    cursor: pointer;
-}
-
-.admin-page-main-products-title-actions>a{
-    text-decoration: none;
-    color: black;
+    width: 25vw;
 }
 
 .admin-page-main-products-table{

@@ -8,11 +8,12 @@ import Customers from './customers';
 import Shipments from './shipments';
 import Transactions from './transactions';
 import Settings from './settings';
+import NavBar from '../shared/commen/navBar';
 
 function Admin(){
-    const [activeComponent, setActiveComponent] = useState<'Dashboard' | 'Orders' | 'Products' | 'Customers' | 'Shipments' | 'Transaction' | 'Settings'>('Dashboard');
+    const [activeComponent, setActiveComponent] = useState<'Dashboard' | 'Orders' | 'Products' | 'Customers' | 'addProduct' | 'Transaction' | 'Settings'>('Dashboard');
 
-    const handleNavItemClick = (componentName: 'Dashboard' | 'Orders' | 'Products' | 'Customers' | 'Shipments' | 'Transaction' | 'Settings') => {
+    const handleNavItemClick = (componentName: 'Dashboard' | 'Orders' | 'Products' | 'Customers' | 'addProduct' | 'Transaction' | 'Settings') => {
         setActiveComponent(componentName);
     };
 
@@ -24,7 +25,7 @@ function Admin(){
                 {activeComponent === 'Products' && <Products />}
                 {activeComponent === 'Customers' && <Customers />}
                 {activeComponent === 'Orders' && <Orders />}
-                {activeComponent === 'Shipments' && <Shipments />}
+                {activeComponent === 'addProduct' && <Shipments />}
                 {activeComponent === 'Transaction' && <Transactions />}
                 {activeComponent === 'Settings' && <Settings />}
             </div>

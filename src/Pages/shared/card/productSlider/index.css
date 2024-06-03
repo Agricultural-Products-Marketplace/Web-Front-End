@@ -15,7 +15,7 @@
     justify-content: center;
 }
 
-.show-all>button{
+.show-all>a{
     background-color: #00FF66;
     border: none;
     padding: 0.8vw 1vw;
@@ -24,12 +24,18 @@
     border-radius: 0.4vw;
     color: white;
     font-size: 1.3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all ease-in-out 0.3s;
 }
 
-.show-all>button:hover{
+.show-all>a:hover{
+    transition: all ease-in-out 0.3s;
     background-color: transparent;
     outline: solid 1px #00FF66;
     color: #00FF66;
+    width: 30vw;
 }
 
 .product-slider>hr{

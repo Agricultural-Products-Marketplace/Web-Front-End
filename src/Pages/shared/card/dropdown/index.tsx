@@ -6,7 +6,7 @@ interface DropDownProps {
 
 function DropDown({ items }: DropDownProps) {
     const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-    const [selectedCategory, setSelectedCategory] = useState<string>('All Category');
+    const [selectedCategory, setSelectedCategory] = useState<string>('Select item');
 
     const toggleDropdown = () => {
         setIsDropdownOpen(prevState => !prevState);
