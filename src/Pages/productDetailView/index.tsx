@@ -90,8 +90,8 @@ function ProductDetail() {
                                 <p>{quantity}</p>
                                 <button onClick={incrementQuantity}><i className="fa fa-plus"></i></button>
                             </div>
-                            <button className="buy-now-btn">Buy Now</button>
-                            <button><i className="fa-regular fa-heart"></i></button>
+                            <button className="buy-now-btn">Add To Cart</button>
+                            <button className="add-towishlist-button"><i className="fa-regular fa-heart"></i></button>
                         </div>
                         <div className="product-detail-services col">
                         <div className="product-detail-service-item">
