@@ -1,11 +1,12 @@
 import React, { FormEvent, useState } from "react";
 import './index.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../../../../services/auth/singup-service"; 
 
 function CustomerSignUp() {
     const [activeCreatePassword, setActiveCreatePassword] = useState(false);
     const [activeConfirmPassword, setActiveConfirmPassword] = useState(false);
+    const navigate = useNavigate();
 
     const handleClickCreatePassword = () => {
         setActiveCreatePassword(prevActive => !prevActive);
@@ -16,11 +17,12 @@ function CustomerSignUp() {
     };
 
     const [formData, setFormData] = useState({
+        first_name: "",
+        last_name: "",
         email: "",
-        username: "",
-        phone_number: "",
-        user_type: "customer",
+        phone: "",
         password: "",
+        password2: "",
     });
 
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -42,7 +44,7 @@ function CustomerSignUp() {
         e.preventDefault();
         setIsLoading(true);
 
-        if (formData.password !== confirmPassword) {
+        if (formData.password !== formData.password2) {
             setRegistrationStatus("Passwords do not match.");
             setIsLoading(false);
             return;
@@ -52,13 +54,15 @@ function CustomerSignUp() {
             const data = await signup(formData);
             if(data.status == 201){
                 setFormData({
-                    email: "",
-                    username: "",
-                    phone_number: "",
-                    user_type: "customer",
-                    password: "",
+                    first_name: "",
+        last_name: "",
+        email: "",
+        phone: "",
+        password: "",
+        password2: "",
                 
                 })
+                navigate('/signIn');
                 setRegistrationStatus(data.message);
             }
             else if(data.status == 400){
@@ -89,22 +93,22 @@ function CustomerSignUp() {
                         <form className="signup-content-form" onSubmit={handleSubmit}>
                             <p>Welcome <br /><strong>Sign Up For Customer Account</strong></p>
                             <div className="signup-form-input-name">
-                            <input type="text" name="firstName" placeholder="First Name" value={formData.username} onChange={handleChange} required />
-                            <input type="text" name="lserName" placeholder="Last Name" value={formData.username} onChange={handleChange} required />
+                            <input type="text" name="first_name" placeholder="First Name" value={formData.first_name} contentEditable onChange={handleChange} required />
+                            <input type="text" name="last_name" placeholder="Last Name" value={formData.last_name} contentEditable onChange={handleChange} required />
                             </div>
 
-                            <input type="text" name="phone_number" placeholder="Your Phone" value={formData.phone_number} onChange={handleChange} required />
-                            <input type="text" name="email" placeholder="Your Email" value={formData.email} onChange={handleChange} />
+                            <input type="text" name="phone" placeholder="Your Phone" value={formData.phone} contentEditable onChange={handleChange} required />
+                            <input type="text" name="email" placeholder="Your Email" value={formData.email} contentEditable onChange={handleChange} />
 
                             <div className="signup-form-password-input">
-                                <input type={activeCreatePassword ? "text" : "password"} name="password" placeholder="Create Password" value={formData.password} onChange={handleChange} required />
+                                <input type={activeCreatePassword ? "text" : "password"} name="password" placeholder="Create Password" contentEditable value={formData.password} onChange={handleChange} required />
                                 <button type="button" onClick={handleClickCreatePassword}>
                                     {activeCreatePassword ? <i className="fa fa-eye"></i> : <i className="fa fa-eye-slash"></i>}
                                 </button>
                             </div>
 
                             <div className="signup-form-password-input">
-                                <input type={activeConfirmPassword ? "text" : "password"} name="confirmPassword" placeholder="Confirm Password" value={confirmPassword} onChange={handleConfirmPasswordChange} required />
+                                <input type={activeConfirmPassword ? "text" : "password"} name="password2" placeholder="Confirm Password" contentEditable value={formData.password2} onChange={handleChange} required />
                                 <button type="button" onClick={handleClickConfirmPassword}>
                                     {activeConfirmPassword ? <i className="fa fa-eye"></i> : <i className="fa fa-eye-slash"></i>}
                                 </button>

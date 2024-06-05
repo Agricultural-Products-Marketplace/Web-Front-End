@@ -5,6 +5,7 @@ import TopPath from "../shared/commen/topPath";
 import { getProductById, ProductData } from '../../services/product/getProducts';
 import ServicesCard from "../shared/commen/services";
 import ProductSlider from "../shared/card/productSlider";
+import ProductDetailLoading from "../shared/card/Loadings/ProductDetailLoading";
 
 function ProductDetail() {
     const [product, setProduct] = useState<ProductData | null>(null);
@@ -44,7 +45,9 @@ function ProductDetail() {
     };
 
     if (!product) {
-        return <div>Loading...</div>;
+        return (
+            <ProductDetailLoading />
+        );
     }
 
     return (

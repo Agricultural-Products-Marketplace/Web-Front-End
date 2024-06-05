@@ -2,29 +2,60 @@ import { useState, useEffect } from 'react';
 import CategoryCard from '../shared/card/category';
 import './index.css';
 import { ProductData, getAllProducts } from '../../services/product/getProducts';
+import LoadingCard from '../shared/card/Loadings/loadingCard';
+import { Link } from 'react-router-dom';
 
 function Category() {
 
     const [products, setProducts] = useState<ProductData[]>([]);
+    const [filteredProducts, setFilteredProducts] = useState<ProductData[]>([]);
+    const [activeCategory, setActiveCategory] = useState<string | null>('All');
+
 
     useEffect(() => {
         const fetchData = async () => {
             const productsData = await getAllProducts();
             setProducts(productsData);
+            setFilteredProducts(productsData); // Initialize with all products
         };
         fetchData();
     }, []);
-    
+
+    const handleCategoryClick = (categoryTitle: string) => {
+        setActiveCategory(categoryTitle);
+        if (categoryTitle === 'All') {
+            setFilteredProducts(products); // Show all products if 'All' is selected
+        } else {
+            setFilteredProducts(products.filter(product => product.category.title === categoryTitle));
+        }
+    };
 
     // Local list variable
 
 
     return(
         <div className="category-page">
-            <CategoryCard />
-            <div className="category-page-items">
-                {products.map((product, index) => (
-                    <a key={index} href={`/product-detail?id=${product.id}`} className="category-page-item">
+            <CategoryCard activeCategory={activeCategory} onCategoryClick={handleCategoryClick} />
+            
+            {(filteredProducts.length === 0)?(
+                <div className="category-page-items">
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                </div>
+            ):(
+                <div className="category-page-items">
+                {filteredProducts.map((product, index) => (
+                    <Link key={index} to={`/product-detail?id=${product.id}`} className="category-page-item">
                         <div className='category-page-item-overlay'>
                             <div className="overlay-top">
                                 <p>{product.old_price}%</p>
@@ -54,10 +85,11 @@ function Category() {
                                 <p>${product.price}</p>
                             </div>
                         </div>
-                    </a>
+                    </Link>
                 ))}
                 
             </div>
+            )}
         </div>
     );
 }

@@ -1,6 +1,6 @@
 //cartReducer.ts
 
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/cartActionTypes";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/ActionTypes";
 import { cartState, cartAction } from '../types';
 
 const initialState: cartState = {

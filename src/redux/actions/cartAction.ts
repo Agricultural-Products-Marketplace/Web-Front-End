@@ -1,6 +1,6 @@
 //cartAction.ts
 
-import { ADD_TO_CART, REMOVE_FROM_CART } from "./cartActionTypes";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "./ActionTypes";
 import ProductModel from "../../model/product";
 
 // Existing addToCart action

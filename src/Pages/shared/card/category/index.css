@@ -16,7 +16,7 @@
     flex-direction: column;
 }
 
-.category_list>a{
+.category_list>button{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -24,9 +24,14 @@
     text-decoration: none;
     color: black;
     padding: 0.5vw 3.25vw;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all ease-in-out 0.1s;
+    font-size: 15px;
 }
 
-.category_list>a:hover{
+.category_list>button:hover{
     background-color: #00FF66;
     transition: all ease-in-out 0.3s;
     color: white;
@@ -34,6 +39,13 @@
 
 .category{
     animation: categoryIntroAnimation 1s;
+}
+
+.category_list button.active_category{
+    background-color: rgba(0, 0, 0, 0.03);
+    color: #00FF66;
+    font-weight: bolder;
+    font-size: 18px;
 }
 
 @keyframes categoryIntroAnimation {

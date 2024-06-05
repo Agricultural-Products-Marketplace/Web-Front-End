@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './index.css'
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../../services/auth/signin-service';
+import { RootState } from '../../redux/reducers/rootReducer';
 
 function Message() {
+    const isAuthenticated = useSelector((state:RootState)=> state.login.isAuthenticated);
+    const navigator = useNavigate();
+
+    useEffect(()=>{
+        if(!isAuthenticated){
+            navigator('/signIn')
+        }
+    });
+
     return(
         <div className="message-page">
             <div className="message-page-nav">

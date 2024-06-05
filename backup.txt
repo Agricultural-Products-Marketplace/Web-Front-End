@@ -1,0 +1,19 @@
+const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsLoading(true);
+
+        try {
+            const data = await login(emailPhone, password);
+            // Login successful
+            console.log("Login successful:", data);
+            // Redirect or perform any other action
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                setError(error.message);
+            } else {
+                setError("Login failed. Please try again.");
+            }
+        } finally {
+            setIsLoading(false);
+        }
+    };

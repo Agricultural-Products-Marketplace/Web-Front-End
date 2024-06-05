@@ -1,0 +1,19 @@
+.loading-card{
+    border-radius: 5px;
+    animation: colorchange 3s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+
+@keyframes colorchange {
+    0% {
+      background: rgba(0, 0, 0, 0.08);
+    }
+    50%{
+        background: rgba(0, 0, 0, 0.3);
+    }
+    100%{
+        background: rgba(0, 0, 0, 0.08);
+    }
+  }

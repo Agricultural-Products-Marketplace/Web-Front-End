@@ -22,6 +22,10 @@ import VerificationSuccess from './Pages/shared/commen/verification-success';
 import Category from './Pages/category';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { useSelector } from 'react-redux';
+import { RootState } from './redux/reducers/rootReducer';
+import { useDispatch } from 'react-redux';
+import { fetchUserProfile } from './redux/actions/userActions';
 
 
 function ScrollToTopOnRouteChange() {
@@ -29,12 +33,15 @@ function ScrollToTopOnRouteChange() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
   }, [location]);
 
   return null;
 }
 
 function App(): JSX.Element { // Get the location directly
+
+  
 
   return (
     <Provider store={store}> 
