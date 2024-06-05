@@ -1,11 +1,12 @@
 import { url } from "../../api/apiUrl";
 
 interface SignupData {
+    first_name: string;
+    last_name: string;
     email: string;
-    username: string;
-    phone_number: string;
-    user_type: string;
+    phone: string;
     password: string;
+    password2: string;
 }
 
 interface SignupResponse {
@@ -18,8 +19,7 @@ export const signup = async (formData: SignupData): Promise<SignupResponse> => {
     console.log(formData);
 
     try {
-        const baseurl = url; 
-        const response = await fetch(baseurl+"auth/register/", {
+        const response = await fetch(url+"v1/auth/register/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

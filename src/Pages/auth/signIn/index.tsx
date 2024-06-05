@@ -1,17 +1,29 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, } from "react";
 import './index.css';
-import { Link } from "react-router-dom";
-import { login } from "../../../services/auth/signin-service";
+import { Link, useNavigate } from "react-router-dom";
+import { RootState } from '../../../redux/reducers/rootReducer';
+import { loginUser } from "../../../redux/actions/loginAction";
+import { connect, useSelector } from "react-redux";
+import { login } from '../../../services/auth/signin-service';
+import { stat } from "fs";
 
-function SignIn() {
-    const [emailPhone, setEmailPhone] = useState<string>("");
+interface SignInProps{
+    isLoading:boolean;
+    error: string | null;
+    loginUser:(credintials:{email: string; password:string}) => void;
+}
+
+const SignIn:React.FC<SignInProps> = ({isLoading,error,loginUser})=> {
+    const [email, setusername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [activeCreatePassword, setActiveCreatePassword] = useState<boolean>(false);
-    const [error, setError] = useState<string>("");
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const isAuthenticated = useSelector((state:RootState)=> state.login.isAuthenticated);
+    const navigate = useNavigate();
+    // const [error, setError] = useState<string>("");
+    // const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const handleChangeEmailPhone = (e: ChangeEvent<HTMLInputElement>) => {
-        setEmailPhone(e.target.value);
+        setusername(e.target.value);
     };
 
     const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
@@ -22,25 +34,36 @@ function SignIn() {
         setActiveCreatePassword(prevActive => !prevActive);
     };
 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (e:React.FormEvent) =>{
+        isLoading = true;
         e.preventDefault();
-        setIsLoading(true);
+        const credentials = {email,password};
+        loginUser(credentials);
+    }
 
-        try {
-            const data = await login(emailPhone, password);
-            // Login successful
-            console.log("Login successful:", data);
-            // Redirect or perform any other action
-        } catch (error: unknown) {
-            if (error instanceof Error) {
-                setError(error.message);
-            } else {
-                setError("Login failed. Please try again.");
-            }
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //     setIsLoading(true);
+
+    //     try {
+    //         const data = await login(emailPhone, password);
+    //         // Login successful
+    //         console.log("Login successful:", data);
+    //         // Redirect or perform any other action
+    //     } catch (error: unknown) {
+    //         if (error instanceof Error) {
+    //             setError(error.message);
+    //         } else {
+    //             setError("Login failed. Please try again.");
+    //         }
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
+
+    if (isAuthenticated) {
+        navigate('/');
+    }
 
     return (
         <div>
@@ -56,14 +79,14 @@ function SignIn() {
                         <form className="signin-content-form col" onSubmit={handleSubmit}>
                             <p><strong>Sign In</strong><br />Login now to track all your expenses and income at a place</p>
                             {error && <small>{error}</small>}
-                            <input type="text" placeholder="Email/Phone" value={emailPhone} onChange={handleChangeEmailPhone} required />
+                            <input type="text" placeholder="Email/Phone" value={email} onChange={handleChangeEmailPhone} required />
                             <div className="signin-form-password-input">
                                 <input type={activeCreatePassword ? "text" : "password"} placeholder="Your Password" value={password} onChange={handleChangePassword} required />
                                 <button type="button" onClick={handleClickCreatePassword}>
                                     {activeCreatePassword ? <i className="fa fa-eye"></i> : <i className="fa fa-eye-slash"></i>}
                                 </button>
                             </div>
-                            <a href="#" className="signin-forget-password">Forget Password</a>
+                            <Link to={'/'} className="signin-forget-password">Forget Password</Link>
                             <button className="signin-form-button" type="submit" disabled={isLoading}>
                                 {isLoading ? "Logging In..." : "Log In"}
                             </button>
@@ -74,6 +97,15 @@ function SignIn() {
             </div>
         </div>
     );
+};
+
+const mapStateToProps = (state:RootState) =>({
+    isLoading:state.login.isLoading,
+    error: state.login.error
+});
+
+const mapDispatchToProps = {
+    loginUser
 }
 
-export default SignIn;
+export default connect(mapStateToProps,mapDispatchToProps)(SignIn);

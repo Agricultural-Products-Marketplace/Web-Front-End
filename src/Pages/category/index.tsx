@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import CategoryCard from '../shared/card/category';
 import './index.css';
 import { ProductData, getAllProducts } from '../../services/product/getProducts';
+import LoadingCard from '../shared/card/Loadings/loadingCard';
+import { Link } from 'react-router-dom';
 
 function Category() {
 
@@ -35,9 +37,25 @@ function Category() {
         <div className="category-page">
             <CategoryCard activeCategory={activeCategory} onCategoryClick={handleCategoryClick} />
             
-            <div className="category-page-items">
+            {(filteredProducts.length === 0)?(
+                <div className="category-page-items">
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                </div>
+            ):(
+                <div className="category-page-items">
                 {filteredProducts.map((product, index) => (
-                    <a key={index} href={`/product-detail?id=${product.id}`} className="category-page-item">
+                    <Link key={index} to={`/product-detail?id=${product.id}`} className="category-page-item">
                         <div className='category-page-item-overlay'>
                             <div className="overlay-top">
                                 <p>{product.old_price}%</p>
@@ -67,10 +85,11 @@ function Category() {
                                 <p>${product.price}</p>
                             </div>
                         </div>
-                    </a>
+                    </Link>
                 ))}
                 
             </div>
+            )}
         </div>
     );
 }

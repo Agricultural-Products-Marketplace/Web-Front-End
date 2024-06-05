@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './index.css';
 import TopPath from "../shared/commen/topPath";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProductModel from "../../model/product";
 import { addToCart, removeFromCart } from '../../redux/actions/cartAction';
-import Products from '../admin/products/index';
 import { AppState } from "../../redux/types";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
+import { RootState } from "../../redux/reducers/rootReducer";
 
 interface Props{
     cart:ProductModel[];
@@ -23,6 +23,9 @@ const Cart: React.FC<Props> = ({cart,addToCart,removeFromCart}) => {
             Price: 60
         },
     ];
+
+    const isAuthenticated = useSelector((state:RootState)=> state.login.isAuthenticated);
+    const navigator = useNavigate();
 
     // State for quantities, initialized to an array of length equal to the products array
     const [quantities, setQuantities] = useState(Array(products.length).fill(1));
@@ -42,6 +45,14 @@ const Cart: React.FC<Props> = ({cart,addToCart,removeFromCart}) => {
             setQuantities(newQuantities);
         }
     };
+
+    
+
+    useEffect(()=>{
+        if(!isAuthenticated){
+            navigator('/signIn')
+        }
+    });
 
     
 

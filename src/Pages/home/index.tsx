@@ -10,85 +10,47 @@ import ServicesCard from "../shared/commen/services";
 import PartnersCard from "../shared/commen/partners";
 import Footer from "../shared/commen/footer";
 import { Category, getAllCategories } from "../../services/category/getCategory";
+import SliderLoading from "../shared/card/Loadings/sliderLoading";
+import { fetchUserProfile } from "../../redux/actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/reducers/rootReducer";
 
 function Home() {
-    const [categories, setCategories] = useState<Category[]>([]);
 
+    const [categories, setCategories] = useState<Category[]>([]);
     useEffect(()=>{
         const fetchData = async () => {
             const categoriesData = await getAllCategories();
             setCategories(categoriesData);
         };
         fetchData();
+        
+    
     },
 []);
+
+const user = useSelector((state:RootState)=> state.user.profile);
     return(
         <div className="home">
             <div className="slider-category row">
                 <SliderCard />
             </div>
-            <ProductSlider 
+            {(categories.length === 8)?(
+                <SliderLoading />
+            ):(
+                <ProductSlider 
             title="Flash Deals"
             slog="today's"
             products={
-                [{
-                    id:1,
-                    productName:"Mango",
-                    productPrice : 120,
-                    rating : 4,
-                    discount : 25,
-                    img : "https://media.istockphoto.com/id/529964085/photo/mango.jpg?s=612x612&w=0&k=20&c=rmcMZlLOZFdn4NhUcjnaJ3EBHKYZQ4xH4xzpzFU4JgY=",
-                    categoryName : ""
-                },
-                {
-                    id:2,
-                    productName:"Apple",
-                    productPrice : 200,
-                    rating : 5,
-                    discount : 10,
-                    img : "https://static.libertyprim.com/files/familles/pomme-large.jpg?1569271834",
-                    categoryName : ""
-                },
-                {
-                    id:3,
-                    productName:"PineApple",
-                    productPrice : 250,
-                    rating : 4,
-                    discount : 20,
-                    img : "https://static.libertyprim.com/files/familles/ananas-large.jpg?1569271716",
-                    categoryName : ""
-                },
-                {
-                    id:4,
-                    productName:"Watermelon",
-                    productPrice : 165,
-                    rating : 3,
-                    discount : 60,
-                    img : "https://weresmartworld.com/sites/default/files/styles/full_screen/public/2021-04/watermeloen_2.jpg?itok=hsBPt3DQ",
-                    categoryName : ""
-                },
-                {
-                    id:5,
-                    productName:"Banana",
-                    productPrice : 100,
-                    rating : 5,
-                    discount : 45,
-                    img : "https://chefsmandala.com/wp-content/uploads/2018/03/Banana.jpg",
-                    categoryName : ""
-                },
-                {
-                    id:6,
-                    productName:"Orange",
-                    productPrice : 135,
-                    rating : 2,
-                    discount : 30,
-                    img : "https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg",
-                    categoryName : ""
-                }
+                [
             ]
             }
             />
-            <ProductSlider 
+            )}
+            
+            {(categories.length === 0) ? (
+               <SliderLoading />
+            ) :(<ProductSlider 
             slog="category"
             title="Brows By Category"
             products={
@@ -105,58 +67,31 @@ function Home() {
                     }
                 ))
             }
-            />
-            <ProductSlider 
+            />)}
+            
+            {(categories.length === 8)?(
+                <SliderLoading />
+            ):(
+                <ProductSlider 
             title="Most Viewed products"
             slog="This Month"
-            products={
-                [{
-                    id:1,
-                    productName:"Apple",
-                    productPrice : 200,
-                    rating : 5,
-                    discount : 10,
-                    img : "https://static.libertyprim.com/files/familles/pomme-large.jpg?1569271834",
-                    categoryName : ""
-                },
-                {
-                    id:2,
-                    productName:"PineApple",
-                    productPrice : 250,
-                    rating : 4,
-                    discount : 20,
-                    img : "https://static.libertyprim.com/files/familles/ananas-large.jpg?1569271716",
-                    categoryName : ""
-                },
-            ]
-            }
+            products={[]}
             />
+            )}
+            
             <AdCard />
-            <ProductSlider 
-            title="Explore The Products"
-            slog="Our Products"
-            products={
-                [{
-                    id:1,
-                    productName:"Rice",
-                    productPrice : 165,
-                    rating : 3,
-                    discount : 30,
-                    img : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Zc6uCIB6x5cmZewJ_g5ebZmbLBpcS2EBLWDuo_PjxQ&s",
-                    categoryName : ""
-                },
-                {
-                    id:2,
-                    productName:"Rice",
-                    productPrice : 165,
-                    rating : 3,
-                    discount : 30,
-                    img : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0Zc6uCIB6x5cmZewJ_g5ebZmbLBpcS2EBLWDuo_PjxQ&s",
-                    categoryName : ""
+            {(categories.length === 8)?(
+                <SliderLoading />
+            ):(
+                <ProductSlider 
+                title="Explore The Products"
+                slog="Our Products"
+                products={
+                    [
+                ]
                 }
-            ]
-            }
-            />
+                />
+            )}
 
             <ServicesCard />
             <PartnersCard 

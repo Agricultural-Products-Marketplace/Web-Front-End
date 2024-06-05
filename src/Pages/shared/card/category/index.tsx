@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './index.css';
 import { Category, getAllCategories } from '../../../../services/category/getCategory';
+import LoadingCard from '../Loadings/loadingCard';
 
 interface CategoryCardProps {
     activeCategory: string | null;
@@ -23,7 +24,21 @@ function CategoryCard({ activeCategory, onCategoryClick }: CategoryCardProps) {
             <div className="Category_title">
                 <h2>Category</h2>
             </div>
-            <div className="category_list">
+            {
+                (categories.length === 0)?(
+                    <div className="category_list" style={{display:'flex',flexDirection:'column',gap:'1vw',alignItems:'center', paddingTop:'1.5vw'}}>
+                            <LoadingCard width={'90%'} height={'3vw'} borderRadius='5px'/>
+                            <LoadingCard width={'90%'} height={'3vw'} borderRadius='5px'/>
+                            <LoadingCard width={'90%'} height={'3vw'} borderRadius='5px'/>
+                            <LoadingCard width={'90%'} height={'3vw'} borderRadius='5px'/>
+                            <LoadingCard width={'90%'} height={'3vw'} borderRadius='5px'/>
+                            <LoadingCard width={'90%'} height={'3vw'} borderRadius='5px'/>
+                            <LoadingCard width={'90%'} height={'3vw'} borderRadius='5px'/>
+                            <LoadingCard width={'90%'} height={'3vw'} borderRadius='5px'/>
+
+                    </div>
+                ):(
+                    <div className="category_list">
                 {categories.map((category, index) => (
                     <button
                         key={index}
@@ -34,6 +49,8 @@ function CategoryCard({ activeCategory, onCategoryClick }: CategoryCardProps) {
                     </button>
                 ))}
             </div>
+                )
+            }
         </section>
     );
 }

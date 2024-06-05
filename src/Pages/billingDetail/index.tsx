@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import './index.css';
-import NavBar from "../shared/commen/navBar";
 import TopPath from "../shared/commen/topPath";
 
 function BillingDetail() {
