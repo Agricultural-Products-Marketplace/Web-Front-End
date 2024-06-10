@@ -1,3 +1,5 @@
 .wishlist-products{
     animation: ScaleUpAnimation 1s;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
 }

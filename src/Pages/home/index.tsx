@@ -13,10 +13,12 @@ import { Category, getAllCategories } from "../../services/category/getCategory"
 import SliderLoading from "../shared/card/Loadings/sliderLoading";
 import { fetchUserProfile } from "../../redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/reducers/rootReducer";
+import { RootState } from "../../redux/reducers/rootReducer";import { fetchWebInfoService } from "../../services/website/webinfo";
+import { fetchWishlist } from "../../redux/actions/wishlistAction";
+import { AppDispatch } from "../../redux/store";
 
 function Home() {
-
+    const dispatch: AppDispatch = useDispatch();
     const [categories, setCategories] = useState<Category[]>([]);
     useEffect(()=>{
         const fetchData = async () => {
@@ -24,14 +26,22 @@ function Home() {
             setCategories(categoriesData);
         };
         fetchData();
+        console.log('Error of despatch');
         
     
     },
+
 []);
 
 const user = useSelector((state:RootState)=> state.user.profile);
+const userId:number = user?.id ? user.id : 0;
+
+useEffect(() => {
+    dispatch(fetchWishlist(userId));
+  }, [dispatch, userId]);
     return(
         <div className="home">
+            
             <div className="slider-category row">
                 <SliderCard />
             </div>
@@ -47,7 +57,6 @@ const user = useSelector((state:RootState)=> state.user.profile);
             }
             />
             )}
-            
             {(categories.length === 0) ? (
                <SliderLoading />
             ) :(<ProductSlider 

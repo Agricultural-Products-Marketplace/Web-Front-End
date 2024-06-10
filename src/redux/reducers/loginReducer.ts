@@ -1,5 +1,5 @@
 import { Reducer } from "redux";
-import { LOGIN_REQUEST,LOGIN_SUCCESS,LOGIN_FAILURE, LOGOUT } from "../actions/ActionTypes";
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from "../actions/ActionTypes";
 import { LoginAction, UserData } from '../actions/loginAction';
 
 export interface LoginState{
@@ -9,43 +9,50 @@ export interface LoginState{
     error: string | null;
 }
 
-const initialState:LoginState ={
-    isLoading:false,
-    isAuthenticated:false,
-    user:null,
-    error:null,
-}
+const persistedState = localStorage.getItem('LoginState');
+const initialState: LoginState = persistedState
+    ? JSON.parse(persistedState)
+    : {
+        isLoading: false,
+        isAuthenticated: false,
+        user: null,
+        error: null,
+    };
 
-const loginReducer: Reducer<LoginState,LoginAction> = (state = initialState,action) => {
+const loginReducer: Reducer<LoginState, LoginAction> = (state = initialState, action) => {
     switch(action.type){
         case LOGIN_REQUEST:
-            return{
+            return {
                 ...state,
                 isLoading:true,
                 error:null,
             };
         case LOGIN_SUCCESS:
-            return{
+            const newState = {
                 ...state,
                 isLoading:false,
                 isAuthenticated:true,
                 user:action.payload,
                 error:null,
             };
+            localStorage.setItem('LoginState', JSON.stringify(newState))
+            return newState;
         case LOGIN_FAILURE:
-            return{
+            return {
                 ...state,
                 isLoading:false,
                 isAuthenticated:false,
                 user:null,
-                error:action.payload
+                error:action.payload,
             };
         case LOGOUT:
-                return {
-                    ...state,
-                    isAuthenticated: false,
-                    user: null,
-                };
+            localStorage.removeItem('LoginState');
+            localStorage.removeItem('UserData');
+            return {
+                ...state,
+                isAuthenticated: false,
+                user: null,
+            };
         default:
             return state;
     }

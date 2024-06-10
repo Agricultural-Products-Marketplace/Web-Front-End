@@ -6,4 +6,6 @@ const store = configureStore({
   devTools: process.env.NODE_ENV !== 'production', // Enable Redux DevTools only in development
 });
 
+export type AppDispatch = typeof store.dispatch;
+
 export default store;

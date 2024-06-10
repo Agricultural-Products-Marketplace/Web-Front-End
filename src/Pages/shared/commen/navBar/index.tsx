@@ -18,6 +18,7 @@ const NavBar: React.FC = () => {
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state:RootState)=> state.login.isAuthenticated);
     const user = useSelector((state:RootState)=>state.user.profile);
+    const wishlistLength = useSelector((state:RootState)=>state.wishlist.data.length);
 
     const handleLogout = () => {
         dispatch(logout()); 
@@ -46,9 +47,10 @@ const NavBar: React.FC = () => {
         </div>
     
     <div className="icons">
-    {(isAuthenticated)?(<Link to={'/wishlist'}><i className="fa-solid fa-heart"><sup>8</sup></i></Link>):(null)}
+    {(isAuthenticated)?(<Link to={'/wishlist'}><i className="fa-solid fa-heart"><sup>{wishlistLength}</sup></i></Link>):(null)}
     {(isAuthenticated)?(<Link to={'/message'} ><i className='fa-solid fa-message'><sup>8</sup></i></Link>):(null)}
     {(isAuthenticated)?(<Link to={'/cart'}><i className="fa-solid fa-cart-shopping"><sup>{cartItemCount}</sup></i></Link>):(null)}
+    {(isAuthenticated)?(<Link to={'/'}><i className="fa-solid fa-bell"><sup>8</sup></i></Link>):null}
     {(isAuthenticated)?(<a href="#" className='icons-user-icon'><i className="fa-solid fa-user"></i>
     <div className="account-dropdown-menus">
         <Link to={'/account'}>

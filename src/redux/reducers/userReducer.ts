@@ -1,40 +1,50 @@
-// reducers/userReducer.ts
-
-import { Reducer } from 'react';
+import { Reducer } from 'redux';
 import { FETCH_USER_PROFILE_FAILURE, FETCH_USER_PROFILE_REQUEST, FETCH_USER_PROFILE_SUCCESS, ProfileActionTypes } from '../actions/userActions';
 import { UserProfile } from '../types';
 
-interface ProfileState{
-    profile:UserProfile | null;
-    loading:boolean;
-    error:string|null;
+interface ProfileState {
+    profile: UserProfile | null;
+    loading: boolean;
+    error: string | null;
 }
 
-const initialState:ProfileState={
-    profile:null,
+const persistedUserData = localStorage.getItem('UserData');
+let initialProfile: UserProfile | null = null;
+
+if (persistedUserData) {
+    try {
+        initialProfile = JSON.parse(persistedUserData) as UserProfile;
+    } catch (e) {
+        console.error("Failed to parse user data from localStorage", e);
+    }
+}
+
+const initialState: ProfileState = {
+    profile: initialProfile,
     loading: false,
-    error:null
+    error: null,
 };
 
-const userReducer = (state = initialState,action:ProfileActionTypes):ProfileState =>{
-    switch(action.type){
+const userReducer: Reducer<ProfileState, ProfileActionTypes> = (state = initialState, action): ProfileState => {
+    switch (action.type) {
         case FETCH_USER_PROFILE_REQUEST:
-            return{
+            return {
                 ...state,
-                loading:true,
-                error:null,
+                loading: true,
+                error: null,
             };
         case FETCH_USER_PROFILE_SUCCESS:
-            return{
+            localStorage.setItem('UserData', JSON.stringify(action.payload));
+            return {
                 ...state,
-                loading:false,
-                profile:action.payload,
+                loading: false,
+                profile: action.payload,
             };
         case FETCH_USER_PROFILE_FAILURE:
-            return{
+            return {
                 ...state,
-                loading:false,
-                error:action.payload,
+                loading: false,
+                error: action.payload,
             };
         default:
             return state;

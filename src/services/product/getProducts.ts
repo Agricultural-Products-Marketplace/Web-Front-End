@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { Category } from '../category/getCategory';
 import { Gallery } from '../../model/gallary';
 import { Farmer } from '../../model/farmer';
@@ -49,3 +49,8 @@ export async function getProductById(productId: number): Promise<ProductData | n
         return null; // Return null in case of error
     }
 }
+
+
+
+
+
