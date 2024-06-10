@@ -1,136 +1,67 @@
-.my-account{
-    display: flex;
-    flex-direction: column;
-    padding: 2vw 7vw;
+.my-profile-content{
+    background-color: white !important;
 }
 
-.my-account-top{
-    display: flex;
-    flex-direction: row;
+.my-account-page{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1vw;
     justify-content: space-between;
 }
 
-.my-account-top-p1{
-    font-size: 17px;
-    color: rgba(0,0,0,0.4);
-}
-
-.my-account-top-p2>span{
-    color: red;
-}
-
-.my-account-top-p1>span{
-    color: black;
-}
-
-.my-account-bottom{
-    display: flex;
-    gap: 2vw;
-    padding: 5vw 3vw;
-}
-
-.my-account-bottom-left{
-    display: flex;
-    flex-direction: column;
-}
-
-.my-account-bottom-left>a{
-    margin-top: 15px;
-    margin-left: 35px;
-    color: rgba(0,0,0,0.6);
-}
-
-.my-account-bottom-left>a:hover{
-    color: red;
-}
-
-.active{
-    color: red !important;
-}
-
-.my-account-bottom-right{
-    display: flex;
-    flex-direction: column;
-    padding: 2vw 4vw;
-    box-shadow: 0px 0px 18px rgba(0,0,0,0.1);
-}
-
-.my-account-bottom-right-name{
-    display: flex;
-    flex-direction: row;
-    gap: 2vw;
-}
-
-.my-account-bottom-right-name-item{
-    display: flex;
-    flex-direction: column;
-}
-
-.my-account-bottom-right-name-item>input{
-    height: 40px;
-    width: 18vw;
-    border: none;
-    background-color: rgba(0,0,0,0.09);
-    border-radius: 6px;
-    padding: 0px 15px;
-}
-
-.my-account-bottom-right-name-item>input:focus{
-    outline: solid 1px red;
-}
-
-.my-account-bottom-right>h2{
-    color: red;
-}
-
-.my-account-bottom-right-password{
+.my-account-input{
+    width: 80%;
     display: flex;
     flex-direction: column;
     gap: 1vw;
+    margin-top: 3vw;
 }
 
-.my-account-bottom-right-password>input{
+.admin-page-main-top>img{
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    transition: all ease 0.3s;
+}
+
+.admin-page-main-top>img:hover{
+    transition: all ease 0.3s;
+    filter: opacity(50%);
+}
+
+
+.my-account-input>input{
     height: 40px;
-    width: 100%;
+    font-size: 17px;
     border: none;
-    background-color: rgba(0,0,0,0.09);
-    border-radius: 6px;
-    padding: 0px 15px;
+    outline: 1px solid rgba(0, 0, 0, 0.2);
+    padding-left: 1vw;
 }
 
-.my-account-bottom-right-password>input:focus{
-    outline: 1px solid red;
-}
-
-.my-account-bottom-right-button{
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-    gap: 2vw;
-    margin-top: 2vw;
-}
-
-.my-account-bottom-right-button-cancel{
-    background-color: transparent;
+.my-profile-content>button{
+    align-self: center;
+    margin-top:50px;
+    width: 40%;
+    height: 40px;
+    background-color: #00ff66;
     border: none;
-    font-size: 16px;
-}
-
-.my-account-bottom-right-button-save{
-    background-color: green;
-    color: white;
-    font-weight: 900;
-    font-size: 16px;
-    border: none;
-    padding: 13px 45px;
     border-radius: 5px;
-    transition: all ease-in-out 0.3s;
+    color: white;
+    font-size: 18px;
+    font-weight: bolder;
+    transition:  all ease 0.3s;
 }
 
-.my-account-bottom-right-button-save:hover{
+.my-profile-content>button:hover{
     background-color: transparent;
-    outline: green 1px solid;
-    color: green;
-    transition: all ease-in-out 0.3s;
+    color: #00ff66;
+    outline: #00ff66 solid 1px;
     cursor: pointer;
+    transition:  all ease 0.3s;
+    width: 60%;
+}
+
+.admin-page-main-top>button>i{
+    color: white;
 }

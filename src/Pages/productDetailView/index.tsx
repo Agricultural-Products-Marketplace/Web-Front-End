@@ -6,11 +6,16 @@ import { getProductById, ProductData } from '../../services/product/getProducts'
 import ServicesCard from "../shared/commen/services";
 import ProductSlider from "../shared/card/productSlider";
 import ProductDetailLoading from "../shared/card/Loadings/ProductDetailLoading";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/reducers/rootReducer";
 
 function ProductDetail() {
     const [product, setProduct] = useState<ProductData | null>(null);
     const [quantity, setQuantity] = useState(1);
     const [mainImage, setMainImage] = useState<string | undefined>(undefined); // Initialize with undefined
+    const wishlist = useSelector((state: RootState) => state.wishlist.data);
+  const wishlistProducts = wishlist.map(wishlistProduct => wishlistProduct.product);
+  const isfavorite = wishlistProducts.map(favorite => favorite.id);
 
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
@@ -90,8 +95,8 @@ function ProductDetail() {
                                 <p>{quantity}</p>
                                 <button onClick={incrementQuantity}><i className="fa fa-plus"></i></button>
                             </div>
-                            <button className="buy-now-btn">Buy Now</button>
-                            <button><i className="fa-regular fa-heart"></i></button>
+                            <button className="buy-now-btn">Add To Cart</button>
+                            {(isfavorite.includes(product.id))?(<button className="add-towishlist-button"><i className="fa-solid fa-heart" style={{color:"gold"}}></i></button>):<button className="add-towishlist-button"><i className="fa-regular fa-heart"></i></button>}
                         </div>
                         <div className="product-detail-services col">
                         <div className="product-detail-service-item">

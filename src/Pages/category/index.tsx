@@ -4,12 +4,27 @@ import './index.css';
 import { ProductData, getAllProducts } from '../../services/product/getProducts';
 import LoadingCard from '../shared/card/Loadings/loadingCard';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/reducers/rootReducer';
+import { AppDispatch } from '../../redux/store';
+import { fetchWishlist } from '../../redux/actions/wishlistAction';
+import { addWishlistItem } from '../../services/wishlist/getwishlist';
 
 function Category() {
+    const dispatch: AppDispatch = useDispatch();
 
     const [products, setProducts] = useState<ProductData[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<ProductData[]>([]);
     const [activeCategory, setActiveCategory] = useState<string | null>('All');
+    const wishlist = useSelector((state: RootState) => state.wishlist.data);
+  const wishlistProducts = wishlist.map(wishlistProduct => wishlistProduct.product);
+  const isfavorite = wishlistProducts.map(favorite => favorite.id);
+  const user = useSelector((state:RootState)=> state.user.profile);
+const userId:number = user?.id ? user.id : 0;
+
+useEffect(() => {
+    dispatch(fetchWishlist(userId));
+  }, [dispatch, userId]);
 
 
     useEffect(() => {
@@ -17,6 +32,7 @@ function Category() {
             const productsData = await getAllProducts();
             setProducts(productsData);
             setFilteredProducts(productsData); // Initialize with all products
+            
         };
         fetchData();
     }, []);
@@ -60,7 +76,8 @@ function Category() {
                             <div className="overlay-top">
                                 <p>{product.old_price}%</p>
                                 <div className="category-page-items-icon">
-                                    <button onClick={()=>{}}><i className="fa-solid fa-heart"></i></button>
+                                    {(isfavorite.includes(product.id))?(<button onClick={()=>{}}><i className="fa-solid fa-heart" style={{color:"Gold"}}></i></button>):(<button onClick={()=>{addWishlistItem(userId,product.id); fetchWishlist(userId)}}><i className="fa-regular fa-heart"></i></button>)}
+                                    {/* <button onClick={()=>{}}><i className="fa-solid fa-heart"></i></button> */}
                                 </div>
                             </div>
                             <div className="overly-bottom">

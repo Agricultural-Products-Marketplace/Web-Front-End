@@ -9,5 +9,5 @@ export interface Farmer {
     active:      boolean;
     date:        Date;
     slug:        string;
-    user:        User;
+    user:        User[];
 }
