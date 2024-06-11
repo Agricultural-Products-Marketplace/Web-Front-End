@@ -45,7 +45,29 @@ export const updateProfile = async (updatedFields: { [key: string]: string }, ac
             },
         };
         const response = await axios.patch(`${url}v1/auth/profile/update/`, updatedFields, config);
-        return response.data;
+        if(response.status === 200){
+            localStorage.removeItem("UserData");
+            try{
+                console.log("this is geeting this data 1");
+                console.log("this is geeting this data 2");
+                const response = await fetch(`${url}v1/auth/profile/`,{
+                    headers:{
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                });
+        
+                if(!response.ok){
+                    throw new Error('Failed to fetch user profile');
+                }
+        
+                const userProfile = await response.json();
+                localStorage.setItem("UserData",JSON.stringify(userProfile));
+        
+            }catch(error: any){
+                return(error);
+            }
+
+        }
     } catch (error) {
         throw error;
     }

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import './index.css';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 declare global {
     interface Window {
@@ -32,7 +32,7 @@ const TopBar = () => {
 
     return (
         pathname === '/admin' || pathname === '/success' ?null:<div className="top_bar" id='TopBar'>
-        <p>Summer Sale For All Agricultural product And Free Express Delivery - OFF 50%! <a href=""><strong> Shop Now</strong></a></p>
+        <p>Summer Sale For All Agricultural product And Free Express Delivery - OFF 50%! <Link to={'/category'}><strong> Shop Now</strong></Link></p>
         <div className="gtranslate_wrapper"></div>
         <div className="icons">
             <a href="#"><i className="fa-solid fa-phone"></i><small>+251 91 297 8713</small></a>

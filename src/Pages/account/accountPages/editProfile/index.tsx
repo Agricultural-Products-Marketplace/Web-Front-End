@@ -4,13 +4,14 @@ import { RootState } from '../../../../redux/reducers/rootReducer';
 import AccountTopCard from '../../../shared/card/accountTopCad';
 import { useDispatch } from 'react-redux';
 import { updateProfile } from '../../../../services/auth/signin-service';
-import { fetchUserProfile } from '../../../../redux/actions/userActions';
+import { UpdateUserProfile } from "../../../../redux/actions/userActions";
 
 function EditMyProfile() {
     const user = useSelector((state: RootState) => state.user.profile);
     const userAccess = useSelector((state: RootState) => state.login.user?.access);
     const useRrefresh = useSelector((state: RootState) => state.login.user?.refresh);
     const dispatch = useDispatch;
+    const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
         username: user?.user.username || '',
         first_name: user?.user.first_name || '',
@@ -19,6 +20,9 @@ function EditMyProfile() {
         phone: user?.user.phone || '',
     });
     const [initialData] = useState(formData);
+    const handleRefresh = () => {
+        window.location.reload();
+      };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -26,9 +30,13 @@ function EditMyProfile() {
             ...formData,
             [name]: value,
         });
+
+
+        
     };
 
     const handleSaveChanges = async () => {
+        setIsLoading(true);
         const updatedFields: { [key: string]: string } = {};
         Object.keys(formData).forEach((key) => {
             if (formData[key as keyof typeof formData] !== initialData[key as keyof typeof formData]) {
@@ -39,6 +47,8 @@ function EditMyProfile() {
         try {
             const updatedProfile = await updateProfile(updatedFields,userAccess);
             console.log('Profile updated successfully', updatedProfile);
+            handleRefresh();
+            setIsLoading(false);
         } catch (error) {
             console.error('Error updating profile', error);
         }
@@ -134,7 +144,8 @@ function EditMyProfile() {
                     />
                 </div>
             </div>
-            <button onClick={handleSaveChanges}>Save Changes</button>
+            {isLoading?(null):(<button onClick={handleSaveChanges}>Save Changes</button>)}
+            
         </div>
     );
 }

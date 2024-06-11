@@ -24,7 +24,7 @@ const NavBar: React.FC = () => {
         dispatch(logout()); 
     };
 
-    return(pathname === '/signup/customer' || pathname === '/signIn' || pathname === '/signUp/' || pathname === '/signUp' || pathname === '/success'? null : <section className="navbar">
+    return(pathname === '/signup/customer' || pathname === '/signIn' || pathname === '/reset-password' ||pathname === '/forget-password' || pathname === '/signUp/' || pathname === '/signUp' || pathname === '/success'? null : <section className="navbar">
     <a href="#123" className="navbar_logo">
         <img src="./assets/img/logo.png" alt="" />
         <hr/>

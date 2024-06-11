@@ -22,10 +22,8 @@ import VerificationSuccess from './Pages/shared/commen/verification-success';
 import Category from './Pages/category';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import { useSelector } from 'react-redux';
-import { RootState } from './redux/reducers/rootReducer';
-import { useDispatch } from 'react-redux';
-import { fetchUserProfile } from './redux/actions/userActions';
+import ForgetPassword from './Pages/auth/forgetPasswords';
+import ResetPassword from './Pages/auth/resetPassword';
 
 
 function ScrollToTopOnRouteChange() {
@@ -55,6 +53,8 @@ function App(): JSX.Element { // Get the location directly
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signup/customer" element={<CustomerSignUp />} />
+          <Route path='/forget-password' element={<ForgetPassword />} />
+          <Route path='/reset-password' element={<ResetPassword />} />
           <Route path='/category' element={<Category />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/wishlist' element={<WishList />} />
