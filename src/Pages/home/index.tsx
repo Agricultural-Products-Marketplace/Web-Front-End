@@ -13,32 +13,35 @@ import { Category, getAllCategories } from "../../services/category/getCategory"
 import SliderLoading from "../shared/card/Loadings/sliderLoading";
 import { fetchUserProfile } from "../../redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/reducers/rootReducer";import { fetchWebInfoService } from "../../services/website/webinfo";
-import { fetchWishlist } from "../../redux/actions/wishlistAction";
+import { RootState } from "../../redux/reducers/rootReducer";import { fetchWebInfoService, getpartnersinfo, getsupportinfo } from "../../services/website/webinfo";
 import { AppDispatch } from "../../redux/store";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
     const dispatch: AppDispatch = useDispatch();
     const [categories, setCategories] = useState<Category[]>([]);
+    const isAuth = useSelector((state:RootState)=>state.login.isAuthenticated);
+    const navigator = useNavigate();
     useEffect(()=>{
         const fetchData = async () => {
             const categoriesData = await getAllCategories();
             setCategories(categoriesData);
         };
         fetchData();
-        console.log('Error of despatch');
-        
-    
     },
 
+    
+
 []);
+
+useState(()=>{
+    getpartnersinfo();
+    getsupportinfo();
+});
 
 const user = useSelector((state:RootState)=> state.user.profile);
 const userId:number = user?.id ? user.id : 0;
 
-useEffect(() => {
-    dispatch(fetchWishlist(userId));
-  }, [dispatch, userId]);
     return(
         <div className="home">
             

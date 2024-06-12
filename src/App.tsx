@@ -54,7 +54,7 @@ function App(): JSX.Element { // Get the location directly
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signup/customer" element={<CustomerSignUp />} />
           <Route path='/forget-password' element={<ForgetPassword />} />
-          <Route path='/reset-password' element={<ResetPassword />} />
+          <Route path='/create-new-password' element={<ResetPassword />} />
           <Route path='/category' element={<Category />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/wishlist' element={<WishList />} />

@@ -18,14 +18,24 @@
     margin-top: 3vw;
 }
 
-.admin-page-main-top>img{
-    width: 100px;
-    height: 100px;
+.admin-page-main-top>div{
+    width: 130px;
+    height: 130px;
     border-radius: 100%;
     transition: all ease 0.3s;
+    border: #00ff66 solid 0.2vw;
+    padding: 0.1vw;
 }
 
-.admin-page-main-top>img:hover{
+
+.admin-page-main-top>div>img{
+    object-fit: cover;
+    width: inherit;
+    height: inherit;
+    border-radius: 100%;
+}
+
+.admin-page-main-top>div>img:hover{
     transition: all ease 0.3s;
     filter: opacity(50%);
 }

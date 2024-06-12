@@ -21,7 +21,7 @@ export interface ProductData {
         rating:          number;
         rating_count:    number;
         gallery:         Gallery[];
-        farmer:          Farmer[];
+        farmer:          Farmer;
         pid:             string;
         slug:            string;
         date:            Date;    

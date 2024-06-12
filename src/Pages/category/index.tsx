@@ -7,8 +7,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers/rootReducer';
 import { AppDispatch } from '../../redux/store';
-import { fetchWishlist } from '../../redux/actions/wishlistAction';
-import { addWishlistItem } from '../../services/wishlist/getwishlist';
+import { addWishlists } from '../../services/wishlist/getwishlist';
 
 function Category() {
     const dispatch: AppDispatch = useDispatch();
@@ -16,16 +15,10 @@ function Category() {
     const [products, setProducts] = useState<ProductData[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<ProductData[]>([]);
     const [activeCategory, setActiveCategory] = useState<string | null>('All');
-    const wishlist = useSelector((state: RootState) => state.wishlist.data);
-  const wishlistProducts = wishlist.map(wishlistProduct => wishlistProduct.product);
-  const isfavorite = wishlistProducts.map(favorite => favorite.id);
-  const user = useSelector((state:RootState)=> state.user.profile);
-const userId:number = user?.id ? user.id : 0;
-
-useEffect(() => {
-    dispatch(fetchWishlist(userId));
-  }, [dispatch, userId]);
-
+    const user = useSelector((state:RootState)=> state.user.profile);
+    const userId:number = user?.id ? user.id : 0;
+    const accessKey = useSelector((state:RootState)=> state.login.user?.access);
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -76,8 +69,8 @@ useEffect(() => {
                             <div className="overlay-top">
                                 <p>{product.old_price}%</p>
                                 <div className="category-page-items-icon">
-                                    {(isfavorite.includes(product.id))?(<button onClick={()=>{}}><i className="fa-solid fa-heart" style={{color:"Gold"}}></i></button>):(<button onClick={()=>{addWishlistItem(userId,product.id); fetchWishlist(userId)}}><i className="fa-regular fa-heart"></i></button>)}
-                                    {/* <button onClick={()=>{}}><i className="fa-solid fa-heart"></i></button> */}
+                                    {}
+                                    <button onClick={()=>{addWishlists(userId,product.id,String(accessKey))}}><i className="fa-solid fa-heart"></i></button>
                                 </div>
                             </div>
                             <div className="overly-bottom">

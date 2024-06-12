@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 function Footer() {
     const location = useLocation();
     const { pathname } = location;
-    return pathname === '/admin' || pathname === '/forget-password' || pathname === '/reset-password' ||pathname === '/signup/customer' || pathname === '/signIn' || pathname === '/message' || pathname === '/signUp/' || pathname === '/signUp' || pathname === '/account'|| pathname === '/success' ? null :<section className="footer_section">
+    return pathname === '/admin' || pathname === '/forget-password' || pathname === '/create-new-password' ||pathname === '/signup/customer' || pathname === '/signin' || pathname === '/message' || pathname === '/signUp/' || pathname === '/signUp' || pathname === '/account'|| pathname === '/success' ? null :<section className="footer_section">
     <div className="footer">
     <div className="footer_a">
         <div className="footer_a_logo">

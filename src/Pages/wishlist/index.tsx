@@ -1,39 +1,47 @@
-import React, { useEffect, useState } from "react";
 import './index.css';
 import WishlistCard from "../shared/card/wishlistCard";
 import Product from "../shared/card/product";
-import NavBar from "../shared/commen/navBar";
-import TopPath from "../shared/commen/topPath";
-import { getWishlistById } from "../../services/wishlist/getwishlist";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
 import { AppDispatch } from "../../redux/store";
-import { addWishlist, deleteWishlist, fetchWishlist } from "../../redux/actions/wishlistAction";
-import { WishlistData } from "../../redux/types";
-import ProductModel from "../../model/product";
+import { fetchWishlists } from '../../services/wishlist/getwishlist';
+import ProductModel from '../../model/product';
+import { useEffect, useState } from 'react';
+import { ProductModelMain } from '../../model/productDetail';
+import { fetchWishlistsAction } from '../../redux/actions/wishlistAction';
+
 
 
 
 
 function WishList() {
-    const dispatch: AppDispatch = useDispatch();
-  const wishlist = useSelector((state: RootState) => state.wishlist.data);
+    
   const user = useSelector((state:RootState)=> state.user.profile?.user);
-  const userId:number = user?.id ? user.id : 0;
-  const wishlistProducts = wishlist.map(wishlistProduct => wishlistProduct.product);
+  const [wishlists, setWishlists] = useState<ProductModelMain[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const accessToken = useSelector((state:RootState)=> state.login.user?.access);
+  const userId = useSelector((state:RootState)=>state.user.profile?.id);
+
+  useState(() => {
+    async function loadWishlists() {
+      try {
+        const response = await fetchWishlists(Number(userId),String(accessToken));
+        if (response.status === 200) {
+          localStorage.setItem("wishlistData",JSON.stringify(response.data));
+          setWishlists(response.data);
+        } else {
+          setError('Failed to fetch wishlists');
+        }
+      } catch (err) {
+        setError('An error occurred while fetching wishlists');
+      }
+    }
+
+    loadWishlists();
+  });
 
 
-  useEffect(() => {
-    dispatch(fetchWishlist(userId));
-  }, [dispatch, userId]);
 
-  const handleAddItem = (ProductId:number ,item: WishlistData) => {
-    dispatch(addWishlist({ userId, item,ProductId }));
-  };
-
-  const handleDeleteItem = (itemId: number) => {
-    dispatch(deleteWishlist({ userId, itemId }));
-  };
     return(
         <>
         <div className="wishlist col">
@@ -43,17 +51,17 @@ function WishList() {
             </div> 
             <div className="wishlist-products">
                {
-                wishlistProducts.map((product,index)=>(
+                wishlists.map((product,index)=>(
                     <WishlistCard 
                     key={index}
-                    id={product.id}
-                    productName={product.title}
-                    discount={product.old_price}
-                    productPrice={product.price}
-                    rating={product.rating}
-                    img={product.image}
-                    categoryName={product.category.title}
-                    isFetured={product.featured}
+                    id={product.product.id}
+                    productName={product.product.title}
+                    discount={product.product.old_price}
+                    productPrice={product.product.price}
+                    rating={product.product.rating}
+                    img={product.product.image}
+                    categoryName={product.product.category.title}
+                    isFetured={product.product.featured}
                     />
                 ))
                }

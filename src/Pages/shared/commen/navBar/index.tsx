@@ -18,13 +18,13 @@ const NavBar: React.FC = () => {
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state:RootState)=> state.login.isAuthenticated);
     const user = useSelector((state:RootState)=>state.user.profile);
-    const wishlistLength = useSelector((state:RootState)=>state.wishlist.data.length);
+    const wishlistCount = useSelector((state:RootState)=>state.wishlist.wishlists);
 
     const handleLogout = () => {
         dispatch(logout()); 
     };
 
-    return(pathname === '/signup/customer' || pathname === '/signIn' || pathname === '/reset-password' ||pathname === '/forget-password' || pathname === '/signUp/' || pathname === '/signUp' || pathname === '/success'? null : <section className="navbar">
+    return(pathname === '/signup/customer' || pathname === '/signin' || pathname === '/create-new-password' ||pathname === '/forget-password' || pathname === '/signUp/' || pathname === '/signUp' || pathname === '/success'? null : <section className="navbar">
     <a href="#123" className="navbar_logo">
         <img src="./assets/img/logo.png" alt="" />
         <hr/>
@@ -37,7 +37,7 @@ const NavBar: React.FC = () => {
             <li><Link to={'/contact'}>Contact</Link></li>
             <li><Link to={'/about'}>About</Link></li>
             {(isAuthenticated)?(null):(<li><Link to={'/signUp/'}>Register</Link></li>)}
-            {(isAuthenticated)?(null):(<li><Link to={'/signUp/'}>Log In</Link></li>)}
+            {(isAuthenticated)?(null):(<li><Link to={'/signin'}>Log In</Link></li>)}
         </ul>
     </div>
     
@@ -47,7 +47,7 @@ const NavBar: React.FC = () => {
         </div>
     
     <div className="icons">
-    {(isAuthenticated)?(<Link to={'/wishlist'}><i className="fa-solid fa-heart"><sup>{wishlistLength}</sup></i></Link>):(null)}
+    {(isAuthenticated)?(<Link to={'/wishlist'}><i className="fa-solid fa-heart"><sup>{wishlistCount?.length}</sup></i></Link>):(null)}
     {(isAuthenticated)?(<Link to={'/message'} ><i className='fa-solid fa-message'><sup>8</sup></i></Link>):(null)}
     {(isAuthenticated)?(<Link to={'/cart'}><i className="fa-solid fa-cart-shopping"><sup>{cartItemCount}</sup></i></Link>):(null)}
     {(isAuthenticated)?(<Link to={'/'}><i className="fa-solid fa-bell"><sup>8</sup></i></Link>):null}
@@ -57,7 +57,7 @@ const NavBar: React.FC = () => {
             <i className="fa fa-user"></i>
             Manage My Account
         </Link>
-        {(user?.user.is_superuser || user?.user.is_staff)?(<Link to={'/admin'} >
+        {(user?.user.is_farmer|| user?.user.is_agent || user?.user.is_staff)?(<Link to={'/admin'} >
             <i className="fa fa-shop"></i>
             My Shop
         </Link>):(null)}
