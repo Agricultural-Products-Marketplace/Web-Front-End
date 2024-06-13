@@ -1,39 +1,22 @@
-// wishlistActions.ts
-import { Dispatch } from 'redux';
-import { fetchWishlists, addWishlists } from './../../services/wishlist/getwishlist';
-import {
-  FETCH_WISHLISTS_REQUEST,
-  FETCH_WISHLISTS_SUCCESS,
-  FETCH_WISHLISTS_FAILURE,
-} from './ActionTypes';
+import { ProductModel } from "../../model/product";
+import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from "./ActionTypes";
 
-export const fetchWishlistsAction = (userId: number, accessToken: string) => async (dispatch: Dispatch) => {
-  dispatch({ type: FETCH_WISHLISTS_REQUEST });
+export interface AddToWishlistAction{
+  type : typeof ADD_TO_WISHLIST;
+  payload: ProductModel;
+}
 
-  try {
-    const response = await fetchWishlists(userId, accessToken);
-    if (response.status === 200) {
-      dispatch({ type: FETCH_WISHLISTS_SUCCESS, payload: response.data });
-    } else {
-      dispatch({ type: FETCH_WISHLISTS_FAILURE, payload: 'Failed to fetch wishlists' });
-    }
-  } catch (error:any) {
-    dispatch({ type: FETCH_WISHLISTS_FAILURE, payload: error.message });
-  }
-};
+export interface RemoveFromWishlistAction{
+  type: typeof REMOVE_FROM_WISHLIST;
+  payload : number;
+}
 
-// export const addWishlistAction = (userId: number, productId: number, accessToken: string) => async (dispatch: Dispatch) => {
-//   dispatch({ type: ADD_WISHLIST_REQUEST });
+export const addToWishlist = (product:ProductModel): AddToWishlistAction => ({
+  type: ADD_TO_WISHLIST,
+  payload: product,
+});
 
-//   try {
-//     const status = await addWishlists(userId, productId, accessToken);
-//     if (status === 201) {
-//       dispatch({ type: ADD_WISHLIST_SUCCESS });
-//       dispatch(fetchWishlistsAction(userId, accessToken)); // Refetch the wishlist after adding
-//     } else {
-//       dispatch({ type: ADD_WISHLIST_FAILURE, payload: 'Failed to add wishlist' });
-//     }
-//   } catch (error:any) {
-//     dispatch({ type: ADD_WISHLIST_FAILURE, payload: error.message });
-//   }
-// };
+export const removeFromWishlist = (productId:number): RemoveFromWishlistAction =>({
+  type:REMOVE_FROM_WISHLIST,
+  payload:productId,
+});

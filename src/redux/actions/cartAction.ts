@@ -1,7 +1,8 @@
 //cartAction.ts
 
+import { ProductModel } from "../../model/product";
 import { ADD_TO_CART, REMOVE_FROM_CART } from "./ActionTypes";
-import ProductModel from "../../model/product";
+
 
 // Existing addToCart action
 export const addToCart = (product: ProductModel) => ({

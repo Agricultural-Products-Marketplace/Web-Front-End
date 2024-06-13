@@ -1,6 +1,5 @@
 import React from "react";
 import './index.css';
-import ProductModel from "../../../../model/product";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../redux/reducers/rootReducer";

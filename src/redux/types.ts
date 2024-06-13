@@ -1,10 +1,9 @@
 //types.ts
-
-import ProductModel from "../model/product";
 import { ADD_TO_CART, REMOVE_FROM_CART } from "./actions/ActionTypes";
 import { UserData } from "./actions/loginAction";
 import { User } from "../model/user";
-import { ProductData } from "../services/product/getProducts";
+import { ProductModel } from "../model/product";
+
 
 export interface cartState {
     cart: ProductModel[];
@@ -81,7 +80,7 @@ export interface WishlistData{
     id:number;
     date:Date;
     user: User;
-    product:ProductData;
+    product:ProductModel;
     access:any;
 }
 

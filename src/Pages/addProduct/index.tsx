@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './index.css';
 import TopPath from '../shared/commen/topPath';
 import DropDown from '../shared/card/dropdown';
-import { getAllCategories, Category } from '../../services/category/getCategory';
+import { getAllCategories } from '../../services/category/getCategory';
+import { Category } from '../../model/category';
 
 
 

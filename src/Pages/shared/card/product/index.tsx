@@ -1,9 +1,9 @@
 import React from "react";
 import './index.css'
 import { Link } from "react-router-dom";
-import ProductModel from '../../../../model/product';
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../../redux/actions/cartAction";
+import { ProductModel } from "../../../../model/product";
 
 interface ProductProps {
     products: ProductModel[];
@@ -19,10 +19,10 @@ const Product: React.FC<ProductProps> = ({ products }) => {
             {products.map((product, index) => (
                 <div className="box" key={index}>
                     <div className="slide-img">
-                        <img src={product.img} alt="" />
+                        <img src={product.image} alt="" />
                         <div className="overlay">
                             <div className="overlay-top-icons">
-                                <p className="discount">{product.discount}%</p>
+                                <p className="discount">{product.old_price}%</p>
                                 <div className="overlay-icons">
                                     <a href="#"><i className="fa fa-heart"></i></a>
                                 </div>
@@ -36,7 +36,7 @@ const Product: React.FC<ProductProps> = ({ products }) => {
                     </div>
                     <div className="detail-box">
                         <div className="type">
-                            <Link to={'/product-detail'}>{product.productName}</Link>
+                            <Link to={'/product-detail'}>{product.title}</Link>
                             <span>New Arrival</span>
                             <div className="rating">
                                 {[...Array(product.rating)].map((_, i) => (
@@ -47,7 +47,7 @@ const Product: React.FC<ProductProps> = ({ products }) => {
                                 ))}
                             </div>
                         </div>
-                        <div className="price">${product.productPrice}</div>
+                        <div className="price">${product.price}</div>
                     </div>
                 </div>
             ))}

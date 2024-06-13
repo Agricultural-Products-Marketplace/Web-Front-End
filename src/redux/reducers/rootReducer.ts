@@ -5,7 +5,7 @@ import cartReducer from './cartReducer';
 import loginReducer from './loginReducer';
 import userReducer from './userReducer';
 import showpopReducer from './showpopReducer';
-import wishlistReducer from './wishlistReducer';
+import { wishlistReducer } from './wishlistReducer';
 
 
 
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
     login: loginReducer,
     user: userReducer,
     showpopup:showpopReducer,
-    wishlist: wishlistReducer,
+    wishlist:wishlistReducer,
 });
 
 export default rootReducer;

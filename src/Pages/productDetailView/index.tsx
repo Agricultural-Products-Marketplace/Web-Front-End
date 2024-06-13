@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react";
 import './index.css';
 import NavBar from "../shared/commen/navBar";
 import TopPath from "../shared/commen/topPath";
-import { getProductById, ProductData } from '../../services/product/getProducts';
+import { getProductById } from '../../services/product/getProducts';
 import ServicesCard from "../shared/commen/services";
 import ProductSlider from "../shared/card/productSlider";
 import ProductDetailLoading from "../shared/card/Loadings/ProductDetailLoading";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
 import ProductReviews from "../shared/card/reviews";
+import { ProductModel } from "../../model/product";
 
 function ProductDetail() {
-    const [product, setProduct] = useState<ProductData | null>(null);
+    const [product, setProduct] = useState<ProductModel | null>(null);
     const [quantity, setQuantity] = useState(1);
     const [mainImage, setMainImage] = useState<string | undefined>(undefined); // Initialize with undefined
 

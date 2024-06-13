@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -18,7 +18,8 @@ const NavBar: React.FC = () => {
     const dispatch = useDispatch();
     const isAuthenticated = useSelector((state:RootState)=> state.login.isAuthenticated);
     const user = useSelector((state:RootState)=>state.user.profile);
-    const wishlistCount = useSelector((state:RootState)=>state.wishlist.wishlists);
+    const wishlist = useSelector((state:RootState)=>state.wishlist.items.length);
+    const [dropdownshow, setdropdownshow] = useState<boolean>(false);
 
     const handleLogout = () => {
         dispatch(logout()); 
@@ -47,7 +48,7 @@ const NavBar: React.FC = () => {
         </div>
     
     <div className="icons">
-    {(isAuthenticated)?(<Link to={'/wishlist'}><i className="fa-solid fa-heart"><sup>{wishlistCount?.length}</sup></i></Link>):(null)}
+    {(isAuthenticated)?(<Link to={'/wishlist'}><i className="fa-solid fa-heart"><sup>{wishlist}</sup></i></Link>):(null)}
     {(isAuthenticated)?(<Link to={'/message'} ><i className='fa-solid fa-message'><sup>8</sup></i></Link>):(null)}
     {(isAuthenticated)?(<Link to={'/cart'}><i className="fa-solid fa-cart-shopping"><sup>{cartItemCount}</sup></i></Link>):(null)}
     {(isAuthenticated)?(<Link to={'/'}><i className="fa-solid fa-bell"><sup>8</sup></i></Link>):null}
@@ -73,20 +74,26 @@ const NavBar: React.FC = () => {
     </a>):(null)}
     </div>
 
-    <a href="#" className='navbar-dropdown-menus'><i className="fa-solid fa-user"></i>
+    <button onClick={()=>{
+        setdropdownshow(!dropdownshow)
+    }} className={(dropdownshow)?('navbar-dropdown-menus-show navbar-dropdown-menus-icon'):('navbar-dropdown-menus navbar-dropdown-menus-icon')}>{dropdownshow?(<i className="fa-solid fa-close"></i>):(<i className="fa-solid fa-bars"></i>)}
     <div>
-    <Link to={'/signUp/'}>Sign Up</Link>
-    <Link to={'/'}>Home</Link>
-    <Link to={'/contact'}>Contact</Link>
-    <Link to={'/about'}>About</Link>
-    <Link to={'/wishlist'}>Wishlist</Link>
-    <Link to={'/message'}>Messge</Link>
-    <Link to={'/cart'}>Cart</Link>
-    <Link to={'/account'}>Manage My Account</Link>
-    <Link to={'/'}>Log Out</Link>
+    
+    {isAuthenticated?(null):(<Link to={'/signUp/'}><i className="fa-solid fa-user-plus"></i>Sign Up</Link>)}
+    {isAuthenticated?(null):(<Link to={'/signin'}><i className="fa-solid fa-arrow-right-to-bracket"></i>Log in</Link>)}
+    <Link to={'/'}><i className="fa-solid fa-home"></i> Home</Link>
+    {(user?.user.is_farmer|| user?.user.is_agent || user?.user.is_staff)?(<Link to={'/'}><i className="fa-solid fa-shop"></i>My Shop</Link>):(null)}
+    <Link to={'/category'}><i className="fa-solid fa-layer-group"></i> Category</Link>
+    {isAuthenticated?(<Link to={'/wishlist'}><i className="fa-solid fa-heart"></i> Wishlist</Link>):(null)}
+    {isAuthenticated?(<Link to={'/message'}><i className="fa-solid fa-message"></i>Messge</Link>):(null)}
+    {isAuthenticated?(<Link to={'/cart'}><i className="fa-solid fa-cart-shopping"></i>Cart</Link>):(null)}
+   {isAuthenticated?( <Link to={'/account'}><i className="fa-solid fa-user"></i>Manage My Account</Link>):(null)}
+    <Link to={'/contact'}><i className="fa-solid fa-phone"></i> Contact</Link>
+    <Link to={'/about'}><i className="fa-solid fa-circle-info"></i>About</Link>
+    {isAuthenticated?(<Link to={'/'}><i className="fa-solid fa-right-from-bracket"></i>Log Out</Link>):(null)}
     
     </div>
-    </a>
+    </button>
     
 </section>
     );

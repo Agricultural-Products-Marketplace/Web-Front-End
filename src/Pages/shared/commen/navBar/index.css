@@ -154,33 +154,56 @@
     animation: RightToLeftAnimation 1s;
 }
 
-.navbar-dropdown-menus{
+.navbar-dropdown-menus-icon{
     visibility: hidden;
 }
+
+.navbar-dropdown-menus-icon{
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+
+.navbar-dropdown-menus-icon>i{
+    font-size: 25px;
+    cursor: pointer;
+    color: #00ff66;
+}
+
 
 .navbar-dropdown-menus>div{
     visibility: hidden;
     position: absolute;
-    list-style: none;
-    top: 0;
+    top: 10;
     left: 0;
     width: 100vw;
     display: flex;
     flex-direction: column;
+}
+
+.navbar-dropdown-menus-show>div{
+    position: absolute;
+    list-style: none;
+    top: 67px;
+    right: 0;
+    width:40vw;
+    height: 100vh;
     display: flex;
+    flex-direction: column;
     background-color: rgba(30, 230, 90, 1);
 }
 
-.navbar-dropdown-menus>div>a{
-    width: 100vw;
+.navbar-dropdown-menus-show>div>a{
     color: white;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 3vw 0;
+    justify-content: start;
+    padding: 2vw 5vw;
+    font-size: 15px;
+    gap: 2vw;
 }
 
-.navbar-dropdown-menus>div>a:hover{
+.navbar-dropdown-menus-show>div>a:hover{
     background-color: white;
     color: rgba(30, 230, 90, 1);
 }
@@ -189,8 +212,10 @@
 
 
 
+
+
 @media only screen and (max-width: 767px){
-    .navbar-dropdown-menus{
+    .navbar-dropdown-menus-icon{
         visibility: visible;
     }
     .navigation_bar{
