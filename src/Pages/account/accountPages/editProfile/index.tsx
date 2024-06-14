@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/reducers/rootReducer';
-import AccountTopCard from '../../../shared/card/accountTopCad';
-import { useDispatch } from 'react-redux';
 import { updateProfile } from '../../../../services/auth/signin-service';
-import { fetchUserProfile } from '../../../../redux/actions/userActions';
+
 
 function EditMyProfile() {
     const user = useSelector((state: RootState) => state.user.profile);
     const userAccess = useSelector((state: RootState) => state.login.user?.access);
-    const useRrefresh = useSelector((state: RootState) => state.login.user?.refresh);
-    const dispatch = useDispatch;
+
+    const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
         username: user?.user.username || '',
         first_name: user?.user.first_name || '',
@@ -19,6 +17,9 @@ function EditMyProfile() {
         phone: user?.user.phone || '',
     });
     const [initialData] = useState(formData);
+    const handleRefresh = () => {
+        window.location.reload();
+      };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -26,9 +27,35 @@ function EditMyProfile() {
             ...formData,
             [name]: value,
         });
+
+
+        
+    };
+
+    const [image, setImage] = useState<string | undefined>(user?.image);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [imageFile, setImageFile] = useState<File | null>(null);
+
+    const handleImageClick = () => {
+        if (fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
+
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files[0]) {
+            const file = event.target.files[0];
+            setImageFile(file);
+            const reader = new FileReader();
+            reader.onload = () => {
+                setImage(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     const handleSaveChanges = async () => {
+        setIsLoading(true);
         const updatedFields: { [key: string]: string } = {};
         Object.keys(formData).forEach((key) => {
             if (formData[key as keyof typeof formData] !== initialData[key as keyof typeof formData]) {
@@ -37,8 +64,10 @@ function EditMyProfile() {
         });
 
         try {
-            const updatedProfile = await updateProfile(updatedFields,userAccess);
+            const updatedProfile = await updateProfile(updatedFields,userAccess,imageFile);
             console.log('Profile updated successfully', updatedProfile);
+            handleRefresh();
+            setIsLoading(false);
         } catch (error) {
             console.error('Error updating profile', error);
         }
@@ -46,7 +75,18 @@ function EditMyProfile() {
 
     return (
         <div className="admin-page-main my-profile-content">
-            <AccountTopCard initialImage={user?.image} />
+            <div className="admin-page-main-top">
+            <div>
+            <img src={image} alt="" onClick={handleImageClick} style={{ cursor: 'pointer' }} />
+            </div>
+            <input
+                type="file"
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+                onChange={handleImageChange}
+            />
+            <h3>Welcome <span>{formData.first_name} {formData.last_name}</span></h3>
+        </div>
             <div className="my-account-page">
                 <div className="my-account-input">
                     <label htmlFor="firstName">First Name</label>
@@ -134,7 +174,8 @@ function EditMyProfile() {
                     />
                 </div>
             </div>
-            <button onClick={handleSaveChanges}>Save Changes</button>
+            {isLoading?(null):(<button onClick={handleSaveChanges}>Save Changes</button>)}
+            
         </div>
     );
 }

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import AdminTopCard from '../../shared/card/admin/adminTopCard';
 import './index.css';
 import DropDown from '../../shared/card/dropdown';
-import { Category, getAllCategories } from '../../../services/category/getCategory';
+import { getAllCategories } from '../../../services/category/getCategory';
+import { Category } from '../../../model/category';
 
 
 function Products() {

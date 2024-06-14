@@ -2,20 +2,19 @@ import React, { useState, useEffect } from "react";
 import './index.css';
 import NavBar from "../shared/commen/navBar";
 import TopPath from "../shared/commen/topPath";
-import { getProductById, ProductData } from '../../services/product/getProducts';
+import { getProductById } from '../../services/product/getProducts';
 import ServicesCard from "../shared/commen/services";
 import ProductSlider from "../shared/card/productSlider";
 import ProductDetailLoading from "../shared/card/Loadings/ProductDetailLoading";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
+import ProductReviews from "../shared/card/reviews";
+import { ProductModel } from "../../model/product";
 
 function ProductDetail() {
-    const [product, setProduct] = useState<ProductData | null>(null);
+    const [product, setProduct] = useState<ProductModel | null>(null);
     const [quantity, setQuantity] = useState(1);
     const [mainImage, setMainImage] = useState<string | undefined>(undefined); // Initialize with undefined
-    const wishlist = useSelector((state: RootState) => state.wishlist.data);
-  const wishlistProducts = wishlist.map(wishlistProduct => wishlistProduct.product);
-  const isfavorite = wishlistProducts.map(favorite => favorite.id);
 
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
@@ -54,6 +53,44 @@ function ProductDetail() {
             <ProductDetailLoading />
         );
     }
+
+    const reviews = [{
+        user:"Yosef Sahle",
+        image:"./assets/img/logo.png",
+        message:"hello world",
+        date:"12/16/2024"
+    },
+    {
+        user:"Yosef Sahle",
+        image:"./assets/img/logo.png",
+        message:"hello world",
+        date:"12/16/2024"
+    },
+    {
+        user:"Yosef Sahle",
+        image:"./assets/img/logo.png",
+        message:"hello world",
+        date:"12/16/2024"
+    },
+    {
+        user:"Yosef Sahle",
+        image:"./assets/img/logo.png",
+        message:"hello world",
+        date:"12/16/2024"
+    },
+    {
+        user:"Yosef Sahle",
+        image:"./assets/img/logo.png",
+        message:"hello world",
+        date:"12/16/2024"
+    },
+    {
+        user:"Yosef Sahle",
+        image:"./assets/img/logo.png",
+        message:"hello world",
+        date:"12/16/2024"
+    },
+]
 
     return (
         <>
@@ -96,7 +133,7 @@ function ProductDetail() {
                                 <button onClick={incrementQuantity}><i className="fa fa-plus"></i></button>
                             </div>
                             <button className="buy-now-btn">Add To Cart</button>
-                            {(isfavorite.includes(product.id))?(<button className="add-towishlist-button"><i className="fa-solid fa-heart" style={{color:"gold"}}></i></button>):<button className="add-towishlist-button"><i className="fa-regular fa-heart"></i></button>}
+                            {/* {(isfavorite.includes(product.id))?(<button className="add-towishlist-button"><i className="fa-solid fa-heart" style={{color:"gold"}}></i></button>):<button className="add-towishlist-button"><i className="fa-regular fa-heart"></i></button>} */}
                         </div>
                         <div className="product-detail-services col">
                         <div className="product-detail-service-item">
@@ -117,30 +154,59 @@ function ProductDetail() {
                     </div>
                 </div>
 
-                <ProductSlider 
-                    products={[
-                        {
-                            id:1,
-                            productName:'apple',
-                            productPrice : 16,
-                            categoryName : '',
-                            rating:3,
-                            discount: 40,
-                            img:'https://weresmartworld.com/sites/default/files/styles/full_screen/public/2021-04/watermeloen_2.jpg?itok=hsBPt3DQ'
-                        },
-                        {
-                            id:2,
-                            productName:'apple',
-                            productPrice : 16,
-                            categoryName : '',
-                            rating:3,
-                            discount: 40,
-                            img:'https://thumbs.dreamstime.com/b/orange-fruit-22884921.jpg'
-                        }
-                    ]}
-                    title=""
-                    slog="Related Items"
-                    />
+                <div className="product-detail-reviews-overview">
+                <div className="product-review-container">
+                    {
+                        reviews.map((review,index)=>(
+                            <ProductReviews 
+                            user={review.user}
+                            image={review.image}
+                            message={review.message}
+                            date={review.date}
+                            />
+                        ))
+                    }
+                </div>
+                <div className="product-overview-container">
+                    <div className="product-overview-main">
+                        <div className="product-overview-item" >
+                            <i className="fa-solid fa-user-check" ></i>
+                            <h3>Seller</h3>
+                            <p>{product.farmer.user.first_name} {product.farmer.user.last_name}</p>
+                        </div>
+                        <div className="product-overview-item">
+                            <i className="fa-solid fa-calendar"></i>
+                            <h3>Posted Date</h3>
+                            <p>{String(product.date)}</p>
+                        </div>
+                        <div className="product-overview-item">
+                            <i className="fa-solid fa-chart-simple"></i>
+                            <h3>Total Sells</h3>
+                            <p>254</p>
+                        </div>
+                        <div className="product-overview-item">
+                            <i className="fa-solid fa-comments"></i>
+                            <h3>Toral Reviews</h3>
+                            <p>{product.rating_count}</p>
+                        </div>
+                        <div className="product-overview-item">
+                            <i className="fa-solid fa-location-dot"></i>
+                            <h3>Location</h3>
+                            <p>Addis Ababa</p>
+                        </div>
+                        <div className="product-overview-item">
+                            <i className="fa-solid fa-layer-group"></i>
+                            <h3>Active Stock</h3>
+                            <p>{String(product.in_stock)}</p>
+                        </div>
+                        <div className="product-overview-item">
+                            <i className="fa-solid fa-list"></i>
+                            <h3>Category</h3>
+                            <p>{product.category.title}</p>
+                        </div>
+                    </div>
+                </div>
+                </div>
             </div>
         </>
     )

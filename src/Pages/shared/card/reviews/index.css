@@ -1,0 +1,47 @@
+.product-reviews-card{
+    display: flex;
+    flex-direction: row;
+    gap: 2vw;
+    align-items: center;
+    padding: 0vw 2vw;
+    border-radius: 5px;
+    box-shadow: 0px 0px 2px #00ff66;
+    transition: all ease 0.3s;
+}
+
+.product-reviews-card:hover{
+    background-color: #00ff661e;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px black;
+    transition: all ease 0.3s;
+}
+
+.product-review-user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+}
+
+.product-review-user>img{
+    width: 40px;
+    border-radius: 100%;
+}
+
+.product-review-user>p{
+    font-size: 12px;
+}
+
+
+.product-review-message{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+}
+
+.product-review-message-actions>i:hover{
+    color: red;
+}
+

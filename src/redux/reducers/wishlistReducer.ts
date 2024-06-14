@@ -1,63 +1,54 @@
-import { addWishlist, deleteWishlist, fetchWishlist } from '../actions/wishlistAction';
-import { WishlistData } from './../types';
-// src/store/wishlistReducer.ts
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ProductModel } from "../../model/product";
+import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from "../actions/ActionTypes";
+import { AddToWishlistAction, RemoveFromWishlistAction } from "../actions/wishlistAction";
 
-export interface WishlistState {
-    data: WishlistData[];
-    loading: boolean;
-    error: string | null;
+type WishlistActionTypes = AddToWishlistAction | RemoveFromWishlistAction;
+
+interface WishlistState {
+  items: ProductModel[];
+}
+
+const loadState = (): WishlistState => {
+  try {
+    const serializedState = localStorage.getItem("WishlistData");
+    if (serializedState === null) {
+      return { items: [] }; // If no data, return default initial state
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return { items: [] }; // If error, return default initial state
   }
-
-const initialState: WishlistState = {
-  data:[],
-  loading: false,
-  error: null,
 };
 
-const wishlistSlice = createSlice({
-  name: 'wishlist',
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchWishlist.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchWishlist.fulfilled, (state, { payload }: PayloadAction<WishlistData[]>) => {
-        state.loading = false;
-        state.data = payload;
-      })
-      .addCase(fetchWishlist.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || 'Failed to fetch wishlist';
-      })
-      .addCase(addWishlist.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(addWishlist.fulfilled, (state, { payload }: PayloadAction<WishlistData>) => {
-        state.loading = false;
-        state.data.push(payload);
-      })
-      .addCase(addWishlist.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || 'Failed to add wishlist item';
-      })
-      .addCase(deleteWishlist.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(deleteWishlist.fulfilled, (state, { payload }: PayloadAction<number>) => {
-        state.loading = false;
-        state.data = state.data.filter(item => item.id !== payload);
-      })
-      .addCase(deleteWishlist.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || 'Failed to delete wishlist item';
-      });
-  },
-});
+const saveState = (state: WishlistState) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem("WishlistData", serializedState);
+  } catch (err) {
+    // Handle write errors if needed
+  }
+};
 
-export default wishlistSlice.reducer;
+const initialState: WishlistState = loadState();
+
+export const wishlistReducer = (state = initialState, action: WishlistActionTypes): WishlistState => {
+  let newState: WishlistState;
+  switch (action.type) {
+    case ADD_TO_WISHLIST:
+      newState = {
+        ...state,
+        items: [...state.items, action.payload]
+      };
+      saveState(newState);
+      return newState;
+    case REMOVE_FROM_WISHLIST:
+      newState = {
+        ...state,
+        items: state.items.filter(item => item.id !== action.payload)
+      };
+      saveState(newState);
+      return newState;
+    default:
+      return state;
+  }
+};

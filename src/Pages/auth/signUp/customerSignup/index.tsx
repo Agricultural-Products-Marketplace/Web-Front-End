@@ -62,7 +62,7 @@ function CustomerSignUp() {
         password2: "",
                 
                 })
-                navigate('/signIn');
+                navigate('/signin');
                 setRegistrationStatus(data.message);
             }
             else if(data.status == 400){
@@ -118,7 +118,7 @@ function CustomerSignUp() {
                             <button className="signup-form-button" type="submit" disabled={isLoading}>
                                 {isLoading ? "Loading..." : "Register"}
                             </button>
-                            <span>Already Have an account? <Link to={'/signIn'}>Login</Link></span>
+                            <span>Already Have an account? <Link to={'/signin'}>Login</Link></span>
                         </form>
                     </div>
                 </div>

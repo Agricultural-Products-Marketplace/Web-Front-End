@@ -24,7 +24,7 @@ function SignUp() {
                                 <a href="#" className="signup-content-form-button">Register as a Seler</a>
                             
                             <Link to={'/signup/customer'} className="signup-content-form-button">Register as a Customer</Link>
-                            <span>Already Have an account? <Link to={'/signIn'}>Login</Link></span>
+                            <span>Already Have an account? <Link to={'/signin'}>Login</Link></span>
                         </div>
                     </div>
             </div>

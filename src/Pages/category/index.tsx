@@ -1,31 +1,31 @@
 import { useState, useEffect } from 'react';
 import CategoryCard from '../shared/card/category';
 import './index.css';
-import { ProductData, getAllProducts } from '../../services/product/getProducts';
+import {  getAllProducts } from '../../services/product/getProducts';
 import LoadingCard from '../shared/card/Loadings/loadingCard';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers/rootReducer';
 import { AppDispatch } from '../../redux/store';
-import { fetchWishlist } from '../../redux/actions/wishlistAction';
-import { addWishlistItem } from '../../services/wishlist/getwishlist';
+import { addWishlists } from '../../services/wishlist/getwishlist';
+import { addToWishlist, removeFromWishlist } from '../../redux/actions/wishlistAction';
+import { ProductModel } from '../../model/product';
 
 function Category() {
     const dispatch: AppDispatch = useDispatch();
-
-    const [products, setProducts] = useState<ProductData[]>([]);
-    const [filteredProducts, setFilteredProducts] = useState<ProductData[]>([]);
+    const [products, setProducts] = useState<ProductModel[]>([]);
+    const [filteredProducts, setFilteredProducts] = useState<ProductModel[]>([]);
     const [activeCategory, setActiveCategory] = useState<string | null>('All');
-    const wishlist = useSelector((state: RootState) => state.wishlist.data);
-  const wishlistProducts = wishlist.map(wishlistProduct => wishlistProduct.product);
-  const isfavorite = wishlistProducts.map(favorite => favorite.id);
-  const user = useSelector((state:RootState)=> state.user.profile);
-const userId:number = user?.id ? user.id : 0;
+    const user = useSelector((state:RootState)=> state.user.profile);
+    const userId:number = user?.id ? user.id : 0;
+    const accessKey = useSelector((state:RootState)=> state.login.user?.access);
+    const wishlist = useSelector((state:RootState)=>state.wishlist.items);
+    const isAuthenticated = useSelector((state:RootState)=>state.login.isAuthenticated);
 
-useEffect(() => {
-    dispatch(fetchWishlist(userId));
-  }, [dispatch, userId]);
-
+    function includes<ProductData>(array:ProductData[],value:ProductData):boolean{
+        return array.some(item => item === value);
+    }
+    
 
     useEffect(() => {
         const fetchData = async () => {
@@ -71,21 +71,32 @@ useEffect(() => {
             ):(
                 <div className="category-page-items">
                 {filteredProducts.map((product, index) => (
-                    <Link key={index} to={`/product-detail?id=${product.id}`} className="category-page-item">
+                    <div key={index}  className="category-page-item">
                         <div className='category-page-item-overlay'>
                             <div className="overlay-top">
                                 <p>{product.old_price}%</p>
                                 <div className="category-page-items-icon">
-                                    {(isfavorite.includes(product.id))?(<button onClick={()=>{}}><i className="fa-solid fa-heart" style={{color:"Gold"}}></i></button>):(<button onClick={()=>{addWishlistItem(userId,product.id); fetchWishlist(userId)}}><i className="fa-regular fa-heart"></i></button>)}
-                                    {/* <button onClick={()=>{}}><i className="fa-solid fa-heart"></i></button> */}
+                                    {
+                                        (isAuthenticated && !includes(wishlist,product)?(<button onClick={async ()=>{
+                                            const respose = await addWishlists(userId,product.id,String(accessKey));
+                                            dispatch(addToWishlist(product));
+                                        }}><i className="fa-regular fa-heart"></i></button>):(
+                                            (isAuthenticated)?(<button onClick={async ()=>{
+                                                const respose = await addWishlists(userId,product.id,String(accessKey));    
+                                                dispatch(removeFromWishlist(product.id))
+                                            }}><i className="fa-solid fa-heart" style={{color:"gold"}}></i></button>):(null)
+                                        ))
+                                    }
                                 </div>
                             </div>
                             <div className="overly-bottom">
-                                <button>Add To Cart</button>
+                                {
+                                    (isAuthenticated)?(<button>Add To Cart</button>):(null)
+                                }
                             </div>
                         </div>
                         <img src={product.image} alt={product.title} />
-                        <div className="category-item-description">
+                        <Link to={`/product-detail?id=${product.id}`} className="category-item-description">
                             <div className="category-page-item-dis">
                                 <small>{product.category.title}</small>
                                 <h3>{product.title}</h3>
@@ -101,8 +112,8 @@ useEffect(() => {
                             <div className="category-dis-bottom">
                                 <p>${product.price}</p>
                             </div>
-                        </div>
-                    </Link>
+                        </Link>
+                    </div>
                 ))}
                 
             </div>

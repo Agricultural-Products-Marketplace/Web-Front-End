@@ -86,7 +86,7 @@ const SignIn:React.FC<SignInProps> = ({isLoading,error,loginUser})=> {
                                     {activeCreatePassword ? <i className="fa fa-eye"></i> : <i className="fa fa-eye-slash"></i>}
                                 </button>
                             </div>
-                            <Link to={'/'} className="signin-forget-password">Forget Password</Link>
+                            <Link to={'/forget-password'} className="signin-forget-password">Forget Password</Link>
                             <button className="signin-form-button" type="submit" disabled={isLoading}>
                                 {isLoading ? "Logging In..." : "Log In"}
                             </button>

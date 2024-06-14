@@ -1,44 +1,49 @@
 import React, { useEffect, useState } from "react";
 import './index.css';
-import TopBar from "../shared/commen/topBar";
-import NavBar from "../shared/commen/navBar";
 import SliderCard from "../shared/card/slider";
-import CategoryCard from "../shared/card/category";
 import ProductSlider from "../shared/card/productSlider";
 import AdCard from "../shared/card/adCard";
 import ServicesCard from "../shared/commen/services";
 import PartnersCard from "../shared/commen/partners";
-import Footer from "../shared/commen/footer";
-import { Category, getAllCategories } from "../../services/category/getCategory";
+import { getAllCategories } from "../../services/category/getCategory";
 import SliderLoading from "../shared/card/Loadings/sliderLoading";
-import { fetchUserProfile } from "../../redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/reducers/rootReducer";import { fetchWebInfoService } from "../../services/website/webinfo";
-import { fetchWishlist } from "../../redux/actions/wishlistAction";
+import { RootState } from "../../redux/reducers/rootReducer";import { fetchWebInfoService, getpartnersinfo, getsupportinfo } from "../../services/website/webinfo";
 import { AppDispatch } from "../../redux/store";
+import { useNavigate } from "react-router-dom";
+import { Category } from "../../model/category";
+import { fetchWishlists } from "../../services/wishlist/getwishlist";
 
 function Home() {
     const dispatch: AppDispatch = useDispatch();
     const [categories, setCategories] = useState<Category[]>([]);
+    const isAuth = useSelector((state:RootState)=>state.login.isAuthenticated);
+    const userId = useSelector((state:RootState)=>state.user.profile?.id);
+    const accessKey = useSelector((state:RootState)=>state.login.user?.access);
+
     useEffect(()=>{
         const fetchData = async () => {
             const categoriesData = await getAllCategories();
             setCategories(categoriesData);
         };
         fetchData();
-        console.log('Error of despatch');
-        
-    
+        if(isAuth){
+            fetchWishlists(Number(userId),String(accessKey));
+        }
     },
+
+    
 
 []);
 
-const user = useSelector((state:RootState)=> state.user.profile);
-const userId:number = user?.id ? user.id : 0;
+useState(()=>{
+    getpartnersinfo();
+    getsupportinfo();
+});
 
-useEffect(() => {
-    dispatch(fetchWishlist(userId));
-  }, [dispatch, userId]);
+const user = useSelector((state:RootState)=> state.user.profile);
+
+
     return(
         <div className="home">
             
@@ -51,6 +56,7 @@ useEffect(() => {
                 <ProductSlider 
             title="Flash Deals"
             slog="today's"
+            category={[]}
             products={
                 [
             ]
@@ -62,19 +68,9 @@ useEffect(() => {
             ) :(<ProductSlider 
             slog="category"
             title="Brows By Category"
-            products={
-                categories.map(category=>(
-                    {
-                        id:category.id,
-                    productName:"",
-                    productPrice : 0,
-                    rating : 0,
-                    discount : 0,
-                    img : category.image,
-                    categoryName : category.title
-
-                    }
-                ))
+            products={[]}
+            category= {
+                categories
             }
             />)}
             
@@ -85,6 +81,7 @@ useEffect(() => {
             title="Most Viewed products"
             slog="This Month"
             products={[]}
+            category={[]}
             />
             )}
             
@@ -95,6 +92,7 @@ useEffect(() => {
                 <ProductSlider 
                 title="Explore The Products"
                 slog="Our Products"
+                category={[]}
                 products={
                     [
                 ]

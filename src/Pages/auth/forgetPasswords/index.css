@@ -1,0 +1,81 @@
+.reset-password-page{
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reset-password-page-main{
+    background-color: white;
+    box-shadow: 0px 0px 20px black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3vw;
+    padding: 1vw 3vw;
+}
+
+.reset-password-page-main-left>img{
+    height: 70vh;
+    border-radius: 10px;
+}
+
+.reset-password-page-main-right{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+
+.reset-password-page-main-right>h1{
+    margin: 0px;
+}
+
+.reset-password-page-main-right>input{
+    height: 35px;
+    background-color: transparent;
+    border-radius: 5px;
+    border: none;
+    outline: #00ff66 solid 1px;
+    padding-left: 1vw;
+}
+
+.reset-password-page-main-right>input:focus{
+    outline: red solid 1px;
+}
+
+
+
+.reset-password-page-main-right>button{
+    height: 35px;
+    background-color: #00ff66;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+
+.reset-password-page-main-right>button:hover{
+    transition: all ease 0.3s;
+    background-color: transparent;
+    outline: #00ff66 solid 1px;
+    color: #00ff66;
+}
+
+.reset-password-page-main-right>a{
+    align-self: center;
+    text-decoration: none;
+    color: rgba(0, 0, 0,0.6);
+    transition: all ease 0.3s;
+}
+
+.reset-password-page-main-right>a:hover{
+    color: #00ff66;
+    transition: all ease 0.3s;
+    transform: scale(1.3);
+}
+

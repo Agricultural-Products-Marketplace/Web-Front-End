@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Admin(){
     const navigator = useNavigate();
-    const user = useSelector((state:RootState)=>state.user.profile?.user.is_superuser || state.user.profile?.user.is_staff);
+    const user = useSelector((state:RootState)=>state.user.profile?.user.is_farmer|| state.user.profile?.user.is_agent || state.user.profile?.user.is_staff);
     const [activeComponent, setActiveComponent] = useState<'Dashboard' | 'Orders' | 'Products' | 'Customers' | 'addProduct' | 'Transaction' | 'Settings'>('Dashboard');
 
     const handleNavItemClick = (componentName: 'Dashboard' | 'Orders' | 'Products' | 'Customers' | 'addProduct' | 'Transaction' | 'Settings') => {

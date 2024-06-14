@@ -15,15 +15,15 @@ function MyAccount() {
     const user = useSelector((state:RootState)=>state.user.profile);
     const navigator = useNavigate();
     const isAuthenticated = useSelector((state:RootState)=>state.login.isAuthenticated);
-    const [activeAccountSetting, setActiveAccountSetting] = useState<'EditProfile'| 'adressBook' | 'paymentOption' | 'myOrders' | 'myCancellation'>('EditProfile');
+    const [activeAccountSetting, setActiveAccountSetting] = useState<'EditProfile'| 'adressBook' | 'myOrders' | 'myCancellation'>('EditProfile');
 
-    const handleNavItemClick = (componentName: 'EditProfile'| 'adressBook' | 'paymentOption' | 'myOrders' | 'myCancellation') => {
+    const handleNavItemClick = (componentName: 'EditProfile'| 'adressBook'  | 'myOrders' | 'myCancellation') => {
         setActiveAccountSetting(componentName);
     };
 
     useEffect(()=>{
         if(!isAuthenticated){
-            navigator('/signIn')
+            navigator('/signin')
         }
     });
 
@@ -34,7 +34,6 @@ function MyAccount() {
             <div className="admin-content">
                 {activeAccountSetting === 'EditProfile' && <EditMyProfile />}
                 {activeAccountSetting === 'adressBook' && <AdressBook />}
-                {activeAccountSetting === 'paymentOption' && <PaymentOption />}
                 {activeAccountSetting === 'myOrders' && <MyOrders /> }
                 {activeAccountSetting === 'myCancellation' && <MyCancellation /> }
             </div>

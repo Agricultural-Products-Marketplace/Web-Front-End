@@ -1,7 +1,9 @@
 import React from "react";
 import './index.css';
-import ProductModel from "../../../../model/product";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../redux/reducers/rootReducer";
+import { addWishlists } from "../../../../services/wishlist/getwishlist";
 
 
 interface WishlistCardProps {
@@ -16,6 +18,9 @@ interface WishlistCardProps {
 }
 
 const WishlistCard: React.FC<WishlistCardProps> = ({ id,productName,discount,productPrice,rating,img,categoryName,isFetured }) => {
+  const userId = useSelector((state:RootState)=> state.user.profile?.user.id);
+    const accessKey = useSelector((state:RootState)=> state.login.user?.access);
+  
   return (
 
       <div className="box">
@@ -25,7 +30,7 @@ const WishlistCard: React.FC<WishlistCardProps> = ({ id,productName,discount,pro
             <div className="overlay-top-icons">
               <p className="discount">{discount}%</p>
               <div className="overlay-icons">
-                <a href="#"><i className="fa fa-x"></i></a>
+                <button onClick={()=>{addWishlists(Number(userId),id,String(accessKey))}}><i className="fa fa-x"></i></button>
               </div>
             </div>
             <a href="#" className="buy-btn">

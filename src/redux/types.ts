@@ -1,10 +1,9 @@
 //types.ts
-
-import ProductModel from "../model/product";
 import { ADD_TO_CART, REMOVE_FROM_CART } from "./actions/ActionTypes";
 import { UserData } from "./actions/loginAction";
 import { User } from "../model/user";
-import { ProductData } from "../services/product/getProducts";
+import { ProductModel } from "../model/product";
+
 
 export interface cartState {
     cart: ProductModel[];
@@ -58,20 +57,18 @@ export interface UserProfile{
     gender: string | null;
     pid: string;
     user : {id:number;
-        password:string;
         last_login:Date;
-        is_superuser: boolean;
-        is_staff : boolean;
-        is_active: boolean;
+        is_agent:boolean;
+        is_customer:boolean;
+        is_farmer:boolean;
+        is_staff:boolean;
         date_joined: Date;
         username: string;
         email:string;
         first_name:string;
         last_name:string;
         phone:string;
-        otp: null;
-        groups:any[];
-        user_permissions: any[];};
+    };
     address: []|null;
 }
 
@@ -83,7 +80,8 @@ export interface WishlistData{
     id:number;
     date:Date;
     user: User;
-    product:ProductData;
+    product:ProductModel;
+    access:any;
 }
 
 export type cartAction = AddToCartAction | RemoveFromCartAction; // Update this line

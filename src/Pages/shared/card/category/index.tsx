@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './index.css';
-import { Category, getAllCategories } from '../../../../services/category/getCategory';
+import { getAllCategories } from '../../../../services/category/getCategory';
 import LoadingCard from '../Loadings/loadingCard';
+import { Category } from '../../../../model/category';
 
 interface CategoryCardProps {
     activeCategory: string | null;

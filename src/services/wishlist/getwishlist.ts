@@ -1,40 +1,59 @@
-import { WishlistData } from './../../redux/types';
-// src/services/wishlistService.ts
 import axios from 'axios';
 import { url } from '../../api/apiUrl';
+import {  ProductModelMain } from '../../model/productDetail';
 
 
-export async function getWishlistById(userId: number): Promise<WishlistData[]> {
+
+interface FetchWishlistResponse {
+  status: number;
+  data: ProductModelMain[];
+}
+
+
+export async function fetchWishlists(userId:number,accessToken: string): Promise<FetchWishlistResponse> {
   try {
-    const response = await axios.get<WishlistData[]>(`${url}v1/customer/customer/wishlist/${userId}`);
-    return response.data;
+    const response = await axios.get(`${url}v1/customer/customer/wishlist/${userId}/`, {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    });
+    localStorage.setItem("WishlistData",JSON.stringify(response.data));
+    return {
+      status: response.status,
+      data: response.data
+    };
+    
   } catch (error) {
-    console.error(`Error fetching wishlist for user ID ${userId}:`, error);
-    throw error;
+    if (axios.isAxiosError(error) && error.response) {
+      return {
+        status: error.response.status,
+        data: []
+      };
+    } else {
+      return {
+        status: 500,
+        data: []
+      };
+    }
   }
 }
 
-export async function addWishlistItem(userId: number, productId: number): Promise<void> {
-  try {
-    const data = [
-      {
-        user: userId,
-        product: productId,
-      },
-    ];
 
-    await axios.post(`${url}v1/customer/customer/wishlist/create`, data);
-  } catch (error) {
-    console.error(`Error adding item to wishlist for user ID ${userId}:`, error);
-    throw error;
+
+export async function addWishlists(userId:number,productId:number,accessToken: string) {
+  const data = {
+    user:userId,
+    product:productId
   }
-}
-
-export async function deleteWishlistItem(userId: number, itemId: number): Promise<void> {
   try {
-    await axios.delete(`${url}v1/customer/customer/wishlist/${userId}/${itemId}`);
+    const response = await axios.post(`${url}v1/customer/customer/wishlist/create/`,data,{
+      headers: {
+        'Authorization': `Bearer ${accessToken}`
+      }
+    });
+    
+    return response.status
   } catch (error) {
-    console.error(`Error deleting item from wishlist for user ID ${userId}:`, error);
-    throw error;
+    return error
   }
 }

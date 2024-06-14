@@ -1,29 +1,22 @@
-// src/store/wishlistActions.ts
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { WishlistData } from '../types';
-import { addWishlistItem, deleteWishlistItem, getWishlistById } from '../../services/wishlist/getwishlist';
+import { ProductModel } from "../../model/product";
+import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from "./ActionTypes";
 
-export const fetchWishlist = createAsyncThunk(
-  'wishlist/fetchWishlist',
-  async (userId: number) => {
-    const data = await getWishlistById(userId);
+export interface AddToWishlistAction{
+  type : typeof ADD_TO_WISHLIST;
+  payload: ProductModel;
+}
 
-    return data;
-  }
-);
+export interface RemoveFromWishlistAction{
+  type: typeof REMOVE_FROM_WISHLIST;
+  payload : number;
+}
 
-export const addWishlist = createAsyncThunk(
-  'wishlist/addWishlist',
-  async ({ userId, item,ProductId }: { userId: number, ProductId: number ,item: WishlistData }) => {
-    await addWishlistItem(userId, ProductId);
-    return item;
-  }
-);
+export const addToWishlist = (product:ProductModel): AddToWishlistAction => ({
+  type: ADD_TO_WISHLIST,
+  payload: product,
+});
 
-export const deleteWishlist = createAsyncThunk(
-  'wishlist/deleteWishlist',
-  async ({ userId, itemId }: { userId: number, itemId: number }) => {
-    await deleteWishlistItem(userId, itemId);
-    return itemId;
-  }
-);
+export const removeFromWishlist = (productId:number): RemoveFromWishlistAction =>({
+  type:REMOVE_FROM_WISHLIST,
+  payload:productId,
+});

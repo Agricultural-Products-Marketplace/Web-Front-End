@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import './index.css';
 import TopPath from "../shared/commen/topPath";
 import { Link, useNavigate } from "react-router-dom";
-import ProductModel from "../../model/product";
+
 import { addToCart, removeFromCart } from '../../redux/actions/cartAction';
 import { AppState } from "../../redux/types";
 import { connect, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
+import { ProductModel } from "../../model/product";
 
 interface Props{
     cart:ProductModel[];
@@ -78,10 +79,10 @@ const Cart: React.FC<Props> = ({cart,addToCart,removeFromCart}) => {
                                         <button onClick={()=>{
                                             removeFromCart(product.id);
                                         }}><sup>X</sup></button>
-                                        <img src={product.img} alt={product.productName} />
-                                        <p>{product.productName}</p>
+                                        <img src={product.image} alt={product.title} />
+                                        <p>{product.title}</p>
                                     </td>
-                                    <td>${product.productPrice}</td>
+                                    <td>${product.price}</td>
                                     <td className="cart-product-quantity row">
                                         <div className="cart-quantitiy-container row">
                                             <p>{quantities[index]}</p>
@@ -91,7 +92,7 @@ const Cart: React.FC<Props> = ({cart,addToCart,removeFromCart}) => {
                                             </div>
                                         </div>
                                     </td>
-                                    <td>${quantities[index] * product.productPrice}</td>
+                                    <td>${quantities[index] * Number(product.price)}</td>
                                 </tr>
                             ))}
                         </tbody>

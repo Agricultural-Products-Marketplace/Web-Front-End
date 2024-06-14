@@ -1,13 +1,8 @@
 import axios from "axios";
 import { url } from "../../api/apiUrl";
+import { Category } from "../../model/category";
 
-export interface Category{
-    id:number,
-    title:string,
-    image:string,
-    active:boolean,
-    slug:string
-}
+
 
 async function getCategory(categoryId:number):Promise<Category | null>{
     try{

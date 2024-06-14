@@ -1,23 +1,21 @@
 import React from "react";
 import './index.css';
+import { ProductModel } from "../../../../model/product";
+import { Category } from "../../../../model/category";
 
-interface Product{
-    categoryName : string
-    img : string
-}
 
 interface CategoryButtonCardProps{
-    products : Product[]
+    categories : Category[]
 }
 
-function CategoryButtonCard({products}:CategoryButtonCardProps) {
+function CategoryButtonCard({categories}:CategoryButtonCardProps) {
     return(
         <div className="slider-products">
             {
-                products.map((product, index)=>(
+                categories.map((category, index)=>(
                     <a href="#" className="category-button-container-link">
-            <img src={product.img} alt="" />
-            <p>{product.categoryName}</p>
+            <img src={category.image} alt="" />
+            <p>{category.title}</p>
         </a>
                 ))
             }
