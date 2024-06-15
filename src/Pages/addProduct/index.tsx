@@ -4,6 +4,9 @@ import TopPath from '../shared/commen/topPath';
 import DropDown from '../shared/card/dropdown';
 import { getAllCategories } from '../../services/category/getCategory';
 import { Category } from '../../model/category';
+import { addProduct } from '../../services/product/addProduct';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/reducers/rootReducer';
 
 
 
@@ -28,6 +31,8 @@ function AddProduct() {
     
 
 const [categories, setCategories] = useState<Category[]>([]);
+const userId = useSelector((state:RootState)=>state.user.profile?.id);
+const accessKey = useSelector((status:RootState)=>status.login.user?.access);
 const [images, setImages] = useState<Image[]>([]);
 const [imageIdCounter, setImageIdCounter] = useState<number>(0);
 const [error, setError] = useState<string | null>(null);
@@ -36,6 +41,7 @@ const [productPrice, setProductPrice] = useState<number>(0);
 const [oldPrice, setOldPrice] = useState<number>(0);
 const [shipmentPrice, setShipmentPrice] = useState<number>(0);
 const [inStock, setInStock] = useState<boolean>(false);
+const [isfeatured,setisfeatured] = useState<boolean>(false);
 const [productName, setProductName] = useState<string>('');
 const [productSlog, setProductSlog] = useState<string>('');
 const [category, setCategory] = useState<string>('Select category');
@@ -97,7 +103,11 @@ const [description, setDescription] = useState<string>('');
     };
 
     return (
-        <form className="add-product">
+        <form className="add-product" onSubmit={()=>{
+            addProduct(
+                String(accessKey),productName,description,2,productPrice,shipmentPrice,quantity,inStock,status,isfeatured,Number(userId),productSlog
+            );
+        }}>
             <div className="add-product-items">
                 <div className="add-product-item">
                     <label htmlFor="product-name">Product Name <sup>*</sup></label>
@@ -189,7 +199,9 @@ const [description, setDescription] = useState<string>('');
                     </div>
                     <div className="add-product-item-one">
                         <label htmlFor="featured">Featured</label>
-                        <input type="checkbox" name="featured" id="featured"/>
+                        <input type="checkbox" name="featured" id="featured"
+                        checked={isfeatured}
+                        />
                     </div>
                 </div>
             </div>
