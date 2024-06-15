@@ -13,6 +13,9 @@ import { AppDispatch } from "../../redux/store";
 import { useNavigate } from "react-router-dom";
 import { Category } from "../../model/category";
 import { fetchWishlists } from "../../services/wishlist/getwishlist";
+import { fetchcart } from "../../services/cart/getcart";
+import { addToCart } from "../../redux/actions/cartAction";
+import { CartModel } from "../../model/cart";
 
 function Home() {
     const dispatch: AppDispatch = useDispatch();
@@ -26,15 +29,25 @@ function Home() {
             const categoriesData = await getAllCategories();
             setCategories(categoriesData);
         };
-        fetchData();
-        if(isAuth){
-            fetchWishlists(Number(userId),String(accessKey));
+        const fetchUserDatas = async () => {
+            if(isAuth && userId && (localStorage.getItem("UserCartData") === '' || localStorage.getItem("UserCartData") === null)){
+                
+                    // fetchWishlists(Number(userId),String(accessKey));
+                const response = await fetchcart(Number(userId),String(accessKey));
+                for(let i = 0;i<response.data.length;i++){
+                    dispatch(addToCart(response.data[i].product));
+                }
+                
+            }
         }
+        fetchData();
+        fetchUserDatas();
+
+        
     },
+[isAuth, userId, accessKey, dispatch]);
 
     
-
-[]);
 
 useState(()=>{
     getpartnersinfo();

@@ -1,26 +1,27 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 interface DropDownProps {
     items: string[];
+    selectedItem: string;
+    onSelectItem: (item: string) => void;
 }
 
-function DropDown({ items }: DropDownProps) {
+function DropDown({ items, selectedItem, onSelectItem }: DropDownProps) {
     const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
-    const [selectedCategory, setSelectedCategory] = useState<string>('Select item');
 
     const toggleDropdown = () => {
         setIsDropdownOpen(prevState => !prevState);
     };
 
     const handleCategorySelect = (category: string) => {
-        setSelectedCategory(category);
+        onSelectItem(category);
         setIsDropdownOpen(false);
     };
 
     return (
         <div className="add-product-item-dropdown">
             <div className="item-dropdown-title" onClick={toggleDropdown}>
-                <p>{selectedCategory}</p>
+                <p>{selectedItem}</p>
                 <i className={`fa-solid fa-caret-${isDropdownOpen ? 'up' : 'down'}`}></i>
             </div>
             {isDropdownOpen && (

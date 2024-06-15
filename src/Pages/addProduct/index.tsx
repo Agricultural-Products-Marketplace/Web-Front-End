@@ -14,7 +14,6 @@ interface Image {
 
 function AddProduct() {
 
-    const [categories, setCategories] = useState<Category[]>([]);
 
     useEffect(()=>{
         const fetchData = async () => {
@@ -28,14 +27,20 @@ function AddProduct() {
     
     
 
-    const [images, setImages] = useState<Image[]>([]);
-    const [imageIdCounter, setImageIdCounter] = useState<number>(0);
-    const [error, setError] = useState<string | null>(null);
-    const [quantity, setQuantity] = useState<number>(0);
-    const [productPrice, setProductPrice] = useState<number>(0);
-    const [oldPrice, setOldPrice] = useState<number>(0);
-    const [shipmentPrice, setShipmentPrice] = useState<number>(0);
-    const [inStock, setInStock] = useState<boolean>(false);
+const [categories, setCategories] = useState<Category[]>([]);
+const [images, setImages] = useState<Image[]>([]);
+const [imageIdCounter, setImageIdCounter] = useState<number>(0);
+const [error, setError] = useState<string | null>(null);
+const [quantity, setQuantity] = useState<number>(0);
+const [productPrice, setProductPrice] = useState<number>(0);
+const [oldPrice, setOldPrice] = useState<number>(0);
+const [shipmentPrice, setShipmentPrice] = useState<number>(0);
+const [inStock, setInStock] = useState<boolean>(false);
+const [productName, setProductName] = useState<string>('');
+const [productSlog, setProductSlog] = useState<string>('');
+const [category, setCategory] = useState<string>('Select category');
+const [status, setStatus] = useState<string>('Select status');
+const [description, setDescription] = useState<string>('');
 
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
@@ -92,21 +97,28 @@ function AddProduct() {
     };
 
     return (
-        <div className="add-product">
+        <form className="add-product">
             <div className="add-product-items">
                 <div className="add-product-item">
                     <label htmlFor="product-name">Product Name <sup>*</sup></label>
-                    <input type="text" name="product-name" id="product-name" placeholder='Product Name'/>
+                    <input type="text" name="product-name" id="product-name" placeholder='Product Name' required
+                    onChange={(e)=>setProductName(e.target.value)}
+                    />
                 </div>
                 <div className="add-product-item">
-                    <label htmlFor="product-slog">Product Slog <sup>*</sup></label>
-                    <input type="text" name="product-slog" id="product-slog" placeholder='Product Slog'/>
+                    <label htmlFor="product-slog">Product Slog {productSlog}<sup>*</sup></label>
+                    <input type="text" name="product-slog" id="product-slog" placeholder='Product Slog' 
+                    onChange={(e)=> setProductSlog(e.target.value)}
+                    />
                 </div>
                 <div className="add-product-item">
                     <label htmlFor="category">Category <sup>*</sup></label>
                     <DropDown items={categories.map(category =>(
                         category.title
-                    ))}/>
+                    ))}
+                    onSelectItem={setCategory}
+                    selectedItem={category}
+                    />
                 </div>
             </div>
 
@@ -135,7 +147,10 @@ function AddProduct() {
                 </div>
                 <div className="add-product-item">
                     <label htmlFor="status">Status <sup>*</sup></label>
-                    <DropDown items={['Published', 'In Review', 'Drafted', 'Disabled']}/>
+                    <DropDown items={['Published', 'In Review', 'Drafted', 'Disabled']}
+                    selectedItem={status}
+                    onSelectItem={setStatus}
+                    />
                 </div>
             </div>
             <div className="add-product-items">
@@ -213,7 +228,7 @@ function AddProduct() {
             <div className="add-product-items">
                 <button className='add-product-button'>Add Product</button>
             </div>
-        </div>
+        </form>
     );
 }
 

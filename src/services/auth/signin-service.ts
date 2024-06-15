@@ -24,6 +24,7 @@ export const login = async (emailPhone: string, password: string)=> {
         console.log(data);
         if(response.ok){
             dispatch(loginSuccess(data))
+            
         }
         if (!response.ok) {
             throw new Error(data.message || "Login failed. Please try again.");

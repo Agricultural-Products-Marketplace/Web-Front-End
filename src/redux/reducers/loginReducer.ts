@@ -48,6 +48,8 @@ const loginReducer: Reducer<LoginState, LoginAction> = (state = initialState, ac
         case LOGOUT:
             localStorage.removeItem('LoginState');
             localStorage.removeItem('UserData');
+            localStorage.removeItem('UserCartData');
+            localStorage.removeItem('WishlistData');
             return {
                 ...state,
                 isAuthenticated: false,
