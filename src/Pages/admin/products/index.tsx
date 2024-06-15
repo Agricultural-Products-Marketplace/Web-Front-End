@@ -9,6 +9,7 @@ import { Category } from '../../../model/category';
 function Products() {
 
     const [categories, setCategories] = useState<Category[]>([]);
+    const [category, setCategory] = useState<string>('Select category');
 
     useEffect(()=>{
         const fetchData = async () => {
@@ -62,7 +63,9 @@ function Products() {
 
                     <DropDown items={categories.map(category =>(
                         category.title
-                    ))}/>
+                    ))} onSelectItem={setCategory}
+                    selectedItem={category}
+                    />
                     </div>
                 </div>
                 <table className="admin-page-main-products-table">

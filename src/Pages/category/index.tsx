@@ -10,6 +10,8 @@ import { AppDispatch } from '../../redux/store';
 import { addWishlists } from '../../services/wishlist/getwishlist';
 import { addToWishlist, removeFromWishlist } from '../../redux/actions/wishlistAction';
 import { ProductModel } from '../../model/product';
+import { addCart } from '../../services/cart/addnewcart';
+import { addToCart } from '../../redux/actions/cartAction';
 
 function Category() {
     const dispatch: AppDispatch = useDispatch();
@@ -91,7 +93,12 @@ function Category() {
                             </div>
                             <div className="overly-bottom">
                                 {
-                                    (isAuthenticated)?(<button>Add To Cart</button>):(null)
+                                    (isAuthenticated)?(<button onClick={async ()=>{
+                                        const response = await addCart(product.id,userId,Number(product.price),"Ethiopia",`${user?.id}_cart`,String(accessKey));
+                                        if(response === 201){
+                                            dispatch(addToCart(product));
+                                        }
+                                    }}> Add To Cart</button>):(null)
                                 }
                             </div>
                         </div>

@@ -8,6 +8,8 @@ import { AppState } from "../../redux/types";
 import { connect, useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
 import { ProductModel } from "../../model/product";
+import { CartModel } from "../../model/cart";
+import { deletcartitem } from "../../services/cart/deletcart";
 
 interface Props{
     cart:ProductModel[];
@@ -17,19 +19,15 @@ interface Props{
 
 const Cart: React.FC<Props> = ({cart,addToCart,removeFromCart}) => {
 
-    const products =[
-        {
-            Image: 'https://media.istockphoto.com/id/184276818/photo/red-apple.jpg?s=612x612&w=0&k=20&c=NvO-bLsG0DJ_7Ii8SSVoKLurzjmV0Qi4eGfn6nW3l5w=',
-            Title: 'Red Apple',
-            Price: 60
-        },
-    ];
+    
 
     const isAuthenticated = useSelector((state:RootState)=> state.login.isAuthenticated);
     const navigator = useNavigate();
-
+    const userID = useSelector((state:RootState)=>state.user.profile?.id);
+    const accessKey = useSelector((state:RootState)=>state.login.user?.access);
     // State for quantities, initialized to an array of length equal to the products array
-    const [quantities, setQuantities] = useState(Array(products.length).fill(1));
+    const [quantities, setQuantities] = useState(Array(cart.length).fill(1));
+    const [highestShipping, setHighestShipping] = useState<number>(0);
 
     // Function to increment quantity of a specific product
     const increment = (index: number) => {
@@ -47,6 +45,18 @@ const Cart: React.FC<Props> = ({cart,addToCart,removeFromCart}) => {
         }
     };
 
+    function highestShippingPrice(list: ProductModel[]): number {
+        let highestShipping = 0;
+    
+        for (let i = 0; i < list.length; i++) {
+            const price = Number(list[i].shipping_amount);
+            if (price > highestShipping) {
+                highestShipping = price;
+            }
+        }
+    
+        return highestShipping;
+    }
     
 
     useEffect(()=>{
@@ -69,7 +79,7 @@ const Cart: React.FC<Props> = ({cart,addToCart,removeFromCart}) => {
                             <tr className="cart-page-product-table-head row">
                                 <td>Product</td>
                                 <td>Price</td>
-                                <td>Quantity</td>
+                                <td>Quantity(liter/kg)</td>
                                 <td>Subtotal</td>
                             </tr>
                         <tbody>
@@ -77,7 +87,8 @@ const Cart: React.FC<Props> = ({cart,addToCart,removeFromCart}) => {
                                 <tr key={index} className="cart-page-product-table-row row">
                                     <td>
                                         <button onClick={()=>{
-                                            removeFromCart(product.id);
+                                            deletcartitem(`${userID}_cart`,product.id,Number(userID),String(accessKey));
+                                            // removeFromCart(product.id);
                                         }}><sup>X</sup></button>
                                         <img src={product.image} alt={product.title} />
                                         <p>{product.title}</p>
@@ -112,21 +123,21 @@ const Cart: React.FC<Props> = ({cart,addToCart,removeFromCart}) => {
                         <div className="cart-page-bottom-checkout-right-price col">
                             <div className="cart-page-bottom-checkout-right-price-item row">
                                 <p>Subtotal :</p>
-                                <p>${quantities.reduce((acc, curr, index) => acc + (curr * products[index].Price), 0)}</p>
+                                <p>${quantities.reduce((acc, curr, index) => acc + (curr * Number(cart[index].price)), 0)}</p>
                             </div>
                             <hr />
                         </div>
                         <div className="cart-page-bottom-checkout-right-price col">
                             <div className="cart-page-bottom-checkout-right-price-item row">
                                 <p>Shipping :</p>
-                                <p>Free</p>
+                                <p>{highestShippingPrice(cart)}</p>
                             </div>
                             <hr />
                         </div>
                         <div className="cart-page-bottom-checkout-right-price col">
                             <div className="cart-page-bottom-checkout-right-price-item row">
                                 <p>Total :</p>
-                                <p>${quantities.reduce((acc, curr, index) => acc + (curr * products[index].Price), 0)}</p>
+                                <p>${quantities.reduce((acc, curr, index) => acc + (curr * Number(cart[index].price)), 0) + highestShippingPrice(cart)}</p>
                             </div>
                             <hr />
                         </div>

@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import './index.css'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getCartItemCount } from '../../../../redux/selecters/cartSelecter';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../../redux/actions/loginAction';
 import { RootState } from '../../../../redux/reducers/rootReducer';
+import NotificationPage from '../../card/notification';
 
 
 const NavBar: React.FC = () => {
 
 
 
-    const cartItemCount = useSelector(getCartItemCount);
+    const cartItemCount = useSelector((state:RootState)=>state.cart.cart.length);
     const location = useLocation();
     const { pathname } = location;
     const dispatch = useDispatch();
@@ -62,7 +62,11 @@ const NavBar: React.FC = () => {
             <i className="fa fa-shop"></i>
             My Shop
         </Link>):(null)}
-        <a href="" onClick={handleLogout}>
+        {(user?.user.is_agent || user?.user.is_staff)?(<Link to={'/admin'} >
+            <i className="fa fa-shop"></i>
+            Manage Farmers Profile
+        </Link>):(null)}
+        <a href="">
             <i className="fa fa-star"></i>
             My Reviews
         </a>
@@ -76,7 +80,7 @@ const NavBar: React.FC = () => {
 
     <button onClick={()=>{
         setdropdownshow(!dropdownshow)
-    }} className={(dropdownshow)?('navbar-dropdown-menus-show navbar-dropdown-menus-icon'):('navbar-dropdown-menus navbar-dropdown-menus-icon')}>{dropdownshow?(<i className="fa-solid fa-close"></i>):(<i className="fa-solid fa-bars"></i>)}
+    }} className={(dropdownshow)?('navbar-dropdown-menus-show navbar-dropdown-menus-icon'):('navbar-dropdown-menus navbar-dropdown-menus-icon')}>{dropdownshow?(<i className="fa-solid fa-close"></i>):(<i className="fa-solid fa-bars"><sup style={{backgroundColor:"#00ff66",borderRadius:"100%",padding:"1vw",fontSize:"10px",color:"white"}}>{cartItemCount + wishlist}</sup></i>)}
     <div>
     
     {isAuthenticated?(null):(<Link to={'/signUp/'}><i className="fa-solid fa-user-plus"></i>Sign Up</Link>)}
@@ -84,13 +88,13 @@ const NavBar: React.FC = () => {
     <Link to={'/'}><i className="fa-solid fa-home"></i> Home</Link>
     {(user?.user.is_farmer|| user?.user.is_agent || user?.user.is_staff)?(<Link to={'/'}><i className="fa-solid fa-shop"></i>My Shop</Link>):(null)}
     <Link to={'/category'}><i className="fa-solid fa-layer-group"></i> Category</Link>
-    {isAuthenticated?(<Link to={'/wishlist'}><i className="fa-solid fa-heart"></i> Wishlist</Link>):(null)}
+    {isAuthenticated?(<Link to={'/wishlist'}><i className="fa-solid fa-heart"></i> Wishlist ({wishlist})</Link>):(null)}
     {isAuthenticated?(<Link to={'/message'}><i className="fa-solid fa-message"></i>Messge</Link>):(null)}
-    {isAuthenticated?(<Link to={'/cart'}><i className="fa-solid fa-cart-shopping"></i>Cart</Link>):(null)}
+    {isAuthenticated?(<Link to={'/cart'}><i className="fa-solid fa-cart-shopping"></i>Cart ({cartItemCount})</Link>):(null)}
    {isAuthenticated?( <Link to={'/account'}><i className="fa-solid fa-user"></i>Manage My Account</Link>):(null)}
     <Link to={'/contact'}><i className="fa-solid fa-phone"></i> Contact</Link>
     <Link to={'/about'}><i className="fa-solid fa-circle-info"></i>About</Link>
-    {isAuthenticated?(<Link to={'/'}><i className="fa-solid fa-right-from-bracket"></i>Log Out</Link>):(null)}
+    {isAuthenticated?(<Link to={'/'} onClick={handleLogout}><i className="fa-solid fa-right-from-bracket"></i>Log Out</Link>):(null)}
     
     </div>
     </button>

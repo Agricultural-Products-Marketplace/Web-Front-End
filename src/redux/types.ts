@@ -3,6 +3,7 @@ import { ADD_TO_CART, REMOVE_FROM_CART } from "./actions/ActionTypes";
 import { UserData } from "./actions/loginAction";
 import { User } from "../model/user";
 import { ProductModel } from "../model/product";
+import { CartModel } from "../model/cart";
 
 
 export interface cartState {
