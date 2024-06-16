@@ -62,10 +62,6 @@ const NavBar: React.FC = () => {
             <i className="fa fa-shop"></i>
             My Shop
         </Link>):(null)}
-        {(user?.user.is_agent || user?.user.is_staff)?(<Link to={'/admin'} >
-            <i className="fa fa-shop"></i>
-            Manage Farmers Profile
-        </Link>):(null)}
         <Link to={'/signin'} onClick={handleLogout}>
         <i className="fa-solid fa-right-from-bracket"></i>
             LogOut

@@ -34,7 +34,7 @@ function ResetPassword() {
         else{
             setError(false);
             console.log('otp ======',otp);
-            console.log("uidb64 ====",uidb64);
+            console.log('uidb64 ====',uidb64);
             console.log("reset_token ======",reset_token);
             console.log("password ==== ",paswword);
 

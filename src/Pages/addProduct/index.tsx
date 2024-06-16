@@ -164,6 +164,7 @@ function AddProduct() {
 
     return (
         <form className="add-product" onSubmit={handleSubmit}>
+        
             <div className="add-product-items">
                 <div className="add-product-item">
                     <label htmlFor="product-name">Product Name <sup>*</sup></label>
