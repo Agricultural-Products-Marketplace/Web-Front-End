@@ -10,6 +10,7 @@ import { CartModel } from "../../model/cart";
 import { deletcartitem } from "../../services/cart/deletcart";
 import { useDispatch } from "react-redux";
 import { setNumbers } from "../../redux/actions/numberlistAction";
+import { updateCatQuantity } from "../../services/cart/cartqty";
 
 interface Props {
     cart: CartModel[];
@@ -22,14 +23,17 @@ const Cart: React.FC<Props> = ({ cart, addToCart, removeFromCart }) => {
     const navigator = useNavigate();
     const dispatch = useDispatch();
     const accessKey = useSelector((state: RootState) => state.login.user?.access);
-
-    const [quantities, setQuantities] = useState(Array(cart.length).fill(1));
+    const useId = useSelector((state:RootState)=>state.user.profile?.id)
+    const initialQuantities:number[] = cart.map(item => Number(item.qty));
+    const [quantities, setQuantities] = useState(initialQuantities);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const increment = (index: number) => {
         const newQuantities = [...quantities];
         newQuantities[index] += 1;
         setQuantities(newQuantities);
+        console.log(quantities[index]);
+        updateCatQuantity(Number(cart[index].product.id),Number(useId),String(cart[index].cart_id),Number(quantities[index]+1));
     };
 
     const handleSetNumbers = (newNumbers: number[]) => {
@@ -41,6 +45,8 @@ const Cart: React.FC<Props> = ({ cart, addToCart, removeFromCart }) => {
         if (newQuantities[index] > 1) {
             newQuantities[index] -= 1;
             setQuantities(newQuantities);
+            console.log(quantities[index]);
+            updateCatQuantity(Number(cart[index].product.id),Number(useId),String(cart[index].cart_id),Number(quantities[index]-1));
         }
     };
 
@@ -98,7 +104,8 @@ const Cart: React.FC<Props> = ({ cart, addToCart, removeFromCart }) => {
                                         <div className="cart-quantitiy-container row">
                                             <p>{quantities[index]}</p>
                                             <div className="quantity-button col">
-                                                <button onClick={() => increment(index)}>
+                                                <button onClick={() => increment(index)
+                                                }>
                                                     <i className="fa fa-angle-up"></i>
                                                 </button>
                                                 <button onClick={() => decrement(index)}>
