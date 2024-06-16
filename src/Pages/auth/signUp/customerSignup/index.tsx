@@ -80,7 +80,7 @@ function CustomerSignUp() {
     };
 
     return (
-        <div>
+        <div className="Signup-page">
             <div className="Signup">
                 <div className="signup-container">
                     <Link to={'/signUp'} className="Signup-back-icon">

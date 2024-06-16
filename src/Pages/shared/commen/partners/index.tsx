@@ -1,25 +1,28 @@
 import React from "react";
 import './index.css';
 
-interface Logo{
-    image:string
-    link : string
+export interface Logo{
+    date:Date;
+    id:number;
+    image:string;
+    name : string;
 }
 
-interface PartnersCardProps{
-    logo : Logo[]
+export interface LogoProps{
+    data : Logo[],
 }
 
-function PartnersCard({logo}:PartnersCardProps) {
+
+function PartnersCard(logo:LogoProps) {
     return(
         <div className="partners-card">
             <div className="partners-title">
                 <p><hr />Partners</p>
             </div>
             <div className="partners-logo">
-            {logo.map((image,index)=>(
+            {logo.data.map((image,index)=>(
                 
-                <a href={image.link} target="_blank"><img src={image.image} key={index} alt="" /></a>
+                <a href={image.name} target="_blank"><img src={image.image} key={index} alt="" /></a>
             
             ))}
             </div>

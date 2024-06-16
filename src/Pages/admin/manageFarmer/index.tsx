@@ -13,6 +13,7 @@ import { deletefarmerproduct } from '../../../services/product/deletProduct';
 import AddProduct from '../../addProduct';
 import { title } from 'process';
 import EdiProduct from '../editProducts';
+import { getFarmersById } from '../../../services/farmer/getfarmers';
 
 
 function ManageFarmers() {
@@ -34,6 +35,7 @@ function ManageFarmers() {
         const fetchData = async () => {
             const categoriesData = await getAllCategories();
             const productData = await getProductByFarmerId(Number(userId));
+            const farmers = await getFarmersById(Number(userId));
             
             if(productData.status === 200){
                 setProducts(productData.data);

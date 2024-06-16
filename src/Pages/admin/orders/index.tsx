@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import AdminTopCard from "../../shared/card/admin/adminTopCard";
 import './index.css';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/reducers/rootReducer';
 
 function Orders() {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState("All Category");
+    const userId = useSelector((state:RootState)=>state.user.profile?.user.id);
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);

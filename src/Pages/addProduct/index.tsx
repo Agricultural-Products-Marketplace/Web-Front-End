@@ -34,6 +34,7 @@ function AddProduct() {
     const [productSlog, setProductSlog] = useState<string>('');
     const [category, setCategory] = useState<string>('Select category');
     const [status, setStatus] = useState<string>('Select status');
+    const [farmerProfile,setFarmerProfile] = useState<string>('select Farmer Profile')
     const [description, setDescription] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -164,8 +165,39 @@ function AddProduct() {
 
     return (
         <form className="add-product" onSubmit={handleSubmit}>
-        
+            
             <div className="add-product-items">
+            <div className="add-product-item">
+                    <label htmlFor="category">Farmer Profile <sup>*</sup></label>
+                    <DropDown items={categories.map(category => (
+                        category.title
+                    ))}
+                        onSelectItem={setFarmerProfile}
+                        selectedItem={farmerProfile}
+                    />
+                </div>
+                <div className="add-product-item">
+                    <label htmlFor="category">Category <sup>*</sup></label>
+                    <DropDown items={categories.map(category => (
+                        category.title
+                    ))}
+                        onSelectItem={setCategory}
+                        selectedItem={category}
+                    />
+                </div>
+                <div className="add-product-item">
+                    <label htmlFor="status">Status <sup>*</sup></label>
+                    <DropDown items={['draft', 'disabled', 'in_review', 'published']}
+                        selectedItem={status}
+                        onSelectItem={setStatus}
+                    />
+                </div>
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
                 <div className="add-product-item">
                     <label htmlFor="product-name">Product Name <sup>*</sup></label>
                     <input type="text" name="product-name" id="product-name" placeholder='Product Name' required
@@ -178,18 +210,8 @@ function AddProduct() {
                         onChange={(e) => setProductSlog(e.target.value)}
                     />
                 </div>
-                <div className="add-product-item">
-                    <label htmlFor="category">Category <sup>*</sup></label>
-                    <DropDown items={categories.map(category => (
-                        category.title
-                    ))}
-                        onSelectItem={setCategory}
-                        selectedItem={category}
-                    />
-                </div>
-            </div>
-
-            <div className="add-product-items">
+                
+           
                 <div className="add-product-item">
                     <label htmlFor="product-price">Product Price <sup>*</sup></label>
                     <input
@@ -201,6 +223,12 @@ function AddProduct() {
                         onChange={handleProductPriceChange}
                     />
                 </div>
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
+                <hr />
                 <div className="add-product-item">
                     <label htmlFor="old-price">Product Old Price <sup>*</sup></label>
                     <input
@@ -212,15 +240,8 @@ function AddProduct() {
                         onChange={handleOldPriceChange}
                     />
                 </div>
-                <div className="add-product-item">
-                    <label htmlFor="status">Status <sup>*</sup></label>
-                    <DropDown items={['draft', 'disabled', 'in_review', 'published']}
-                        selectedItem={status}
-                        onSelectItem={setStatus}
-                    />
-                </div>
-            </div>
-            <div className="add-product-items">
+                
+            
                 <div className="add-product-item">
                     <label htmlFor="quantity">Quantity <sup>*</sup></label>
                     <input
@@ -243,7 +264,10 @@ function AddProduct() {
                         onChange={handleShipmentPriceChange}
                     />
                 </div>
-                <div className="add-product-item product-check-box">
+                
+            </div>
+            <div className="add-product-items">
+            <div className="add-product-item product-check-box">
                     <div className="add-product-item-one">
                         <label htmlFor="in-stock">In Stock</label>
                         <input
@@ -263,6 +287,7 @@ function AddProduct() {
                     </div>
                 </div>
             </div>
+            
 
             {error && <p className="error-message">{error}</p>}
             <div className="add-product-items add-product-items-img">

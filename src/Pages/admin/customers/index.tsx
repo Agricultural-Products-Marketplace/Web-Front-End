@@ -1,10 +1,26 @@
 import { useState } from "react";
 import AdminTopCard from "../../shared/card/admin/adminTopCard";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/reducers/rootReducer";
+import { GetOrder } from "../../../model/getorders";
+import { getOrderById } from "../../../services/order/getorder";
 
 function Customers() {
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState("All Users");
+    const [ordersData,setOrdersData] = useState<GetOrder[]>([]);
+    const userId = useSelector((state:RootState)=>state.user.profile?.user.id);
+
+    useState(()=>{
+        const fetchData = async () =>{
+            const farmerOrders = await getOrderById(Number(1));
+            if(farmerOrders.status === 200){
+                setOrdersData(farmerOrders.orders)
+            }
+        }
+        fetchData();
+    })
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
@@ -13,14 +29,6 @@ function Customers() {
         setSelectedOption(option);
         setIsDropdownOpen(false); // Close dropdown after selecting an option
     };
-    
-    const customersData = [
-        {id:'1',fullName:'Yosef Sahle',phone:'0947449009',gender:'Male',age:'24',role:'admin',status:'Active'},
-        {id:'2',fullName:'Abel Tadesse',phone:'0947449009',gender:'Male',age:'24',role:'admin',status:'Active'},
-        {id:'3',fullName:'Tadesse Ageru',phone:'0947449009',gender:'Male',age:'24',role:'admin',status:'Active'},
-        {id:'4',fullName:'Chala Amenu',phone:'0947449009',gender:'Male',age:'24',role:'admin',status:'Active'},
-        {id:'4',fullName:'Abebe Kebede',phone:'0947449009',gender:'Male',age:'24',role:'Farmer',status:'Deactive'},
-    ];
 
     
     return(
@@ -50,22 +58,22 @@ function Customers() {
                         <tr>
                             <th className="flex-2">Full Name</th>
                             <th className="flex-2">Phone Number</th>
-                            <th className="flex-2">Gender</th>
-                            <th className="flex-2">Age</th>
-                            <th className="flex-2">Role</th>
-                            <th className="flex-1">Status</th>
+                            <th className="flex-2">Username</th>
+                            <th className="flex-2">Total</th>
+                            <th className="flex-2">Order Status</th>
+                            <th className="flex-1">Payment Status</th>
                         </tr>
                     </thead>
                     <tbody className="transaction-table-body">
                         {
-                            customersData.map((customer)=>(
-                                <tr key={customer.id} style={{backgroundColor: customer.status === 'Active'?'#00FF66':'Red',color:'white'}}>
-                                    <td className="flex-2">{customer.fullName}</td>
-                                    <td className="flex-2">{customer.phone}</td>
-                                    <td className="flex-2">{customer.gender}</td>
-                                    <td className="flex-2">{customer.age}</td>
-                                    <td className="flex-2">{customer.role}</td>
-                                    <td className="flex-1">{customer.status}</td>
+                            ordersData.map((customer)=>(
+                                <tr key={customer.id} style={{backgroundColor: customer.payment_status === 'paid'?'#00FF66':'Red',color:'white'}}>
+                                    <td className="flex-2">{customer.buyer.first_name} {customer.buyer.last_name}</td>
+                                    <td className="flex-2">{customer.buyer.phone}</td>
+                                    <td className="flex-2">{customer.buyer.username}</td>
+                                    <td className="flex-2">{customer.total}</td>
+                                    <td className="flex-2">{customer.order_status}</td>
+                                    <td className="flex-1">{customer.payment_status}</td>
                                 </tr>
                             ))
                         }

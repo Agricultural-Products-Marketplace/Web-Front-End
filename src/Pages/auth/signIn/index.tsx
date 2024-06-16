@@ -6,6 +6,7 @@ import { loginUser } from "../../../redux/actions/loginAction";
 import { connect, useSelector } from "react-redux";
 import { login } from '../../../services/auth/signin-service';
 import { stat } from "fs";
+import TopBar from "../../shared/commen/topBar";
 
 interface SignInProps{
     isLoading:boolean;
@@ -44,7 +45,7 @@ const SignIn:React.FC<SignInProps> = ({isLoading,error,loginUser})=> {
     }
 
     return (
-        <div>
+        <div className="signin-Page">
             <div className="signin">
                 <div className="signin-container col">
                     <Link to={'/'} className="signin-back-icon">
