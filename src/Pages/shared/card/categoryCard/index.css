@@ -4,7 +4,7 @@
 
 .category-button-container-link{
     outline: solid 1.5px rgba(0,0,0,0.5);
-    width: 9vw;
+    width: 150px;
     text-decoration: none;
     color: black !important;
     display: flex;
@@ -19,6 +19,6 @@
 }
 
 .category-button-container-link>img{
-    width: inherit;
-    height: 10vw;
+    width: 150px;
+    height: 130px;
 }

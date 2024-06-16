@@ -10,7 +10,7 @@ interface CategoryButtonCardProps{
 
 function CategoryButtonCard({categories}:CategoryButtonCardProps) {
     return(
-        <div className="slider-products">
+        <div className="slider-products category-slider-item">
             {
                 categories.map((category, index)=>(
                     <a href="#" className="category-button-container-link">

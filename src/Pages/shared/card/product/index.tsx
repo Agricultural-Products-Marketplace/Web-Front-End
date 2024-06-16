@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../../redux/actions/cartAction";
 import { ProductModel } from "../../../../model/product";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../redux/reducers/rootReducer";
 
 interface ProductProps {
     products: ProductModel[];
@@ -12,6 +14,7 @@ interface ProductProps {
 const Product: React.FC<ProductProps> = ({ products }) => {
 
     const dispatch = useDispatch();
+    const isAuthenticated = useSelector((state:RootState)=>state.login.isAuthenticated)
 
     
     return (
@@ -21,17 +24,17 @@ const Product: React.FC<ProductProps> = ({ products }) => {
                     <div className="slide-img">
                         <img src={product.image} alt="" />
                         <div className="overlay">
-                            <div className="overlay-top-icons">
+                            {isAuthenticated?(<div className="overlay-top-icons">
                                 <p className="discount">{product.old_price}%</p>
                                 <div className="overlay-icons">
                                     <a href="#"><i className="fa fa-heart"></i></a>
                                 </div>
-                            </div>
-                            <button onClick={()=>{dispatch(addToCart(product));
+                            </div>):(<p className="discount">- {product.old_price}%</p>)}
+                            {isAuthenticated?(<button onClick={()=>{dispatch(addToCart({product}));
                                 
                             }} className="buy-btn">
                                 Add To Cart
-                            </button>
+                            </button>):(null)}
                         </div>
                     </div>
                     <div className="detail-box">

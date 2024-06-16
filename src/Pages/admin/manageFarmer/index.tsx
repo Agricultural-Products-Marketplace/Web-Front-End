@@ -15,7 +15,7 @@ import { title } from 'process';
 import EdiProduct from '../editProducts';
 
 
-function Products() {
+function ManageFarmers() {
 
     const [categories, setCategories] = useState<Category[]>([]);
     const [category, setCategory] = useState<string>('Select category');
@@ -82,7 +82,7 @@ function Products() {
 
     return (
         <div className="admin-page-main">
-            <AdminTopCard title="My Products" />
+            <AdminTopCard title="My Farmers" />
             {editProduct?(
                 <EdiProduct 
                 productId={Number(editProductId)}
@@ -90,7 +90,7 @@ function Products() {
             ):(
                 <div className="admin-page-main-products">
                 <div className="admin-page-main-products-title">
-                    <h3>Product List</h3>
+                    <h3>Farmers List</h3>
                     <div className="admin-page-main-products-title-actions">
                     <div className={`dropdown ${isDropdownOpen ? "menu-open" : ""}`}>
                             <div className="select" onClick={() => toggleDropdown()}>
@@ -107,22 +107,17 @@ function Products() {
                                 </ul>
                             )}
                         </div>
-                    {/* <DropDown items={categories.map(category =>(
-                        category.title
-                    ))} onSelectItem={setCategory}
-                    selectedItem={category}
-                    /> */}
                     </div>
                 </div>
                 <table className="admin-page-main-products-table">
                     <thead>
                         <tr>
-                            <th className='flex-3'>Products</th>
-                            <th className="flex-1">Category</th>
-                            <th className='flex-1'>QTY</th>
+                            <th className='flex-3'>Farmer</th>
+                            <th className="flex-1">Name</th>
+                            <th className='flex-1'>Email</th>
+                            <th className='flex-1'>Status</th>
+                            <th className='flex-1'>Phone</th>
                             <th className='flex-1'>Date</th>
-                            <th className='flex-1'>Price</th>
-                            <th className='flex-1'>Discount</th>
                             <th className='flex-1'>Status</th>
                             <th className='flex-1'>Actions</th>
                         </tr>
@@ -173,7 +168,7 @@ function Products() {
                                 </tr>
                             ))
                         ):(
-                            <h3>You Have No Products</h3>
+                            <h3>You Have No Farmer Profiles</h3>
                         )}
                     </tbody>
                 </table>
@@ -187,4 +182,4 @@ function Products() {
     );
 }
 
-export default Products;
+export default ManageFarmers;

@@ -19,8 +19,6 @@ const SignIn:React.FC<SignInProps> = ({isLoading,error,loginUser})=> {
     const [activeCreatePassword, setActiveCreatePassword] = useState<boolean>(false);
     const isAuthenticated = useSelector((state:RootState)=> state.login.isAuthenticated);
     const navigate = useNavigate();
-    // const [error, setError] = useState<string>("");
-    // const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const handleChangeEmailPhone = (e: ChangeEvent<HTMLInputElement>) => {
         setusername(e.target.value);
@@ -40,26 +38,6 @@ const SignIn:React.FC<SignInProps> = ({isLoading,error,loginUser})=> {
         const credentials = {email,password};
         loginUser(credentials);
     }
-
-    // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
-    //     setIsLoading(true);
-
-    //     try {
-    //         const data = await login(emailPhone, password);
-    //         // Login successful
-    //         console.log("Login successful:", data);
-    //         // Redirect or perform any other action
-    //     } catch (error: unknown) {
-    //         if (error instanceof Error) {
-    //             setError(error.message);
-    //         } else {
-    //             setError("Login failed. Please try again.");
-    //         }
-    //     } finally {
-    //         setIsLoading(false);
-    //     }
-    // };
 
     if (isAuthenticated) {
         navigate('/');

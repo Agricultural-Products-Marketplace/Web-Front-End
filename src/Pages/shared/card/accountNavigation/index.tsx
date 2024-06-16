@@ -1,13 +1,13 @@
 import React from 'react';
 
 interface AccountNavBarProps {
-    onNavItemClick: (componentName: 'EditProfile' | 'adressBook'  | 'myOrders' | 'myCancellation') => void;
+    onNavItemClick: (componentName: 'EditProfile' | 'adressBook'  | 'myOrders' | 'myReviews') => void;
 }
 
 const AccountNavBar: React.FC<AccountNavBarProps> = ({ onNavItemClick }) => {
-    const [activeItem, setActiveItem] = React.useState<'EditProfile' | 'adressBook'  | 'myOrders' | 'myCancellation'>('EditProfile');
+    const [activeItem, setActiveItem] = React.useState<'EditProfile' | 'adressBook'  | 'myOrders' | 'myReviews'>('EditProfile');
 
-    const handleItemClick = (componentName: 'EditProfile' | 'adressBook'  | 'myOrders' | 'myCancellation') => {
+    const handleItemClick = (componentName: 'EditProfile' | 'adressBook'  | 'myOrders' | 'myReviews') => {
         setActiveItem(componentName);
         onNavItemClick(componentName);
     };
@@ -26,7 +26,7 @@ const AccountNavBar: React.FC<AccountNavBarProps> = ({ onNavItemClick }) => {
                     <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('EditProfile')} className={activeItem === 'EditProfile' ? 'active-item' : ''}><i className="fa-solid fa-user-tie"></i><h4>Edit Profile</h4></button></li>
                     <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('adressBook')} className={activeItem === 'adressBook' ? 'active-item' : ''}><i className="fa-solid fa-cart-shopping"></i><h4>Adress info</h4></button></li>
                     <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('myOrders')} className={activeItem === 'myOrders' ? 'active-item' : ''}><i className="fa-solid fa-credit-card"></i><h4>My Orders</h4></button></li>
-                    <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('myCancellation')} className={activeItem === 'myCancellation' ? 'active-item' : ''}><i className="fa-solid fa-close"></i><h4>My Cancellations</h4></button></li>
+                    <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('myReviews')} className={activeItem === 'myReviews' ? 'active-item' : ''}><i className="fa-solid fa-star"></i><h4>My Reviews</h4></button></li>
                 </ul>
             </div>
         </div>

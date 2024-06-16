@@ -16,10 +16,14 @@ import { fetchWishlists } from "../../services/wishlist/getwishlist";
 import { fetchcart } from "../../services/cart/getcart";
 import { addToCart } from "../../redux/actions/cartAction";
 import { CartModel } from "../../model/cart";
+import { getAllProducts, getFeaturedProducts } from "../../services/product/getProducts";
+import { ProductModel } from "../../model/product";
 
 function Home() {
     const dispatch: AppDispatch = useDispatch();
     const [categories, setCategories] = useState<Category[]>([]);
+    const [featuredProducts, setFeaturedProducts] = useState<ProductModel[]>([]);
+    const [allProducts,setAllProducts] = useState<ProductModel[]>([]);
     const isAuth = useSelector((state:RootState)=>state.login.isAuthenticated);
     const userId = useSelector((state:RootState)=>state.user.profile?.id);
     const accessKey = useSelector((state:RootState)=>state.login.user?.access);
@@ -28,6 +32,10 @@ function Home() {
         const fetchData = async () => {
             const categoriesData = await getAllCategories();
             setCategories(categoriesData);
+            const featuredData = await getFeaturedProducts();
+            setFeaturedProducts(featuredData);
+            const allproductsData = await getAllProducts();
+            setAllProducts(allproductsData);
         };
         const fetchUserDatas = async () => {
             if(isAuth && userId && (localStorage.getItem("UserCartData") === '' || localStorage.getItem("UserCartData") === null)){
@@ -35,7 +43,7 @@ function Home() {
                     // fetchWishlists(Number(userId),String(accessKey));
                 const response = await fetchcart(Number(userId),String(accessKey));
                 for(let i = 0;i<response.data.length;i++){
-                    dispatch(addToCart(response.data[i].product));
+                    dispatch(addToCart(response.data[i]));
                 }
                 
             }
@@ -63,17 +71,14 @@ const user = useSelector((state:RootState)=> state.user.profile);
             <div className="slider-category row">
                 <SliderCard />
             </div>
-            {(categories.length === 8)?(
+            {(featuredProducts.length === 0)?(
                 <SliderLoading />
             ):(
                 <ProductSlider 
-            title="Flash Deals"
+            title="Featured Products"
             slog="today's"
             category={[]}
-            products={
-                [
-            ]
-            }
+            products={featuredProducts}
             />
             )}
             {(categories.length === 0) ? (
@@ -87,13 +92,13 @@ const user = useSelector((state:RootState)=> state.user.profile);
             }
             />)}
             
-            {(categories.length === 8)?(
+            {(allProducts.length ===0 )?(
                 <SliderLoading />
             ):(
                 <ProductSlider 
             title="Most Viewed products"
             slog="This Month"
-            products={[]}
+            products={allProducts}
             category={[]}
             />
             )}

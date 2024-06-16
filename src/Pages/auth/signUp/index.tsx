@@ -1,9 +1,6 @@
-import React, { useEffect } from "react";
 import './index.css';
-import Footer from "../../shared/commen/footer";
-import TopBar from "../../shared/commen/topBar";
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import signup from "../signIn";
+import { Link } from 'react-router-dom';
+
 
 function SignUp() {
     return(
@@ -21,7 +18,7 @@ function SignUp() {
                             <p>Welcome to <br /><strong>Agricultural Market Place</strong></p>
                             <small>A Place where you can track all your <br /> expenses and incomes ....</small>
                             <span>Let's Get Started ...</span>
-                                <a href="#" className="signup-content-form-button">Register as a Seler</a>
+                                <Link to={'/signup/agent'} className="signup-content-form-button">Register as a Seller</Link>
                             
                             <Link to={'/signup/customer'} className="signup-content-form-button">Register as a Customer</Link>
                             <span>Already Have an account? <Link to={'/signin'}>Login</Link></span>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import './index.css';
 import NavBar from "../shared/commen/navBar";
 import TopPath from "../shared/commen/topPath";
@@ -10,18 +10,29 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
 import ProductReviews from "../shared/card/reviews";
 import { ProductModel } from "../../model/product";
+import { addProductReview } from "../../services/product-review/add-product-review";
+import { ReviewModel } from "../../model/productReviewModel";
+import { fetchProductReviewbyId } from "../../services/product-review/get-product-Review";
 
 function ProductDetail() {
     const [product, setProduct] = useState<ProductModel | null>(null);
     const [quantity, setQuantity] = useState(1);
     const [mainImage, setMainImage] = useState<string | undefined>(undefined); // Initialize with undefined
-
+    const [rating, setRating] = useState(0);
+    const [reviewMessage, setReviewMessage] = useState<string>("");
+    const [reviews,setReviews] = useState<ReviewModel[]>([]);
+    const accessKey = useSelector((state:RootState)=>state.login.user?.access);
+    const userID = useSelector((state:RootState)=>state.user.profile?.id);
+    const isAuthenticated = useSelector((state:RootState)=>state.login.isAuthenticated);
+    
     useEffect(() => {
         const queryParams = new URLSearchParams(window.location.search);
         const productId = queryParams.get('id');
         
+
         if(productId) {
             fetchProduct(productId);
+            
         }
     }, []);
 
@@ -32,6 +43,8 @@ function ProductDetail() {
             // Set main image here after fetching product data
             if (productData && productData.gallery.length > 0) {
                 setMainImage(productData.gallery[0].image);
+                const reviewData = await fetchProductReviewbyId(Number(productId));
+                setReviews(reviewData.data);
             }
         } catch (error) {
             console.error('Error fetching product:', error);
@@ -54,43 +67,51 @@ function ProductDetail() {
         );
     }
 
-    const reviews = [{
-        user:"Yosef Sahle",
-        image:"./assets/img/logo.png",
-        message:"hello world",
-        date:"12/16/2024"
-    },
-    {
-        user:"Yosef Sahle",
-        image:"./assets/img/logo.png",
-        message:"hello world",
-        date:"12/16/2024"
-    },
-    {
-        user:"Yosef Sahle",
-        image:"./assets/img/logo.png",
-        message:"hello world",
-        date:"12/16/2024"
-    },
-    {
-        user:"Yosef Sahle",
-        image:"./assets/img/logo.png",
-        message:"hello world",
-        date:"12/16/2024"
-    },
-    {
-        user:"Yosef Sahle",
-        image:"./assets/img/logo.png",
-        message:"hello world",
-        date:"12/16/2024"
-    },
-    {
-        user:"Yosef Sahle",
-        image:"./assets/img/logo.png",
-        message:"hello world",
-        date:"12/16/2024"
-    },
-]
+    const handleStarClick = (value: React.SetStateAction<number>) => {
+        setRating(value);
+    };
+
+    const handleChangeReview = (e: ChangeEvent<HTMLInputElement>) => {
+        setReviewMessage(e.target.value);
+    };
+
+//     const reviews = [{
+//         user:"Yosef Sahle",
+//         image:"./assets/img/logo.png",
+//         message:"hello world",
+//         date:"12/16/2024"
+//     },
+//     {
+//         user:"Yosef Sahle",
+//         image:"./assets/img/logo.png",
+//         message:"hello world",
+//         date:"12/16/2024"
+//     },
+//     {
+//         user:"Yosef Sahle",
+//         image:"./assets/img/logo.png",
+//         message:"hello world",
+//         date:"12/16/2024"
+//     },
+//     {
+//         user:"Yosef Sahle",
+//         image:"./assets/img/logo.png",
+//         message:"hello world",
+//         date:"12/16/2024"
+//     },
+//     {
+//         user:"Yosef Sahle",
+//         image:"./assets/img/logo.png",
+//         message:"hello world",
+//         date:"12/16/2024"
+//     },
+//     {
+//         user:"Yosef Sahle",
+//         image:"./assets/img/logo.png",
+//         message:"hello world",
+//         date:"12/16/2024"
+//     }
+// ]
 
     return (
         <>
@@ -157,14 +178,41 @@ function ProductDetail() {
                 <div className="product-detail-reviews-overview">
                 <div className="product-review-container">
                     {
-                        reviews.map((review,index)=>(
-                            <ProductReviews 
-                            user={review.user}
-                            image={review.image}
-                            message={review.message}
-                            date={review.date}
+                        isAuthenticated?(<div className="product-review-container-add-review">
+                            <input type="text" 
+                            value={reviewMessage}
+                            onChange={handleChangeReview}
                             />
-                        ))
+                            <div>
+                            <div className="rating">
+                                {[1, 2, 3, 4, 5].map((value) => (
+                                    <i key={value}
+                                    className={value <= rating ? 'fa-solid fa-star' : 'fa-regular fa-star'} onClick={() => handleStarClick(value)}></i>))}
+                            </div>
+                            <button style={{fontSize:"17px",fontWeight:"bolder"}}
+                            onClick={()=>{
+                                addProductReview(String(accessKey),Number(userID),Number(product.id),String(reviewMessage),Number(rating))
+                            }}
+                            >Submit Review</button>
+                            </div>
+                        </div>):(null)
+                    }
+                    <h1>Product Reviews</h1>
+                    {
+                        
+                        (reviews.length > 0)?(
+                            reviews.map((review,index)=>(
+                                <ProductReviews 
+                                user={review.user.first_name +" "+review.user.last_name}
+                                image={review.profile.image}
+                                message={review.review}
+                                date={review.user.date_joined}
+                                reviewrId={review.user.id}
+                                />
+                            ))
+                        ):(
+                            <h1>No Reviews</h1>
+                        )
                     }
                 </div>
                 <div className="product-overview-container">

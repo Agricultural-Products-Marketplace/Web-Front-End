@@ -57,7 +57,7 @@ export const loginUser=(
             body:JSON.stringify(Credentials)
         });
         if(!response.ok){
-            throw new Error('Login Faild');
+            throw new Error('Incorrect Password or Email');
         }
         const userData:UserData = await response.json();
         console.log(userData);

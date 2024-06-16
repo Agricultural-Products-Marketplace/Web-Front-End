@@ -7,7 +7,7 @@ import { CartModel } from "../model/cart";
 
 
 export interface cartState {
-    cart: ProductModel[];
+    cart: CartModel[];
 }
 
 export interface UserState{
@@ -20,7 +20,7 @@ export interface AppState {
 
 export interface AddToCartAction {
     type: typeof ADD_TO_CART;
-    payload: ProductModel;
+    payload: CartModel;
 }
 
 export interface RemoveFromCartAction {

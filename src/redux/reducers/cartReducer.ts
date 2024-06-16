@@ -17,19 +17,23 @@ const initialState: cartState = loadInitialState();
 const cartReducer = (state = initialState, action: cartAction): cartState => {
     switch (action.type) {
         case ADD_TO_CART:
+            // Filter out any existing product with the same ID before adding the new one
+            const updatedCartAfterAdd = state.cart.filter(cartItem => cartItem.product.id !== action.payload.product.id);
             const newStateAfterAdd = {
                 ...state,
-                cart: [...state.cart, action.payload],
+                cart: [...updatedCartAfterAdd, action.payload],
             };
             localStorage.setItem("UserCartData", JSON.stringify(newStateAfterAdd));
             return newStateAfterAdd;
+
         case REMOVE_FROM_CART:
             const newStateAfterRemove = {
                 ...state,
-                cart: state.cart.filter(product => product.id !== action.payload),
+                cart: state.cart.filter(cartItem => cartItem.product.id !== action.payload),
             };
             localStorage.setItem("UserCartData", JSON.stringify(newStateAfterRemove));
             return newStateAfterRemove;
+
         default:
             return state;
     }

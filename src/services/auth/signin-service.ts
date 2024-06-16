@@ -138,3 +138,30 @@ export const updateProfile = async (updatedFields: { [key: string]: string }, ac
         throw error;
     }
 };
+
+
+
+
+
+export const updateAdress = async (updatedFields: { [key: string]: string }, accessToken: any,) => {
+    try {
+        const config: AxiosRequestConfig = {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        };
+        const response = await axios.patch(`${url}v1/auth/profile/update/`, updatedFields, config);
+
+            if(response.status === 200){
+                const response = await fetch(`${url}v1/auth/profile/`,{
+                    headers:{
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                });
+            }
+
+        
+    } catch (error) {
+        throw error;
+    }
+};

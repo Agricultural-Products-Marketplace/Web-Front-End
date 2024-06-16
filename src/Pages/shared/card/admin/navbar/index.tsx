@@ -1,13 +1,23 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../../redux/reducers/rootReducer';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../../../redux/actions/loginAction';
 
 interface AdminNavBarProps {
-    onNavItemClick: (componentName: 'Dashboard' | 'Orders' | 'Products' | 'Customers' | 'addProduct' | 'Transaction' | 'Settings') => void;
+
+
+    onNavItemClick: (componentName: 'Dashboard' | 'Orders' | 'Products' | 'Customers' | 'addProduct'|'addFarmer'|'manageFarmer' | 'Transaction' | 'Settings') => void;
 }
 
 const AdminNavBar: React.FC<AdminNavBarProps> = ({ onNavItemClick }) => {
-    const [activeItem, setActiveItem] = React.useState<'Dashboard' | 'Orders' | 'Products' | 'Customers' | 'addProduct' | 'Transaction' | 'Settings'>('Dashboard');
-
-    const handleItemClick = (componentName: 'Dashboard' | 'Orders' | 'Products' | 'Customers' | 'addProduct' | 'Transaction' | 'Settings') => {
+    const dispatch = useDispatch();
+    const handleLogout = () => {
+        dispatch(logout()); 
+    };
+    const isAgent = useSelector((state:RootState)=>state.user.profile?.user.is_agent);
+    const [activeItem, setActiveItem] = React.useState<'Dashboard' | 'Orders' | 'Products' | 'Customers' | 'addProduct'|'addFarmer'|'manageFarmer' | 'Transaction' | 'Settings'>('Dashboard');
+    const handleItemClick = (componentName: 'Dashboard' | 'Orders' | 'Products' | 'Customers' | 'addProduct'|'addFarmer'|'manageFarmer' | 'Transaction' | 'Settings') => {
         setActiveItem(componentName);
         onNavItemClick(componentName);
     };
@@ -28,9 +38,10 @@ const AdminNavBar: React.FC<AdminNavBarProps> = ({ onNavItemClick }) => {
                     <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('Customers')} className={activeItem === 'Customers' ? 'active-item' : ''}><i className="fa-solid fa-user-group"></i><h4>My Customers</h4></button></li>
                     <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('Orders')} className={activeItem === 'Orders' ? 'active-item' : ''}><i className="fa-solid fa-cart-shopping"></i><h4>Orders</h4></button></li>
                     <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('addProduct')} className={activeItem === 'addProduct' ? 'active-item' : ''}><i className="fa-solid fa-plus"></i><h4>Add Product</h4></button></li>
+                    {isAgent?(<li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('addFarmer')} className={activeItem === 'addFarmer' ? 'active-item' : ''}><i className="fa-solid fa-user-plus"></i><h4>Add Farmer</h4></button></li>):(null)}
+                    {isAgent?(<li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('manageFarmer')} className={activeItem === 'manageFarmer' ? 'active-item' : ''}><i className="fa-solid fa-user-plus"></i><h4>Manage Farmers Profile</h4></button></li>):(null)}
                     <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('Transaction')} className={activeItem === 'Transaction' ? 'active-item' : ''}><i className="fa-solid fa-credit-card"></i><h4>Transaction</h4></button></li>
-                    <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('Settings')} className={activeItem === 'Settings' ? 'active-item' : ''}><i className="fa-solid fa-gear"></i><h4>Settings</h4></button></li>
-                    <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('Dashboard')} className={activeItem === 'Dashboard' ? 'active-item' : ''}><i className="fa-solid fa-arrow-right-from-bracket"></i><h4>Logout</h4></button></li>
+                    {/* <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('Settings')} className={activeItem === 'Settings' ? 'active-item' : ''}><i className="fa-solid fa-gear"></i><h4>Settings</h4></button></li> */}
                 </ul>
             </div>
         </div>
