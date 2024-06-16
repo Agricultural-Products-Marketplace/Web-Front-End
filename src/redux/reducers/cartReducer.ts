@@ -26,7 +26,7 @@ const cartReducer = (state = initialState, action: cartAction): cartState => {
         case REMOVE_FROM_CART:
             const newStateAfterRemove = {
                 ...state,
-                cart: state.cart.filter(product => product.id !== action.payload),
+                cart: state.cart.filter(cart => cart.product.id !== action.payload),
             };
             localStorage.setItem("UserCartData", JSON.stringify(newStateAfterRemove));
             return newStateAfterRemove;

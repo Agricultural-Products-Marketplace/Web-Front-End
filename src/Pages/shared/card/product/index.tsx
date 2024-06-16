@@ -27,7 +27,7 @@ const Product: React.FC<ProductProps> = ({ products }) => {
                                     <a href="#"><i className="fa fa-heart"></i></a>
                                 </div>
                             </div>
-                            <button onClick={()=>{dispatch(addToCart(product));
+                            <button onClick={()=>{dispatch(addToCart({product}));
                                 
                             }} className="buy-btn">
                                 Add To Cart

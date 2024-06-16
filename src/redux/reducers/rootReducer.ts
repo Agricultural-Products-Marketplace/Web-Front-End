@@ -6,6 +6,7 @@ import loginReducer from './loginReducer';
 import userReducer from './userReducer';
 import showpopReducer from './showpopReducer';
 import { wishlistReducer } from './wishlistReducer';
+import numberListReducer from './numberlistReducer';
 
 
 
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     user: userReducer,
     showpopup:showpopReducer,
     wishlist:wishlistReducer,
+    numberlist:numberListReducer
 });
 
 export default rootReducer;

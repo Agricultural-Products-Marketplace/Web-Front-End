@@ -24,6 +24,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import ForgetPassword from './Pages/auth/forgetPasswords';
 import ResetPassword from './Pages/auth/resetPassword';
+import SellerSignUp from './Pages/auth/signUp/sellerSignup';
 
 
 function ScrollToTopOnRouteChange() {
@@ -53,6 +54,7 @@ function App(): JSX.Element { // Get the location directly
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signup/customer" element={<CustomerSignUp />} />
+          <Route path="/signup/agent" element={<SellerSignUp />} />
           <Route path='/forget-password' element={<ForgetPassword />} />
           <Route path='/create-new-password' element={<ResetPassword />} />
           <Route path='/category' element={<Category />} />

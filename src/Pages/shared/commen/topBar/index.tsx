@@ -31,7 +31,7 @@ const TopBar = () => {
     }, []);
 
     return (
-        pathname === '/admin' || pathname === '/signup/customer'|| pathname === '/signUp'|| pathname === '/signUp/' ||pathname === '/signin' ||pathname === '/success' ?null:<div className="top_bar" id='TopBar'>
+        pathname === '/admin'|| pathname === '/signup/agent' || pathname === '/signup/customer'|| pathname === '/signUp'|| pathname === '/signUp/' ||pathname === '/signin' ||pathname === '/success' ?null:<div className="top_bar" id='TopBar'>
         <p>Summer Sale For All Agricultural product And Free Express Delivery - OFF 50%! <Link to={'/category'}><strong> Shop Now</strong></Link></p>
         <div className="gtranslate_wrapper"></div>
         <div className="icons">

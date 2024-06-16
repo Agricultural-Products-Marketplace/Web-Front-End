@@ -12,6 +12,7 @@ import { addToWishlist, removeFromWishlist } from '../../redux/actions/wishlistA
 import { ProductModel } from '../../model/product';
 import { addCart } from '../../services/cart/addnewcart';
 import { addToCart } from '../../redux/actions/cartAction';
+import { CartModel } from '../../model/cart';
 
 function Category() {
     const dispatch: AppDispatch = useDispatch();
@@ -22,10 +23,15 @@ function Category() {
     const userId:number = user?.id ? user.id : 0;
     const accessKey = useSelector((state:RootState)=> state.login.user?.access);
     const wishlist = useSelector((state:RootState)=>state.wishlist.items);
+    const cart = useSelector((state:RootState)=>state.cart.cart);
     const isAuthenticated = useSelector((state:RootState)=>state.login.isAuthenticated);
 
-    function includes<ProductData>(array:ProductData[],value:ProductData):boolean{
+    function includes<ProductModel>(array:ProductModel[],value:ProductModel):boolean{
         return array.some(item => item === value);
+    }
+
+    function includescart<ProductModel>(array:CartModel[],value:number):boolean{
+        return array.some(item => Number(item.product.id) === Number(value));
     }
     
 
@@ -83,7 +89,7 @@ function Category() {
                                             const respose = await addWishlists(userId,product.id,String(accessKey));
                                             dispatch(addToWishlist(product));
                                         }}><i className="fa-regular fa-heart"></i></button>):(
-                                            (isAuthenticated)?(<button onClick={async ()=>{
+                                            (isAuthenticated && !includes(wishlist,product))?(<button onClick={async ()=>{
                                                 const respose = await addWishlists(userId,product.id,String(accessKey));    
                                                 dispatch(removeFromWishlist(product.id))
                                             }}><i className="fa-solid fa-heart" style={{color:"gold"}}></i></button>):(null)
@@ -93,10 +99,10 @@ function Category() {
                             </div>
                             <div className="overly-bottom">
                                 {
-                                    (isAuthenticated)?(<button onClick={async ()=>{
+                                    (isAuthenticated && !includescart(cart,product.id))?(<button onClick={async ()=>{
                                         const response = await addCart(product.id,userId,Number(product.price),"Ethiopia",`${user?.id}_cart`,String(accessKey));
                                         if(response === 201){
-                                            dispatch(addToCart(product));
+                                            dispatch(addToCart({product}));
                                         }
                                     }}> Add To Cart</button>):(null)
                                 }

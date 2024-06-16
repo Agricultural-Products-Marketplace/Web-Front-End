@@ -4,9 +4,9 @@ import { ProductModel } from "../../model/product";
 import { CartModel } from "../../model/cart";
 
 
-export async function deletcartitem(cartId:string,itemId:number,userId:number,accessToken: string){
+export async function deletcartitem(cartId:string,itemId:number,accessToken: string){
     try {
-      const response = await axios.delete(`${url}v1/store/cart-delete/${cartId}/${itemId}/${userId}/`, {
+      const response = await axios.delete(`${url}v1/store/cart-delete/${cartId}/${itemId}/`, {
         headers: {
           'Authorization': `Bearer ${accessToken}`
         }

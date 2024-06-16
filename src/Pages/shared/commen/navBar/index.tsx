@@ -25,7 +25,7 @@ const NavBar: React.FC = () => {
         dispatch(logout()); 
     };
 
-    return(pathname === '/signup/customer' || pathname === '/signin' || pathname === '/create-new-password' ||pathname === '/forget-password' || pathname === '/signUp/' || pathname === '/signUp' || pathname === '/success'? null : <section className="navbar">
+    return(pathname === '/signup/customer' || pathname === '/signup/agent' || pathname === '/signin' || pathname === '/create-new-password' ||pathname === '/forget-password' || pathname === '/signUp/' || pathname === '/signUp' || pathname === '/success'? null : <section className="navbar">
     <a href="#123" className="navbar_logo">
         <img src="./assets/img/logo.png" alt="" />
         <hr/>
@@ -66,14 +66,10 @@ const NavBar: React.FC = () => {
             <i className="fa fa-shop"></i>
             Manage Farmers Profile
         </Link>):(null)}
-        <a href="">
-            <i className="fa fa-star"></i>
-            My Reviews
-        </a>
-        <a href="" onClick={handleLogout}>
+        <Link to={'/signin'} onClick={handleLogout}>
         <i className="fa-solid fa-right-from-bracket"></i>
             LogOut
-        </a>
+        </Link>
     </div>
     </a>):(null)}
     </div>
@@ -86,7 +82,7 @@ const NavBar: React.FC = () => {
     {isAuthenticated?(null):(<Link to={'/signUp/'}><i className="fa-solid fa-user-plus"></i>Sign Up</Link>)}
     {isAuthenticated?(null):(<Link to={'/signin'}><i className="fa-solid fa-arrow-right-to-bracket"></i>Log in</Link>)}
     <Link to={'/'}><i className="fa-solid fa-home"></i> Home</Link>
-    {(user?.user.is_farmer|| user?.user.is_agent || user?.user.is_staff)?(<Link to={'/'}><i className="fa-solid fa-shop"></i>My Shop</Link>):(null)}
+    {(user?.user.is_farmer|| user?.user.is_agent || user?.user.is_staff)?(<Link to={'/admin'}><i className="fa-solid fa-shop"></i>My Shop</Link>):(null)}
     <Link to={'/category'}><i className="fa-solid fa-layer-group"></i> Category</Link>
     {isAuthenticated?(<Link to={'/wishlist'}><i className="fa-solid fa-heart"></i> Wishlist ({wishlist})</Link>):(null)}
     {isAuthenticated?(<Link to={'/message'}><i className="fa-solid fa-message"></i>Messge</Link>):(null)}

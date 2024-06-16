@@ -4,16 +4,41 @@ import './index.css';
 import DropDown from '../../shared/card/dropdown';
 import { getAllCategories } from '../../../services/category/getCategory';
 import { Category } from '../../../model/category';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../redux/reducers/rootReducer';
+import { getProductByFarmerId } from '../../../services/product/getProducts';
+import { ProductModel } from '../../../model/product';
+import Swal from 'sweetalert2';
+import { deletefarmerproduct } from '../../../services/product/deletProduct';
+import AddProduct from '../../addProduct';
+import { title } from 'process';
+import EdiProduct from '../editProducts';
 
 
 function Products() {
 
     const [categories, setCategories] = useState<Category[]>([]);
     const [category, setCategory] = useState<string>('Select category');
+    const [products, setProducts] =useState<ProductModel[]>([]);
+    // const userId = useSelector((state:RootState)=>state.user.profile?.id);
+    const userId = 2;
+    const accessToken = useSelector((state:RootState)=>state.login.user?.access);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState("All Products");
+    const [filteredProducts, setFilteredProducts] = useState<ProductModel[]>([]);
+    const [editProduct,setEditProduct] = useState<boolean>(false); 
+    const [editProductId,setEditProductId] = useState<number>(0);
+
 
     useEffect(()=>{
         const fetchData = async () => {
             const categoriesData = await getAllCategories();
+            const productData = await getProductByFarmerId(Number(userId));
+            
+            if(productData.status === 200){
+                setProducts(productData.data);
+                setFilteredProducts(productData.data);
+            }
             setCategories(categoriesData);
         };
         fetchData();
@@ -23,26 +48,13 @@ function Products() {
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 15;
 
-    const originalProductData = [
-        { id: 1, image:'https://domf5oio6qrcr.cloudfront.net/medialibrary/11525/0a5ae820-7051-4495-bcca-61bf02897472.jpg', name: 'Apple', category: 'Fruit', qty: 'X2', date: 'Feb 5, 2020', price: '253.82', discount: '60.76', status: 'out of Stock' },
-        { id: 2, image:'https://www.shutterstock.com/image-photo/bunch-bananas-isolated-on-white-600nw-1722111529.jpg', name: 'Banana', category: 'Fruit', qty: 'X3', date: 'Feb 6, 2020', price: '350.25', discount: '80.30', status: 'in Stock' },
-        { id: 3, image:'https://t4.ftcdn.net/jpg/00/60/56/89/360_F_60568941_XGMX5shUGjF6Oz3B21ICojozyf1FBqmY.jpg', name: 'Tomato', category: 'Vegetable', qty: 'X3', date: 'Feb 6, 2020', price: '350.25', discount: '80.30', status: 'in Stock' },
-        { id: 4, image:'https://images.immediate.co.uk/production/volatile/sites/30/2020/02/Kidney-beans-8496667.jpg?quality=90&resize=556,505', name: 'beans', category: 'Pulse', qty: 'X3', date: 'Feb 6, 2020', price: '350.25', discount: '80.30', status: 'in Stock' },
-        { id: 5, image:'https://shop.tulsidas.com/cdn/shop/products/wheat-whole-wheat-seeds-688110.jpg?v=1685168866', name: 'wheat', category: 'Grain', qty: 'X3', date: 'Feb 6, 2020', price: '350.25', discount: '80.30', status: 'out of Stock' },
-        { id: 6, image:'https://vimafoods.com/wp-content/uploads/2020/05/mazorcas-maiz-choclo.jpg', name: 'corn', category: 'Grain', qty: 'X3', date: 'Feb 6, 2020', price: '350.25', discount: '80.30', status: 'in Stock' },
-        { id: 7, image:'https://domf5oio6qrcr.cloudfront.net/medialibrary/6159/ff717f2b-8a5b-4862-a65f-25b59e3f57b8.jpg', name: 'corn', category: 'Grain', qty: 'X3', date: 'Feb 6, 2020', price: '350.25', discount: '80.30', status: 'in Stock' },
-        { id: 8, image:'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3BmLXMxMjctYWstNzI4Ml82LnBuZw.png', name: 'Sun Flower', category: 'Oilseed', qty: 'X3', date: 'Feb 6, 2020', price: '350.25', discount: '80.30', status: 'in Stock' },
-        { id: 9, image:'https://static.wixstatic.com/media/70ba6c_1ddc70fd731d4d01975e5f42f6261398~mv2.jpg/v1/fill/w_560,h_330,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/s-l1600.jpg', name: 'soybeans', category: 'Oilseeds', qty: 'X3', date: 'Feb 6, 2020', price: '350.25', discount: '80.30', status: 'in Stock' },
-        { id: 10, image:'https://www.the-sustainable-fashion-collective.com/img/http/assets.the-sustainable-fashion-collective.com/assets/the-swatch-book/2014/11/cotton.png/7c098280951a28c0f2aa4291f179ae42.png', name: 'cotton', category: 'Fiber crop', qty: 'X3', date: 'Feb 6, 2020', price: '350.25', discount: '80.30', status: 'in Stock' },
-        // Add more data as needed
-    ];
 
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = originalProductData.slice(indexOfFirstProduct, indexOfLastProduct);
+    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
 
     const nextPage = () => {
-        if (indexOfLastProduct < originalProductData.length) {
+        if (indexOfLastProduct < products.length) {
             setCurrentPage(currentPage + 1);
         }
     };
@@ -53,19 +65,53 @@ function Products() {
         }
     };
 
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const handleOptionClick = (option: string) => {
+        setSelectedOption(option);
+        setIsDropdownOpen(false); // Close dropdown after selecting an option
+        if (option === "All Products") {
+            setFilteredProducts(products); // Reset to all transactions
+        } else {
+            const filtered = products.filter(product => product.category.title === option);
+            setFilteredProducts(filtered);
+        }
+    };
+
     return (
         <div className="admin-page-main">
             <AdminTopCard title="My Products" />
-            <div className="admin-page-main-products">
+            {editProduct?(
+                <EdiProduct 
+                productId={Number(editProductId)}
+                />
+            ):(
+                <div className="admin-page-main-products">
                 <div className="admin-page-main-products-title">
                     <h3>Product List</h3>
                     <div className="admin-page-main-products-title-actions">
-
-                    <DropDown items={categories.map(category =>(
+                    <div className={`dropdown ${isDropdownOpen ? "menu-open" : ""}`}>
+                            <div className="select" onClick={() => toggleDropdown()}>
+                                <span className="selected">{selectedOption}</span>
+                                <i className={`fa-solid ${isDropdownOpen ? "fa-caret-up" : "fa-caret-down"}`}></i>
+                            </div>
+                            {isDropdownOpen && (
+                                <ul className="menu">
+                                    <li  className={selectedOption === "All Products" ? "active" : ""}onClick={() => handleOptionClick("All Products")}>All Products</li>
+                                    
+                                    {categories.map(category => (
+                                        <li  className={selectedOption === category.title ? "active" : ""}onClick={() => handleOptionClick(category.title)}>{category.title}</li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+                    {/* <DropDown items={categories.map(category =>(
                         category.title
                     ))} onSelectItem={setCategory}
                     selectedItem={category}
-                    />
+                    /> */}
                     </div>
                 </div>
                 <table className="admin-page-main-products-table">
@@ -82,29 +128,53 @@ function Products() {
                         </tr>
                     </thead>
                     <tbody>
-                        {currentProducts.map(product => (
-                            <tr key={product.id}>
-                                <td className='flex-3'>
-                                    <div className='row'>
-                                        <img src={product.image} alt="" />
-                                        <p>{product.name}</p>
-                                    </div>
-                                </td>
-                                <td className="flex-1">{product.category}</td>
-                                <td className='flex-1'>{product.qty}</td>
-                                <td className='flex-1'>{product.date}</td>
-                                <td className='flex-1'>{product.price}</td>
-                                <td className='flex-1'>{product.discount}</td>
-                                <td className='flex-1' style={{ color: product.status === 'waiting' ? 'yellow' : (product.status === 'in Stock' ? 'green' : (product.status === 'out of Stock' ? 'Red' : 'Black')) }}>{product.status}</td>
-                                <td className='flex-1'>
-                                    <div className='row'>
-                                        <button><i className='fa-solid fa-pen'></i></button>
-                                        <button><i className='fa-solid fa-trash'></i></button>
-                                        <button><i className='fa-solid fa-ellipsis'></i></button>
-                                    </div>
-                                </td>
-                            </tr>
-                        ))}
+                        {(products.length > 0)?(
+                            filteredProducts.map(product => (
+                                <tr key={product.id}>
+                                    <td className='flex-3'>
+                                        <div className='row'>
+                                            <img src={product.image} alt="" />
+                                            <p>{product.title}</p>
+                                        </div>
+                                    </td>
+                                    <td className="flex-1">{product.category.title}</td>
+                                    <td className='flex-1'>{product.in_stock}</td>
+                                    <td className='flex-1'>{String(product.date)}</td>
+                                    <td className='flex-1'>{product.price}</td>
+                                    <td className='flex-1'>{product.old_price}</td>
+                                    <td className='flex-1' style={{ color: product.status === 'in_review' ? 'yellow' : (product.status === 'published' ? 'green' : (product.status === 'disabled' ? 'Red' : 'Black')) }}>{product.status}</td>
+                                    <td className='flex-1'>
+                                        <div className='row'>
+                                            <button onClick={()=>{
+                                                setEditProductId(product.id)
+                                                setEditProduct(true);
+                                            }}><i className='fa-solid fa-pen'></i></button>
+                                            <button
+                                            onClick={()=>{
+                                                Swal.fire({
+                                                    title: 'Are you sure?',
+                                                    text: "You won't be able to revert this!",
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#d33',
+                                                    cancelButtonColor: '#000000',
+                                                    confirmButtonText: 'Yes, delete it!'
+                                                    
+                                                }).then((result)=>{
+                                                    if(result.isConfirmed){
+                                                        deletefarmerproduct(Number(userId),product.pid,String(accessToken));
+                                                        window.location.reload();
+                                                    }
+                                                })
+                                            }}
+                                            ><i className='fa-solid fa-trash'></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))
+                        ):(
+                            <h3>You Have No Products</h3>
+                        )}
                     </tbody>
                 </table>
                 <div className='admin-page-main-products-table-nav-button'>
@@ -112,6 +182,7 @@ function Products() {
                     <button onClick={nextPage}>Next <i className='fa-solid fa-arrow-right'></i></button>
                 </div>
             </div>
+            )}
         </div>
     );
 }

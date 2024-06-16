@@ -1,71 +1,61 @@
 import React, { useEffect, useState } from 'react';
-import './index.css';
-import TopPath from '../shared/commen/topPath';
-import DropDown from '../shared/card/dropdown';
-import { getAllCategories } from '../../services/category/getCategory';
-import { Category } from '../../model/category';
-import { addProduct } from '../../services/product/addProduct';
+import TopPath from '../../shared/commen/topPath';
+import DropDown from '../../shared/card/dropdown';
+import { getAllCategories } from '../../../services/category/getCategory';
+import { Category } from '../../../model/category';
+import { addProduct } from '../../../services/product/addProduct';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/reducers/rootReducer';
+import { RootState } from '../../../redux/reducers/rootReducer';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { ProductModel } from '../../../model/product';
+import { getProductById } from '../../../services/product/getProducts';
 
-interface Image {
-    id: number;
-    url: string;
-    file: File;
+interface EdiProductProps {
+    productId: number;
 }
 
-function AddProduct() {
-    const navigate = useNavigate();
-    const [categories, setCategories] = useState<Category[]>([]);
-    const userId = useSelector((state: RootState) => state.user.profile?.id);
-    const accessKey = useSelector((status: RootState) => status.login.user?.access);
-    const [images, setImages] = useState<Image[]>([]);
-    const [imageIdCounter, setImageIdCounter] = useState<number>(0);
-    const [error, setError] = useState<string | null>(null);
-    const [quantity, setQuantity] = useState<number>(0);
-    const [productPrice, setProductPrice] = useState<number>(0);
-    const [oldPrice, setOldPrice] = useState<number>(0);
-    const [shipmentPrice, setShipmentPrice] = useState<number>(0);
-    const [inStock, setInStock] = useState<boolean>(false);
-    const [isFeatured, setIsFeatured] = useState<boolean>(false);
-    const [productName, setProductName] = useState<string>('');
-    const [productSlog, setProductSlog] = useState<string>('');
-    const [category, setCategory] = useState<string>('Select category');
-    const [status, setStatus] = useState<string>('Select status');
-    const [description, setDescription] = useState<string>('');
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-
+const EdiProduct: React.FC<EdiProductProps> = ({ productId }) => {
+    
     useEffect(() => {
         const fetchData = async () => {
             const categoriesData = await getAllCategories();
+            const product = await getProductById(productId);
             setCategories(categoriesData);
+            if(product){
+                setProductName(product.title);
+                setCategory(product.category.title);
+                setProductSlog(product.slug);
+                setProductPrice(Number(product.price));
+                setOldPrice(Number(product.old_price));
+                setStatus(product.status);
+                setShipmentPrice(Number(product.shipping_amount));
+                setIsFeatured(product.featured);
+                setDescription(product.description);
+            }
         };
         fetchData();
     }, []);
 
-    const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files) {
-            const files = Array.from(event.target.files);
-            if (images.length + files.length > 10) {
-                setError("You can only upload a maximum of 10 images.");
-                return;
-            }
-            setError(null);
-            const newImages = files.map((file, index) => ({
-                id: imageIdCounter + index + 1,
-                url: URL.createObjectURL(file),
-                file: file
-            }));
-            setImageIdCounter(prevCounter => prevCounter + files.length);
-            setImages(prevImages => [...prevImages, ...newImages]);
-        }
-    };
+    const navigate = useNavigate();
+    const [categories, setCategories] = useState<Category[]>([]);
+    const userId = useSelector((state: RootState) => state.user.profile?.id);
+    const accessKey = useSelector((status: RootState) => status.login.user?.access);
+    const [error, setError] = useState<string | null>(null);
+    const [quantity, setQuantity] = useState<number>(0);
+    const [productPrice, setProductPrice] = useState<number>();
+    const [oldPrice, setOldPrice] = useState<number>();
+    const [shipmentPrice, setShipmentPrice] = useState<number>();
+    const [inStock, setInStock] = useState<boolean>();
+    const [isFeatured, setIsFeatured] = useState<boolean>();
+    const [productName, setProductName] = useState<string>();
+    const [productSlog, setProductSlog] = useState<string>('');
+    const [category, setCategory] = useState<string>('Select category');
+    const [status, setStatus] = useState<string>('');
+    const [description, setDescription] = useState<string>();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
-    const handleImageDelete = (id: number) => {
-        setImages(images.filter(image => image.id !== id));
-    };
+    
 
     const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let newQuantity = Number(event.target.value);
@@ -103,7 +93,7 @@ function AddProduct() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsLoading(true);
-        if (!productName || !description || !productPrice || !category || !shipmentPrice || !quantity || images.length === 0) {
+        if (!productName || !description || !productPrice || !category || !shipmentPrice || !quantity) {
             // If any required field is missing, show an error message or take appropriate action
             console.log("Please fill in all required fields");
             setIsLoading(false);
@@ -125,29 +115,17 @@ function AddProduct() {
             formData.append('price', String(productPrice));
             formData.append('shipping_amount', String(shipmentPrice));
             formData.append('stock_qty', String(quantity));
-            formData.append('category',String(3));
+            formData.append('category', String(3));
             formData.append('in_stock', String(inStock));
             formData.append('status', status);
             formData.append('is_featured', String(isFeatured));
             formData.append('farmer', String(2));
             formData.append('slug', productSlog);
-            formData.append('image',images[0].file);
-            images.forEach((item,index)=> {
-                if(item.file){
-                    formData.append(`gallery[${index}][image]`,item.file);
-                }
-            })
-
-            // Append images
-            images.forEach((image, index) => {
-                formData.append(`images[${index}]`, image.file);
-            });
 
             const response = await addProduct(
-                formData,Number(userId),String(accessKey)
+                formData, Number(userId), String(accessKey)
             );
 
-            navigate('/vendor/products/');
             Swal.fire({
                 icon: 'success',
                 title: 'Product Created Successfully',
@@ -166,7 +144,7 @@ function AddProduct() {
         <form className="add-product" onSubmit={handleSubmit}>
             <div className="add-product-items">
                 <div className="add-product-item">
-                    <label htmlFor="product-name">Product Name <sup>*</sup></label>
+                    <label htmlFor="product-name">{} <sup>*</sup></label>
                     <input type="text" name="product-name" id="product-name" placeholder='Product Name' required
                         onChange={(e) => setProductName(e.target.value)}
                     />
@@ -264,37 +242,11 @@ function AddProduct() {
             </div>
 
             {error && <p className="error-message">{error}</p>}
-            <div className="add-product-items add-product-items-img">
-                <div className="add-product-items-image">
-                    <div className="add-product-item-add-image">
-                        <label htmlFor="image-upload">
-                            <i className="fa-solid fa-file-import"></i>
-                        </label>
-                        <input
-                            type="file"
-                            id="image-upload"
-                            accept="image/*"
-                            multiple
-                            style={{ display: 'none' }}
-                            onChange={handleImageUpload}
-                        />
-                    </div>
 
-                    <div className="image-preview">
-                        {images.map((image) => (
-                            <div key={image.id} className="uploaded-image-container">
-                                <img src={image.url} alt={`Upload ${image.id}`} className="uploaded-image" />
-                                <button onClick={() => handleImageDelete(image.id)} className="delete-button">×</button>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                <div className="add-product-items-description">
-                    <textarea name="description" id="description" placeholder='Your Description'
-                        onChange={(e) => setDescription(e.target.value)}
-                    ></textarea>
-                </div>
+            <div className="add-product-items add-product-items-description">
+                <textarea name="description" id="description" placeholder='Your Description'
+                    onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
             </div>
             <div className="add-product-items">
                 <button className='add-product-button' type="submit" disabled={isLoading}>
@@ -305,4 +257,4 @@ function AddProduct() {
     );
 }
 
-export default AddProduct;
+export default EdiProduct;

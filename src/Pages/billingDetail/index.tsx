@@ -3,16 +3,34 @@ import './index.css';
 import TopPath from "../shared/commen/topPath";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/reducers/rootReducer";
+import { ProductModel } from "../../model/product";
+import { CartModel } from "../../model/cart";
+
 
 function BillingDetail() {
     const [isBankChecked, setIsBankChecked] = useState(false);
   const [isCashChecked, setIsCashChecked] = useState(false);
   const user = useSelector((state:RootState)=> state.user.profile);
+  const carts = useSelector((state:RootState)=>state.cart.cart);
+  const [quantities, setQuantities] = useState(Array(carts.length).fill(1));
+  const quantity = useSelector((state:RootState)=>state.numberlist.numbers)
 
   const handleBankChange = () => {
     setIsBankChecked(true);
     setIsCashChecked(false);
   };
+  function highestShippingPrice(list: CartModel[]): number {
+    let highestShipping = 0;
+
+    for (let i = 0; i < list.length; i++) {
+        const price = Number(list[i].product.shipping_amount);
+        if (price > highestShipping) {
+            highestShipping = price;
+        }
+    }
+
+    return highestShipping;
+}
 
   const handleCashChange = () => {
     setIsCashChecked(true);
@@ -58,27 +76,32 @@ function BillingDetail() {
                     </div>
                 </div>
                 <div className="billing-detail-main-right col">
-                    <div className="billing-detail-main-right-products row">
+                    {
+                        carts.map((cart,index)=>(
+                            <div key={index} className="billing-detail-main-right-products row">
                         <div className="checkout-product-detail row">
-                            <img src="https://thumbs.dreamstime.com/b/red-apple-isolated-clipping-path-19130134.jpg" alt="" />
-                            <p>Apple</p>
+                            <img src={cart.product.image} alt="" />
+                            <p>{cart.product.title}</p>
                         </div>
-                        <p className="checkout-price">$150</p>
+                        <p className="checkout-price">{cart.product.price} * {quantity[index]} = {Number(cart.product.price)*Number(quantity[index])}</p>
                     </div>
+                        ))
+                    }
+                    
                     <div className="checkout-product-total-price col">
                         <div className="checkout-subtotal">
                             <p>Subtotal :</p>
-                            <p className="checkout-price">$300</p>
+                            <p className="checkout-price">{quantities.reduce((acc, curr, index) => acc + (Number(quantity[index]) * Number(carts[index].price)), 0)} Birr</p>
                         </div>
                         <hr />
                         <div className="checkout-subtotal">
                             <p>Shipping :</p>
-                            <p className="checkout-price">Free</p>
+                            <p className="checkout-price">{highestShippingPrice(carts)} Birr</p>
                         </div>
                         <hr />
                         <div className="checkout-subtotal">
                             <p>Total :</p>
-                            <p className="checkout-price">$300</p>
+                            <p className="checkout-price">{quantities.reduce((acc, curr, index) => acc + (quantity[index] * Number(carts[index].price)), 0) + highestShippingPrice(carts)} Birr</p>
                         </div>
                     </div>
                     <div className="checkout-payment-bank col">
