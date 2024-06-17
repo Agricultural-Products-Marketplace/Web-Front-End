@@ -24,7 +24,7 @@ const Cart: React.FC<Props> = ({ cart, addToCart, removeFromCart }) => {
     const dispatch = useDispatch();
     const accessKey = useSelector((state: RootState) => state.login.user?.access);
     const useId = useSelector((state:RootState)=>state.user.profile?.id)
-    const initialQuantities:number[] = cart.map(item => Number(item.qty));
+    const initialQuantities:number[] = cart.map(item => (isNaN(Number(item.qty)))?(1):(Number(item.qty)));
     const [quantities, setQuantities] = useState(initialQuantities);
     const [isLoading, setIsLoading] = useState<boolean>(false);
 

@@ -227,7 +227,7 @@
 .product-overview-main{
     display: grid;
     grid-template-columns: repeat(3,1fr);
-    width: 100%;
+    width: 90%;
     border-radius: 5px;
     padding: 1vw;
     gap: 1vw;

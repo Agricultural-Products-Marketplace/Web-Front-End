@@ -14,6 +14,7 @@ import { addCart } from '../../services/cart/addnewcart';
 import { addToCart } from '../../redux/actions/cartAction';
 import { Category } from '../../model/category';
 import { getAllCategories } from '../../services/category/getCategory';
+import { getAllFarmers, getFarmersById, getfarmersProps } from '../../services/farmer/getfarmers';
 
 function FilterProducts() {
     const [status, setStatus] = useState<string>('Status');
@@ -30,6 +31,8 @@ function FilterProducts() {
     const maxPriceOptions = [100, 200, 500, 1000, 2000, 5000];
     const [minPrice, setMinPrice] = useState<number>(0);
     const [maxPrice, setMaxPrice] = useState<number>(5000);
+    const [farmers,setFarmers] = useState<getfarmersProps[]>([]);
+    const [farmerProfile,setFarmerProfile] = useState<string>('select Farmer Profile')
 
     const dispatch: AppDispatch = useDispatch();
     const [filteredProducts, setFilteredProducts] = useState<ProductModel[]>([]);
@@ -44,9 +47,12 @@ function FilterProducts() {
         const fetchData = async () => {
             const productsData = await getAllProducts();
             const categoriesData = await getAllCategories();
+            const farmersData = await getAllFarmers();
             setProducts(productsData);
             setFilteredProducts(productsData);
             setCategories(categoriesData);
+            setFarmers(farmersData);
+            
         };
         fetchData();
     }, []);
@@ -128,9 +134,9 @@ function FilterProducts() {
                 <DropDown items={['Status', 'draft', 'disabled', 'in_review', 'published']}
                     selectedItem={status}
                     onSelectItem={setStatus} />
-                <DropDown items={['All Farmers', 'Abebe', 'Chala', 'Asnake', 'Merkuna']}
-                    selectedItem={farmerName}
-                    onSelectItem={setFarmerName} />
+                <DropDown items={['All Farmers',...farmers.map(farmer => farmer.name) ]}
+                    selectedItem={farmerProfile}
+                    onSelectItem={setFarmerProfile} />
                 <div>
                     Min Price
                 <DropDown items={minPriceOptions.map(price => price.toString())}
@@ -203,11 +209,14 @@ function FilterProducts() {
                     </div>
                 ))}
                 </div>
-                <div className="pagination-controls-bottom">
+                {
+                    (products.length > 0)?(<div className="pagination-controls-bottom">
                     
-                    <button onClick={handlePreviousPage} disabled={currentPage === 1}> <i className="fa-solid fa-arrow-left"> </i> Previous</button>
-                    <button onClick={handleNextPage} disabled={currentPage * itemsPerPage >= filteredProducts.length}>Next <i className="fa-solid fa-arrow-right"></i></button>
-                </div>
+                        <button onClick={handlePreviousPage} disabled={currentPage === 1}> <i className="fa-solid fa-arrow-left"> </i> Previous</button>
+                        <button onClick={handleNextPage} disabled={currentPage * itemsPerPage >= filteredProducts.length}>Next <i className="fa-solid fa-arrow-right"></i></button>
+                    </div>):(null)
+                }
+                
             </div>
         </div>
     );

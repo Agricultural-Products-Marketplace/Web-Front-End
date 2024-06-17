@@ -10,7 +10,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     padding: 4vw 2vw;
-    gap: 2vw;
+    gap: 3vw;
     flex: 10;
 }
 
@@ -19,7 +19,7 @@
     position: relative;
     flex-direction: column;
     border-radius: 8px;
-    height: 30dvh;
+    height: 40dvh;
 }
 
 .category-page-item:hover{

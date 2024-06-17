@@ -24,7 +24,7 @@ const AccountNavBar: React.FC<AccountNavBarProps> = ({ onNavItemClick }) => {
             <div className="admin-page-nav-bar">
                 <ul className="admin-page-nav-bar-list">
                     <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('EditProfile')} className={activeItem === 'EditProfile' ? 'active-item' : ''}><i className="fa-solid fa-user-tie"></i><h4>Edit Profile</h4></button></li>
-                    <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('adressBook')} className={activeItem === 'adressBook' ? 'active-item' : ''}><i className="fa-solid fa-cart-shopping"></i><h4>Adress info</h4></button></li>
+                    {/* <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('adressBook')} className={activeItem === 'adressBook' ? 'active-item' : ''}><i className="fa-solid fa-cart-shopping"></i><h4>Adress info</h4></button></li> */}
                     <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('myOrders')} className={activeItem === 'myOrders' ? 'active-item' : ''}><i className="fa-solid fa-credit-card"></i><h4>My Orders</h4></button></li>
                     <li className="admin-page-nav-bar-list-item"><button onClick={() => handleItemClick('myReviews')} className={activeItem === 'myReviews' ? 'active-item' : ''}><i className="fa-solid fa-star"></i><h4>My Reviews</h4></button></li>
                 </ul>

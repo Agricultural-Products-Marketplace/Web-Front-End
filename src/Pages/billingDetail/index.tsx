@@ -49,7 +49,7 @@ function BillingDetail() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const response = await addorder(fullName,String(user?.user.email),phone,address,city,state,country,String(`${user?.user.id}_cart`),Number(user?.user.id));
+    const response = await addorder(fullName,String(user?.user.email),phone,address,city,state,country,String(`${user?.user.id}_cart`),Number(user?.id));
     if (response.message === "Order Created Successfully") {
 
         
@@ -70,7 +70,7 @@ function BillingDetail() {
       } else {
         Swal.fire({
           icon: 'error',
-          title: 'Order Not Created Successfully',
+          title: 'Order Not Created',
           text: 'Something went wrong!',
         });
       }

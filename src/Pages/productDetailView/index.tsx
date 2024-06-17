@@ -227,21 +227,21 @@ function ProductDetail() {
                             <h3>Posted Date</h3>
                             <p>{String(product.date)}</p>
                         </div>
-                        <div className="product-overview-item">
+                        {/* <div className="product-overview-item">
                             <i className="fa-solid fa-chart-simple"></i>
                             <h3>Total Sells</h3>
                             <p>254</p>
-                        </div>
+                        </div> */}
                         <div className="product-overview-item">
                             <i className="fa-solid fa-comments"></i>
                             <h3>Toral Reviews</h3>
                             <p>{product.rating_count}</p>
                         </div>
-                        <div className="product-overview-item">
+                        {/* <div className="product-overview-item">
                             <i className="fa-solid fa-location-dot"></i>
                             <h3>Location</h3>
-                            <p>Addis Ababa</p>
-                        </div>
+                            <p>{}</p>
+                        </div> */}
                         <div className="product-overview-item">
                             <i className="fa-solid fa-layer-group"></i>
                             <h3>Active Stock</h3>

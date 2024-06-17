@@ -5,8 +5,8 @@ import cartReducer from './cartReducer';
 import loginReducer from './loginReducer';
 import userReducer from './userReducer';
 import showpopReducer from './showpopReducer';
-import { wishlistReducer } from './wishlistReducer';
 import numberListReducer from './numberlistReducer';
+import wishlistReducer from './wishlistReducer';
 
 
 

@@ -1,5 +1,5 @@
 //types.ts
-import { ADD_TO_CART, REMOVE_FROM_CART } from "./actions/ActionTypes";
+import { ADD_TO_CART, ADD_TO_WISHLIST, REMOVE_FROM_CART, REMOVE_FROM_WISHLIST } from "./actions/ActionTypes";
 import { UserData } from "./actions/loginAction";
 import { User } from "../model/user";
 import { ProductModel } from "../model/product";
@@ -86,3 +86,16 @@ export interface WishlistData{
 }
 
 export type cartAction = AddToCartAction | RemoveFromCartAction; // Update this line
+
+export interface AddToWishlistAction {
+    type: typeof ADD_TO_WISHLIST;
+    payload: ProductModel;
+}
+
+export interface RemoveFromWishlistAction {
+    type: typeof REMOVE_FROM_WISHLIST;
+    payload: number;
+}
+
+
+export type wishlistAction = AddToWishlistAction | RemoveFromWishlistAction;

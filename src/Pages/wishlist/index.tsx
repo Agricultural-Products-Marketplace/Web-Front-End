@@ -27,23 +27,26 @@ function WishList() {
                 <h3>WishList ({40})</h3>
                 <a href="#">Move all to bag</a>    
             </div> 
-            <div className="wishlist-products">
-               {
-                wishlists.map((product,index)=>(
-                    <WishlistCard 
-                    key={index}
-                    id={product.id}
-                    productName={product.title}
-                    discount={product.old_price}
-                    productPrice={product.price}
-                    rating={product.rating}
-                    img={product.image}
-                    categoryName={product.category.title}
-                    isFetured={product.featured}
-                    />
-                ))
-               }
-               </div>
+            {
+                (wishlists.length > 0)?(<div className="wishlist-products">
+                    {
+      
+                     wishlists.map((product,index)=>(
+                         <WishlistCard 
+                         key={index}
+                         id={product.id}
+                         productName={product.title}
+                         discount={product.old_price}
+                         productPrice={product.price}
+                         rating={product.rating}
+                         img={product.image}
+                         categoryName={product.category.title}
+                         isFetured={product.featured}
+                         />
+                     ))
+                    }
+                    </div>):(null)
+            }
                
                <div className="wishlist-for-you col">
                <div className="wishlist-for-you-title row">

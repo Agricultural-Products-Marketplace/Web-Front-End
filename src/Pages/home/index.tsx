@@ -18,6 +18,7 @@ import { addToCart } from "../../redux/actions/cartAction";
 import { CartModel } from "../../model/cart";
 import { getAllProducts, getFeaturedProducts } from "../../services/product/getProducts";
 import { ProductModel } from "../../model/product";
+import { addToWishlist } from "../../redux/actions/wishlistAction";
 
 function Home() {
     const dispatch: AppDispatch = useDispatch();
@@ -49,6 +50,10 @@ function Home() {
                 for(let i = 0;i<response.data.length;i++){
                     dispatch(addToCart(response.data[i]));
                 }
+                // const responseWishlist = await fetchWishlists(Number(userId),String(accessKey));
+                // for(let i = 0;i<response.data.length;i++){
+                //     dispatch(addToWishlist(responseWishlist.data[i]));
+                // }
                 
             }
         }

@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/reducers/rootReducer';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { getFarmersById, getfarmersProps } from '../../services/farmer/getfarmers';
 
 interface Image {
     id: number;
@@ -18,9 +19,11 @@ interface Image {
 
 function AddProduct() {
     const navigate = useNavigate();
-    const [categories, setCategories] = useState<Category[]>([]);
     const userId = useSelector((state: RootState) => state.user.profile?.id);
     const accessKey = useSelector((status: RootState) => status.login.user?.access);
+    const isAgent = useSelector((state:RootState)=>state.user.profile?.user.is_agent);
+
+    const [categories, setCategories] = useState<Category[]>([]);
     const [images, setImages] = useState<Image[]>([]);
     const [imageIdCounter, setImageIdCounter] = useState<number>(0);
     const [error, setError] = useState<string | null>(null);
@@ -34,14 +37,18 @@ function AddProduct() {
     const [productSlog, setProductSlog] = useState<string>('');
     const [category, setCategory] = useState<string>('Select category');
     const [status, setStatus] = useState<string>('Select status');
+    const [farmers,setFarmers] = useState<getfarmersProps[]>([]);
     const [farmerProfile,setFarmerProfile] = useState<string>('select Farmer Profile')
     const [description, setDescription] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
             const categoriesData = await getAllCategories();
             setCategories(categoriesData);
+            const response = await getFarmersById(Number(userId));
+            setFarmers(response);
         };
         fetchData();
     }, []);
@@ -76,6 +83,37 @@ function AddProduct() {
         setQuantity(newQuantity);
         setInStock(newQuantity > 0);
     };
+
+    const getFarmerIdByName = (name: string): number | undefined => {
+        if(name === 'select Farmer Profile'){
+            return undefined
+            }
+            else{
+            const farmer = farmers.find(farmer => farmer.name === name);
+            if(isAgent){
+                return farmer?.id;
+            }
+            else{
+                return Number(userId);
+            }
+        }
+    }
+
+
+      const getCategoryIdByName = (name: string): number | undefined => {
+          if(name === "Select category"){
+              return undefined;
+              }
+              else{
+            const farmer = categories.find(farmer => farmer.title === name);
+            if(isAgent){
+                return farmer?.id;
+            }
+            else{
+                return Number(0);
+            }
+        }
+      };
 
     const handleProductPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let newPrice = Number(event.target.value);
@@ -126,11 +164,11 @@ function AddProduct() {
             formData.append('price', String(productPrice));
             formData.append('shipping_amount', String(shipmentPrice));
             formData.append('stock_qty', String(quantity));
-            formData.append('category',String(3));
+            formData.append('category',String(getCategoryIdByName(category)));
             formData.append('in_stock', String(inStock));
             formData.append('status', status);
             formData.append('is_featured', String(isFeatured));
-            formData.append('farmer', String(2));
+            formData.append('farmer', String(getFarmerIdByName(farmerProfile)));
             formData.append('slug', productSlog);
             formData.append('image',images[0].file);
             images.forEach((item,index)=> {
@@ -148,7 +186,7 @@ function AddProduct() {
                 formData,Number(userId),String(accessKey)
             );
 
-            navigate('/vendor/products/');
+            navigate('/admin');
             Swal.fire({
                 icon: 'success',
                 title: 'Product Created Successfully',
@@ -167,15 +205,17 @@ function AddProduct() {
         <form className="add-product" onSubmit={handleSubmit}>
             
             <div className="add-product-items">
-            <div className="add-product-item">
+
+                {isAgent?(<div className="add-product-item">
                     <label htmlFor="category">Farmer Profile <sup>*</sup></label>
-                    <DropDown items={categories.map(category => (
-                        category.title
+                    <DropDown items={farmers.map(farmer => (
+                        farmer.name
                     ))}
                         onSelectItem={setFarmerProfile}
                         selectedItem={farmerProfile}
                     />
-                </div>
+                </div>):(null)}
+            
                 <div className="add-product-item">
                     <label htmlFor="category">Category <sup>*</sup></label>
                     <DropDown items={categories.map(category => (

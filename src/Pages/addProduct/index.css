@@ -222,3 +222,16 @@
     justify-content: center;
     gap: 0.5vw;
 }
+
+
+@media only screen and (max-width: 767px){
+    .add-product-items{
+        display: grid;
+        grid-template-columns: (1fr,1) !important;
+    }
+
+    .add-product{
+        display: grid;
+        grid-template-columns: (1fr,1);
+    }
+}

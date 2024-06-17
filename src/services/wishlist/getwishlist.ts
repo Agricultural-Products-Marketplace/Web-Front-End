@@ -1,12 +1,13 @@
 import axios from 'axios';
 import { url } from '../../api/apiUrl';
 import {  ProductModelMain } from '../../model/productDetail';
+import { ProductModel } from '../../model/product';
 
 
 
 interface FetchWishlistResponse {
   status: number;
-  data: ProductModelMain[];
+  data: ProductModel[];
 }
 
 
@@ -17,7 +18,6 @@ export async function fetchWishlists(userId:number,accessToken: string): Promise
         'Authorization': `Bearer ${accessToken}`
       }
     });
-    localStorage.setItem("WishlistData",JSON.stringify(response.data));
     return {
       status: response.status,
       data: response.data

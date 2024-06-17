@@ -6,4 +6,4 @@ Laptop = 992 px - 1199 px
 Desktop = > 1200px
 
 
-@media only screen and (max-width: 767px)
+@media only screen and (max-width: 767px){}
