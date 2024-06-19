@@ -15,6 +15,7 @@ import { addToCart } from '../../redux/actions/cartAction';
 import { Category } from '../../model/category';
 import { getAllCategories } from '../../services/category/getCategory';
 import { getAllFarmers, getFarmersById, getfarmersProps } from '../../services/farmer/getfarmers';
+import LoadingCard from '../shared/card/Loadings/loadingCard';
 
 function FilterProducts() {
     const [status, setStatus] = useState<string>('Status');
@@ -32,7 +33,6 @@ function FilterProducts() {
     const [minPrice, setMinPrice] = useState<number>(0);
     const [maxPrice, setMaxPrice] = useState<number>(5000);
     const [farmers,setFarmers] = useState<getfarmersProps[]>([]);
-    const [farmerProfile,setFarmerProfile] = useState<string>('select Farmer Profile')
 
     const dispatch: AppDispatch = useDispatch();
     const [filteredProducts, setFilteredProducts] = useState<ProductModel[]>([]);
@@ -42,6 +42,7 @@ function FilterProducts() {
     const wishlist = useSelector((state: RootState) => state.wishlist.items);
     const cart = useSelector((state: RootState) => state.cart.cart);
     const isAuthenticated = useSelector((state: RootState) => state.login.isAuthenticated);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -60,6 +61,14 @@ function FilterProducts() {
     useEffect(() => {
         filterProducts();
     }, [status, category, farmerName, minPrice, maxPrice, searchTerm, currentPage]);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 2000);
+
+        return () => clearTimeout(timer);
+    }, []);
 
     const handleMinPriceChange = (value: string) => {
         setMinPrice(Number(value));
@@ -85,7 +94,7 @@ function FilterProducts() {
         }
 
         if (farmerName !== 'All Farmers') {
-            filtered = filtered.filter(product => product.farmer.user.first_name === farmerName);
+            filtered = filtered.filter(product => product.farmer.name === farmerName);
         }
 
         filtered = filtered.filter(product => Number(product.price) >= minPrice && Number(product.price) <= maxPrice);
@@ -135,8 +144,8 @@ function FilterProducts() {
                     selectedItem={status}
                     onSelectItem={setStatus} />
                 <DropDown items={['All Farmers',...farmers.map(farmer => farmer.name) ]}
-                    selectedItem={farmerProfile}
-                    onSelectItem={setFarmerProfile} />
+                    selectedItem={farmerName}
+                    onSelectItem={setFarmerName} />
                 <div>
                     Min Price
                 <DropDown items={minPriceOptions.map(price => price.toString())}
@@ -157,7 +166,24 @@ function FilterProducts() {
                 />
             </div>
             <div className='filter-products-left-nav'>
-                <div className="filter-products-left-nav-products">
+                {isLoading?(
+                    <div className="filter-products-left-nav-products">
+                        <LoadingCard width={'100%'} height={'370px'} borderRadius='5px' />
+                        <LoadingCard width={'100%'} height={'370px'} borderRadius='5px' />
+                        <LoadingCard width={'100%'} height={'370px'} borderRadius='5px' />
+                        <LoadingCard width={'100%'} height={'370px'} borderRadius='5px' />
+                        <LoadingCard width={'100%'} height={'370px'} borderRadius='5px' />
+                        <LoadingCard width={'100%'} height={'370px'} borderRadius='5px' />
+                        <LoadingCard width={'100%'} height={'370px'} borderRadius='5px' />
+                        <LoadingCard width={'100%'} height={'370px'} borderRadius='5px' />
+                    </div>
+                ):(
+                    currentProducts.length === 0?(
+                        <div className="filter-products-left-nav-products">
+                            <h1>No Products</h1>
+                        </div>
+                    ):(
+                        <div className="filter-products-left-nav-products">
                 {currentProducts.map((product, index) => (
                     <div key={index} className="category-page-item">
                         <div className='category-page-item-overlay'>
@@ -209,8 +235,10 @@ function FilterProducts() {
                     </div>
                 ))}
                 </div>
+                    )
+                )}
                 {
-                    (products.length > 0)?(<div className="pagination-controls-bottom">
+                    (products.length > 15)?(<div className="pagination-controls-bottom">
                     
                         <button onClick={handlePreviousPage} disabled={currentPage === 1}> <i className="fa-solid fa-arrow-left"> </i> Previous</button>
                         <button onClick={handleNextPage} disabled={currentPage * itemsPerPage >= filteredProducts.length}>Next <i className="fa-solid fa-arrow-right"></i></button>

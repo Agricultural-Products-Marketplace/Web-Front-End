@@ -27,7 +27,7 @@ function ProductReviews({user,image,message,date,reviewrId}:ProductReviewsProps)
                 (Number(userID) === reviewrId)?(
                     <div className="product-review-message-actions">
                 {/* <i className="fa-solid fa-edit"></i> */}
-                <i className="fa-solid fa-trash" onClick={()=>{console.log("Icon Clicked")}}></i>
+                {/* <i className="fa-solid fa-trash" onClick={()=>{console.log("Icon Clicked")}}></i> */}
             </div>
                 ):(null)
             }

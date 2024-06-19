@@ -25,6 +25,7 @@ function Category() {
     const wishlist = useSelector((state:RootState)=>state.wishlist.items);
     const cart = useSelector((state:RootState)=>state.cart.cart);
     const isAuthenticated = useSelector((state:RootState)=>state.login.isAuthenticated);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     function includes<ProductModel>(array:ProductModel[],value:ProductModel):boolean{
         return array.some(item => item === value);
@@ -45,6 +46,14 @@ function Category() {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 3000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     const handleCategoryClick = (categoryTitle: string) => {
         setActiveCategory(categoryTitle);
         if (categoryTitle === 'All') {
@@ -61,75 +70,79 @@ function Category() {
         <div className="category-page">
             <CategoryCard activeCategory={activeCategory} onCategoryClick={handleCategoryClick} />
             
-            {(filteredProducts.length === 0)?(
-                <div className="category-page-items">
-                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
-                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
-                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
-                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
-                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
-                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
-                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
-                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
-                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
-                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
-                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
-                    <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
-                </div>
-            ):(
-                <div className="category-page-items">
-                {filteredProducts.map((product, index) => (
-                    <div key={index}  className="category-page-item">
-                        <div className='category-page-item-overlay'>
-                            <div className="overlay-top">
-                                <p>{product.old_price}%</p>
-                                <div className="category-page-items-icon">
+            {isLoading?(<div className="category-page-items">
+                        <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                        <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                        <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                        <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                        <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                        <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                        <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                        <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                        <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                        <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                        <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                        <LoadingCard width={'18vw'} height={'22vw'} borderRadius='5px'/>
+                    </div>):(
+                filteredProducts.length === 0?(
+                    <div className="category-page-items">
+                        <h1>No Avilable Products</h1>
+                    </div>
+                ):(
+                    <div className="category-page-items">
+                    {filteredProducts.map((product, index) => (
+                        <div key={index}  className="category-page-item">
+                            <div className='category-page-item-overlay'>
+                                <div className="overlay-top">
+                                    <p>{product.old_price}%</p>
+                                    <div className="category-page-items-icon">
+                                        {
+                                            (isAuthenticated && !includes(wishlist,product)?(<button onClick={async ()=>{
+                                                const respose = await addWishlists(userId,product.id,String(accessKey));
+                                                dispatch(addToWishlist(product));
+                                            }}><i className="fa-regular fa-heart"></i></button>):(
+                                                (isAuthenticated && !includes(wishlist,product))?(<button onClick={async ()=>{
+                                                    const respose = await addWishlists(userId,product.id,String(accessKey));    
+                                                    dispatch(removeFromWishlist(product.id))
+                                                }}><i className="fa-solid fa-heart" style={{color:"gold"}}></i></button>):(null)
+                                            ))
+                                        }
+                                    </div>
+                                </div>
+                                <div className="overly-bottom">
                                     {
-                                        (isAuthenticated && !includes(wishlist,product)?(<button onClick={async ()=>{
-                                            const respose = await addWishlists(userId,product.id,String(accessKey));
-                                            dispatch(addToWishlist(product));
-                                        }}><i className="fa-regular fa-heart"></i></button>):(
-                                            (isAuthenticated && !includes(wishlist,product))?(<button onClick={async ()=>{
-                                                const respose = await addWishlists(userId,product.id,String(accessKey));    
-                                                dispatch(removeFromWishlist(product.id))
-                                            }}><i className="fa-solid fa-heart" style={{color:"gold"}}></i></button>):(null)
-                                        ))
+                                        (isAuthenticated && !includescart(cart,product.id))?(<button onClick={async ()=>{
+                                            const response = await addCart(product.id,userId,Number(product.price),"Ethiopia",`${user?.id}_cart`,String(accessKey));
+                                            if(response === 201){
+                                                dispatch(addToCart({product}));
+                                            }
+                                        }}> Add To Cart</button>):(null)
                                     }
                                 </div>
                             </div>
-                            <div className="overly-bottom">
-                                {
-                                    (isAuthenticated && !includescart(cart,product.id))?(<button onClick={async ()=>{
-                                        const response = await addCart(product.id,userId,Number(product.price),"Ethiopia",`${user?.id}_cart`,String(accessKey));
-                                        if(response === 201){
-                                            dispatch(addToCart({product}));
-                                        }
-                                    }}> Add To Cart</button>):(null)
-                                }
-                            </div>
-                        </div>
-                        <img src={product.image} alt={product.title} />
-                        <Link to={`/product-detail?id=${product.id}`} className="category-item-description">
-                            <div className="category-page-item-dis">
-                                <small>{product.category.title}</small>
-                                <h3>{product.title}</h3>
-                                <div className="rating">
-                                    {[...Array(product.rating)].map((_, i) => (
-                                        <i key={i} className="fa fa-star"></i>
-                                    ))}
-                                    {[...Array(5 - product.rating)].map((_, i) => (
-                                        <i key={i + product.rating} className="fa-regular fa-star"></i>
-                                    ))}
+                            <img src={product.image} alt={product.title} />
+                            <Link to={`/product-detail?id=${product.id}`} className="category-item-description">
+                                <div className="category-page-item-dis">
+                                    <small>{product.category.title}</small>
+                                    <h3>{product.title}</h3>
+                                    <div className="rating">
+                                        {[...Array(product.rating)].map((_, i) => (
+                                            <i key={i} className="fa fa-star"></i>
+                                        ))}
+                                        {[...Array(5 - product.rating)].map((_, i) => (
+                                            <i key={i + product.rating} className="fa-regular fa-star"></i>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="category-dis-bottom">
-                                <p>${product.price}</p>
-                            </div>
-                        </Link>
-                    </div>
-                ))}
-                
-            </div>
+                                <div className="category-dis-bottom">
+                                    <p>{product.price} Birr</p>
+                                </div>
+                            </Link>
+                        </div>
+                    ))}
+                    
+                </div>
+                )
             )}
         </div>
     );

@@ -164,7 +164,7 @@ function Products() {
                                                             confirmButtonText: 'Yes, delete it!'
                                                         }).then((result) => {
                                                             if (result.isConfirmed) {
-                                                                deletefarmerproduct(Number(userId), product.pid, String(accessToken));
+                                                                deletefarmerproduct(product.farmer.id, product.pid, String(accessToken));
                                                                 window.location.reload();
                                                             }
                                                         })

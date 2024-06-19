@@ -30,7 +30,7 @@ export async function getFarmersById(userId: number):Promise<getfarmersProps []>
 
 export async function getAllFarmers():Promise<getfarmersProps []> {
     try {
-        const response = await axios.get<getfarmersProps[]>(`${url}v1/farm/farmers`);
+        const response = await axios.get<getfarmersProps[]>(`${url}v1/farm/farmers/`);
         console.log(response);
         console.log(response);
         console.log(response);

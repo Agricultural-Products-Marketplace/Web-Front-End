@@ -186,12 +186,14 @@ function AddProduct() {
                 formData,Number(userId),String(accessKey)
             );
 
-            navigate('/admin');
+            
             Swal.fire({
                 icon: 'success',
                 title: 'Product Created Successfully',
                 text: 'This product has been successfully created',
-            });
+            }).then(() => {
+                window.location.reload();
+            })
 
             setIsLoading(false);
 

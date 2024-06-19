@@ -13,6 +13,7 @@ import { ProductModel } from "../../model/product";
 import { addProductReview } from "../../services/product-review/add-product-review";
 import { ReviewModel } from "../../model/productReviewModel";
 import { fetchProductReviewbyId } from "../../services/product-review/get-product-Review";
+import Swal from "sweetalert2";
 
 function ProductDetail() {
     const [product, setProduct] = useState<ProductModel | null>(null);
@@ -191,7 +192,14 @@ function ProductDetail() {
                             </div>
                             <button style={{fontSize:"17px",fontWeight:"bolder"}}
                             onClick={()=>{
-                                addProductReview(String(accessKey),Number(userID),Number(product.id),String(reviewMessage),Number(rating))
+                                addProductReview(String(accessKey),Number(userID),Number(product.id),String(reviewMessage),Number(rating));
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Review Added Successfully',
+                                    text: 'Your Review is Added',
+                                }).then(() => {
+                                    window.location.reload();
+                                })
                             }}
                             >Submit Review</button>
                             </div>
@@ -219,8 +227,13 @@ function ProductDetail() {
                     <div className="product-overview-main">
                         <div className="product-overview-item" >
                             <i className="fa-solid fa-user-check" ></i>
-                            <h3>Seller</h3>
+                            <h3>Agent</h3>
                             <p>{product.farmer.user.first_name} {product.farmer.user.last_name}</p>
+                        </div>
+                        <div className="product-overview-item" >
+                            <i className="fa-solid fa-user-check" ></i>
+                            <h3>Farmer</h3>
+                            <p>{product.farmer.name}</p>
                         </div>
                         <div className="product-overview-item">
                             <i className="fa-solid fa-calendar"></i>

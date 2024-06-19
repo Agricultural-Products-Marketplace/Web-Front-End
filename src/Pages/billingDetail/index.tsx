@@ -8,6 +8,7 @@ import { CartModel } from "../../model/cart";
 import { addorder } from "../../services/order/createorder";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { url } from "../../api/apiUrl";
 
 
 function BillingDetail() {
@@ -49,14 +50,11 @@ function BillingDetail() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const response = await addorder(fullName,String(user?.user.email),phone,address,city,state,country,String(`${user?.user.id}_cart`),Number(user?.id));
+    const response = await addorder(fullName,String(user?.user.email),phone,address,city,state,country,String(`${Number(user?.id)}_cart`),Number(user?.id));
     if (response.message === "Order Created Successfully") {
-
-        
         const form = document.createElement('form');
         form.method = 'POST';
-        form.action = 'http://192.168.158.245:8000/api/payment/chapa/';
-  
+        form.action = `${url}payment/chapa/`; 
         // Add the orderId as a hidden input
         const input = document.createElement('input');
         input.type = 'hidden';
