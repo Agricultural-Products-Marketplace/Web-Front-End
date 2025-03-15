@@ -29,7 +29,7 @@ function About() {
     },{
         Name : 'Tadesse Ageru',
         Image : 'https://media.licdn.com/dms/image/C4E03AQH_kA7bV3yrVQ/profile-displayphoto-shrink_800_800/0/1659866407877?e=2147483647&v=beta&t=Yf3yL1NEn30a7PkyiNHqFoR6DfY2gFl76RQfN7rB7Fk',
-        Position : 'UI Designer, Adroid(flutter) Developer',
+        Position : 'Backend(Django), and Adroid(flutter) Developer',
         Facebook : '',
         Instagram : '',
         Linkedin : '',
